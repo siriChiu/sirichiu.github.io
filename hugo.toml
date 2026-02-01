@@ -260,7 +260,7 @@ canonifyurls = true
    [[params.customCSS]]
      href = "css/_about.css"
    [[params.customCSS]]
-     href = "css/modern-layout.css"
+     href = "css/modern-layout-v3.css"
    [[params.customCSS]]
      href = "css/resume.css"
 

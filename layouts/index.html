@@ -12,7 +12,8 @@
         <section class="main-content-wrap glass-portfolio">
           
           <!-- Define your category order here -->
-          {{- $categoryOrder := slice "專業技術" "研究所論文" "研究生專題"  "大學生專題"}}
+          {{- $categoryOrder := slice "專業技術" "研究所論文" "研究生專題" "大學生專題"}}
+          
           
           <!-- Filter Bar -->
           <div class="glass-filter-bar">
@@ -24,7 +25,7 @@
                 {{- end }}
               {{- end }}
             </div>
-            <div class="filter-dropdown">
+            <div class="filter-controls">
               <select id="year-filter" class="year-select">
                 <option value="all">All Years</option>
                 {{- $years := slice }}
@@ -41,62 +42,66 @@
             </div>
           </div>
 
-          <!-- Posts grouped by Category (same order as tabs) -->
+          
+          <!-- Category Sections -->
           <div class="portfolio-content">
             {{- range $catName := $categoryOrder }}
               {{- $pages := index $.Site.Taxonomies.categories $catName }}
               {{- if $pages }}
-            <div class="category-section" data-category="{{ $catName | urlize }}">
-              <h2 class="category-title">{{ $catName }}</h2>
-              <div class="cards-container">
-                {{- range $pages.Pages }}
-                <article class="glass-card" 
-                         data-category="{{ $catName | urlize }}" 
-                         data-year="{{ .Date.Format "2006" }}">
-                  
-                  {{- $thumbnailImage := "" }}
-                  {{- if .Params.thumbnailImage }}
-                    {{- $thumbnailImage = .Params.thumbnailImage }}
-                  {{- else if .Params.coverImage }}
-                    {{- $thumbnailImage = .Params.coverImage }}
-                  {{- end }}
-                  
-                  {{- if $thumbnailImage }}
-                  <a href="{{ .Permalink }}" class="card-image-link">
-                    <div class="card-image">
-                      <img alt="{{ .Title }}" src="{{ $thumbnailImage }}" loading="lazy"/>
-                    </div>
-                  </a>
-                  {{- end }}
-                  
-                  <div class="card-content">
-                    <div class="card-header">
+              <div class="category-section" data-category="{{ $catName | urlize }}">
+                <h2 class="category-title">{{ $catName }}</h2>
+                <div class="cards-container">
+                  {{- range $pages.Pages }}
+                  <article class="glass-card" 
+                           data-category="{{ $catName | urlize }}" 
+                           data-year="{{ .Date.Format "2006" }}"
+                           data-tags="{{ range .Params.tags }}{{ . | urlize }} {{ end }}">
+                    
+                    {{- $thumbnailImage := "" }}
+                    {{- if .Params.thumbnailImage }}
+                      {{- $thumbnailImage = .Params.thumbnailImage }}
+                    {{- else if .Params.coverImage }}
+                      {{- $thumbnailImage = .Params.coverImage }}
+                    {{- end }}
+                    
+                    {{- if $thumbnailImage }}
+                    <a href="{{ .Permalink }}" class="card-image-link">
+                      <div class="card-image">
+                        <img alt="{{ .Title }}" src="{{ $thumbnailImage }}" loading="lazy"/>
+                      </div>
+                    </a>
+                    {{- end }}
+
+                    <div class="card-header-top">
                       <h3 class="card-title">
                         <a href="{{ .Permalink }}">{{ .Title }}</a>
                       </h3>
-                      <time class="card-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2006" }}</time>
                     </div>
                     
-                    <p class="card-description">
-                      {{- if .Params.Summary }}
-                        {{ .Params.Summary | markdownify | truncate 200 }}
-                      {{- else }}
-                        {{ .Summary | truncate 200 }}
+                    <div class="card-content">
+                      <p class="card-description">
+                        {{- if .Params.Summary }}
+                          {{ .Params.Summary | markdownify | plainify | truncate 150 }}
+                        {{- else }}
+                          {{ .Summary | plainify | truncate 150 }}
+                        {{- end }}
+                      </p>
+                      <div class="card-extra-text">...more like</div>
+                      
+                      {{- with .Params.tags }}
+                      <div class="card-tags">
+                        {{- range first 4 . }}
+                        <span class="tag-pill">#{{ . }}</span>
+                        {{- end }}
+                      </div>
                       {{- end }}
-                    </p>
-                    
-                    {{- with .Params.tags }}
-                    <div class="card-tags">
-                      {{- range first 5 . }}
-                      <span class="tag-pill">#{{ . }}</span>
-                      {{- end }}
+                      
+                      <a href="{{ .Permalink }}" class="card-read-more">Read More →</a>
                     </div>
-                    {{- end }}
-                  </div>
-                </article>
-                {{- end }}
+                  </article>
+                  {{- end }}
+                </div>
               </div>
-            </div>
               {{- end }}
             {{- end }}
           </div>
@@ -128,24 +133,29 @@
           const matchYear = yearFilter === 'all' || cardYear === yearFilter;
           
           if (matchCategory && matchYear) {
-            card.style.display = 'flex';
+            // Show card
+            card.style.display = 'flex'; // Restore Grid/Flex behavior
+            card.classList.remove('is-hidden');
             card.classList.add('fade-in');
           } else {
+            // Hide card
             card.style.display = 'none';
+            card.classList.add('is-hidden');
             card.classList.remove('fade-in');
           }
         });
         
         // Show/hide category sections
         sections.forEach(section => {
-          const sectionCategory = section.dataset.category;
-          const visibleCards = section.querySelectorAll('.glass-card:not([style*="display: none"])');
-          
-          if (categoryFilter === 'all') {
-            section.style.display = visibleCards.length > 0 ? 'block' : 'none';
-          } else {
-            section.style.display = sectionCategory === categoryFilter ? 'block' : 'none';
-          }
+            const sectionCategory = section.dataset.category;
+            // Check if this section has any VISIBLE cards NOT hidden
+            const visibleCards = section.querySelectorAll('.glass-card:not(.is-hidden)');
+            
+            if (visibleCards.length > 0) {
+                 section.style.display = 'block';
+            } else {
+                 section.style.display = 'none';
+            }
         });
       }
       
@@ -155,6 +165,12 @@
           tabs.forEach(t => t.classList.remove('active'));
           this.classList.add('active');
           filterContent();
+          
+          // Scroll to top of filters to avoid getting lost
+          document.querySelector('.glass-filter-bar').scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
         });
       });
       

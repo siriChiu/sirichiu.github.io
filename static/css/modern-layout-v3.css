@@ -1,0 +1,464 @@
+/* ===== Full-Width Container Overrides ===== */
+/* Only override widths within the content area, DO NOT touch global margins */
+.main-content-wrap {
+    max-width: none !important;
+    width: auto !important;
+    padding: 0 20px;
+}
+
+.glass-portfolio {
+    width: 100% !important;
+    padding: 30px 20px;
+    box-sizing: border-box;
+}
+
+#main {
+    /* Explicitly push content for sidebar */
+    margin-left: 250px !important; 
+    width: auto !important;
+    display: block !important;
+    float: none !important; /* Fix: Prevent being pushed to the right */
+}
+
+@media only screen and (max-width: 768px) {
+    #main {
+        margin-left: 0 !important;
+    }
+}
+
+/* ===== Clean Filter Bar ===== */
+.glass-filter-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 0 0 40px; /* Removed side margins to prevent overflow */
+    padding: 15px 0;
+    border-bottom: 1px solid #e9ecef;
+    background: transparent;
+    width: 100%;
+}
+
+.filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.filter-tab {
+    padding: 8px 18px;
+    border: none;
+    background: #f8f9fa;
+    color: #6c757d;
+    font-size: 1.3rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-tab:hover {
+    background: #e9ecef;
+    color: #495057;
+}
+
+.filter-tab.active {
+    background: #349EF3;
+    color: white;
+}
+
+.filter-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.year-select,
+.tag-select {
+    padding: 8px 16px;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    background: white;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #495057;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 140px;
+}
+
+.year-select:hover,
+.year-select:focus,
+.tag-select:hover,
+.tag-select:focus {
+    border-color: #349EF3;
+    outline: none;
+}
+
+/* ===== Category Sections ===== */
+.portfolio-content {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.category-section {
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.category-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #349EF3;
+    display: inline-block;
+}
+
+/* ===== Masonry Layout (CSS Grid for Stability) ===== */
+.cards-container {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    width: 100%;
+    align-items: start;
+}
+
+/* Responsive Columns */
+@media only screen and (max-width: 1400px) {
+    .cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+@media only screen and (max-width: 900px) {
+    .cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 20px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== Pinterest-Style Compact Card ===== */
+.glass-card {
+    display: flex !important; /* Restore Flex for vertical stack */
+    flex-direction: column !important;
+    width: 100%;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid #f1f3f5;
+    position: relative;
+    cursor: pointer;
+    margin: 0 !important;
+    height: auto !important; /* Allow natural height, don't stretch to row height */
+    align-self: start; /* Ensure it sticks to top of grid cell */
+    box-sizing: border-box !important;
+}
+
+/* Utility for filtering */
+.glass-card.is-hidden {
+    display: none !important;
+}
+
+/* Ensure children respect box model */
+.glass-card * {
+    box-sizing: border-box !important;
+}
+
+/* Force children to fill width but respect padding */
+.glass-card > * {
+    width: 100%;
+    margin: 0;
+}
+
+.glass-card:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px) scale(1.02);
+    z-index: 100;
+}
+
+/* ===== Card Image (Top) ===== */
+.card-image-link {
+    display: flex; /* Use flex to center content */
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    width: 100%;
+    background: #f8f9fa;
+    overflow: hidden;
+    margin: 0;
+    max-height: 520px; /* Limit maximum height */
+}
+
+.card-image {
+    width: auto !important; /* Allow width to conform to image aspect ratio */
+    max-width: 100%;
+    display: block;
+    padding: 0;
+    margin: 0;
+    height: auto !important;
+    max-height: 520px !important; /* match container limit */
+}
+
+.card-image img {
+    display: block;
+    width: auto !important; /* Allow width to shrink */
+    max-width: 100%;
+    height: auto !important;
+    max-height: 520px !important; /* Hard limit on image height */
+    object-fit: contain; /* Ensure full image is visible */
+    transition: transform 0.4s ease;
+}
+
+.glass-card:hover .card-image img {
+    transform: scale(1.05); /* Increased scale slightly for effect */
+}
+
+/* ===== Card Header (Middle) ===== */
+.card-header-top {
+    padding: 15px 24px 5px; /* Aligned padding with content */
+    background: white;
+}
+
+.card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.3;
+    word-break: break-word;
+    hyphens: auto;
+}
+
+.card-title a {
+    color: #1a1a2e;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.card-title a:hover {
+    color: #349EF3;
+}
+
+/* ===== Card Content (Bottom) ===== */
+.card-content {
+    padding: 12px 24px 30px; /* Increased bottom padding to 30px */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: white;
+    width: 100%; /* Ensure it fills parent */
+}
+
+/* ===== Compact Description ===== */
+.card-description {
+    color: #5c677d;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+    width: 100%;
+    max-width: 100%; /* Prevent overflow */
+    /* Truncation logic */
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    transition: all 0.3s ease;
+    max-height: 1.5em; /* Fallback for height limits */
+}
+
+/* ===== Extra Text "...more like" ===== */
+.card-extra-text {
+    font-size: 0.85rem;
+    color: #adb5bd;
+    font-style: italic;
+    display: block;
+    margin-top: -5px;
+}
+
+/* ===== Tags ===== */
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 5px;
+}
+
+.tag-pill {
+    background: #f1f3f5;
+    color: #495057;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.tag-pill:hover {
+    background: #349EF3;
+    color: white;
+}
+
+/* ===== Read More Link ===== */
+.card-read-more {
+    display: none; 
+    margin-top: 5px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #349EF3;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.card-read-more:hover {
+    color: #1a7fd4;
+    text-decoration: underline;
+}
+
+/* ===== Expanded State on Hover ===== */
+.glass-card:hover .card-description {
+    display: block !important; /* Unset box layout to show full text */
+    -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
+    max-height: 800px !important;
+    height: auto !important;
+    overflow: visible !important;
+}
+
+.glass-card:hover .card-read-more {
+    display: inline-block;
+}
+
+.glass-card:hover .card-extra-text {
+    display: none;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+/* ===== Responsive Design ===== */
+@media only screen and (max-width: 1400px) {
+    .cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .glass-portfolio {
+        padding: 20px 25px;
+    }
+    
+    .cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .glass-portfolio {
+        padding: 20px 15px;
+    }
+    
+    .glass-filter-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .filter-tabs {
+        width: 100%;
+    }
+    
+    .filter-tab {
+        padding: 8px 14px;
+        font-size: 1.2rem;
+    }
+    
+    .filter-controls {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .year-select,
+    .tag-select {
+        width: 100%;
+    }
+    
+    .cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+    }
+    
+    .card-content {
+        padding: 15px;
+    }
+    
+    .card-title {
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== Override Main Content Wrap ===== */
+.main-content-wrap {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 20px;
+}
+
+@media only screen and (min-width: 1024px) {
+    .main-content-wrap {
+        max-width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
+
+/* ===== Hide old styles ===== */
+.postShorten,
+.postShorten-group .postShorten {
+    display: none !important;
+}
+
+/* ===== Footer Override ===== */
+#footer {
+    margin: 0 !important;
+    width: 100% !important;
+    padding: 20px 0;
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+}
