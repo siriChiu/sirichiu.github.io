@@ -1,0 +1,125 @@
+.timeline {
+  --date_column_width: 80px;
+  --timeline_column_width: 60px;
+  --timeline_line_width: 6px;
+  --timeline_line_color: #444;
+  --timeline_bullet_diameter: 15px;
+  --timeline_bullet_border_width: 4px;
+  --timeline_bullet_color: rgb(106, 215, 229);
+  --content_collapse_duration: 0.3s;
+  --content_background_color: #FFF;
+  --content_border_color: #444;
+  --content_duration_color: #000; }
+
+.timeline {
+  position: relative;
+  margin: 0 auto;
+  left: 8%; }
+  .timeline::after {
+    content: "";
+    position: absolute;
+    width: var(--timeline_line_width);
+    background-color: var(--timeline_line_color);
+    top: 0;
+    bottom: 0;
+    left: 8%;
+    margin-left: -3px; }
+  .timeline .container {
+    padding: 10px 10px 10px 40px;
+    margin-top: 10px;
+    position: relative;
+    /* background-color: gray; */
+    width: 86%;
+    left: 8%; }
+    .timeline .container::after {
+      content: "";
+      position: absolute;
+      width: var(--timeline_bullet_diameter);
+      height: var(--timeline_bullet_diameter);
+      left: calc(-0.6 * (var(--timeline_bullet_diameter) + var(--timeline_bullet_border_width)));
+      background-color: var(--timeline_bullet_color);
+      border: var(--timeline_bullet_border_width) solid var(--timeline_line_color);
+      top: 0px;
+      border-radius: 50%;
+      z-index: 1; }
+    .timeline .container .date {
+      position: absolute;
+      top: 22px;
+      z-index: 1;
+      left: -16%;
+      font-size: medimum; }
+    .timeline .container::before {
+      content: " ";
+      height: 0;
+      position: absolute;
+      top: 20px;
+      width: 0;
+      z-index: 1;
+      left: 26px;
+      border: medium solid #6ad7e5;
+      border-width: 13px 13px 13px 0px;
+      border-color: #6ad7e5 #6ad7e5 transparent transparent; }
+  .timeline .content {
+    box-shadow: 0 0 3px 3px #6ad7e5;
+    background-color: white;
+    position: relative;
+    border-radius: 6px;
+    transition: box-shadow 0.3s;
+    width: 90%; }
+    .timeline .content:hover {
+      box-shadow: 0 0 3px 4px #6ad7e5; }
+    .timeline .content .title {
+      padding: 5px 30px;
+      font-weight: bold;
+      display: inline-block; }
+    .timeline .content .duration {
+      margin: 0;
+      color: var(--content_duration_color);
+      opacity: 0.6;
+      top: 0;
+      right: 0;
+      text-align: right;
+      position: absolute;
+      padding: 5px;
+      transform-origin: 50% 100%;
+      width: auto;
+      transition: opacity calc(0.5 * var(--content_collapse_duration));
+      transition-delay: calc(0.5 * var(--content_collapse_duration)); }
+    .timeline .content.collapsed .duration {
+      opacity: 0.0;
+      transition-delay: 0.0s; }
+    .timeline .content .body {
+      margin: 0px;
+      padding: 5px 30px;
+      transition-property: max-height, padding;
+      transition-duration: var(--content_collapse_duration);
+      transition-timing-function: ease-in-out;
+      overflow: hidden; }
+    .timeline .content.collapsed .body {
+      padding-top: 0px;
+      padding-bottom: 0px;
+      max-height: 0px; }
+
+/* Add arrows to the right container (pointing left) */
+/* The actual content */
+/* small shadow change on hover */
+/* card title format */
+/* time moment format */
+/* body size */
+/* responsive for small devices */
+@media screen and (max-width: 600px) {
+  .timeline .container {
+    padding: 10px 10px 0px 40px;
+    left: 5%;
+    width: 95%; }
+    .timeline .container .date {
+      font-size: small;
+      transform: rotate(-90deg);
+      left: -5%;
+      top: 30px; }
+    .timeline .container::after {
+      left: 3px; }
+  .timeline .content .body {
+    padding: 5px 5px; }
+  .timeline .content .moment {
+    position: relative; } }

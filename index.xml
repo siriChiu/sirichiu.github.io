@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SiriC's Blog</title><link>https://sirichiu.github.io/</link><description>Recent content on SiriC's Blog</description><generator>Hugo</generator><language>en-us</language><managingEditor>sirichiu8632@gmail.com (Siri Chiu)</managingEditor><webMaster>sirichiu8632@gmail.com (Siri Chiu)</webMaster><lastBuildDate>Mon, 10 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://sirichiu.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>智慧型自動化壓力測試系統：融合物理特性建模預測與 AI 視覺化分析</title><link>https://sirichiu.github.io/2025/11/%E6%99%BA%E6%85%A7%E5%9E%8B%E8%87%AA%E5%8B%95%E5%8C%96%E5%A3%93%E5%8A%9B%E6%B8%AC%E8%A9%A6%E7%B3%BB%E7%B5%B1%E8%9E%8D%E5%90%88%E7%89%A9%E7%90%86%E7%89%B9%E6%80%A7%E5%BB%BA%E6%A8%A1%E9%A0%90%E6%B8%AC%E8%88%87-ai-%E8%A6%96%E8%A6%BA%E5%8C%96%E5%88%86%E6%9E%90/</link><pubDate>Mon, 10 Nov 2025 00:00:00 +0000</pubDate><author>sirichiu8632@gmail.com (Siri Chiu)</author><guid>https://sirichiu.github.io/2025/11/%E6%99%BA%E6%85%A7%E5%9E%8B%E8%87%AA%E5%8B%95%E5%8C%96%E5%A3%93%E5%8A%9B%E6%B8%AC%E8%A9%A6%E7%B3%BB%E7%B5%B1%E8%9E%8D%E5%90%88%E7%89%A9%E7%90%86%E7%89%B9%E6%80%A7%E5%BB%BA%E6%A8%A1%E9%A0%90%E6%B8%AC%E8%88%87-ai-%E8%A6%96%E8%A6%BA%E5%8C%96%E5%88%86%E6%9E%90/</guid><description>&lt;p&gt;本專案開發了一套基於 Golang 的分佈式自動化壓力測試系統，旨在解決傳統測試工具「難以精準控制系統瓦數」與「海量數據難以判讀」的兩大痛點。&lt;/p&gt;</description></item><item><title>全自動化技術資訊聚合平台：基於 n8n 與本地 LLM 的內容工作流</title><link>https://sirichiu.github.io/2025/08/%E5%85%A8%E8%87%AA%E5%8B%95%E5%8C%96%E6%8A%80%E8%A1%93%E8%B3%87%E8%A8%8A%E8%81%9A%E5%90%88%E5%B9%B3%E5%8F%B0%E5%9F%BA%E6%96%BC-n8n-%E8%88%87%E6%9C%AC%E5%9C%B0-llm-%E7%9A%84%E5%85%A7%E5%AE%B9%E5%B7%A5%E4%BD%9C%E6%B5%81/</link><pubDate>Fri, 15 Aug 2025 00:00:00 +0000</pubDate><author>sirichiu8632@gmail.com (Siri Chiu)</author><guid>https://sirichiu.github.io/2025/08/%E5%85%A8%E8%87%AA%E5%8B%95%E5%8C%96%E6%8A%80%E8%A1%93%E8%B3%87%E8%A8%8A%E8%81%9A%E5%90%88%E5%B9%B3%E5%8F%B0%E5%9F%BA%E6%96%BC-n8n-%E8%88%87%E6%9C%AC%E5%9C%B0-llm-%E7%9A%84%E5%85%A7%E5%AE%B9%E5%B7%A5%E4%BD%9C%E6%B5%81/</guid><description>&lt;p&gt;本專案構建了一套端到端 (End-to-End) 的自動化內容發布系統，旨在解決繁體中文圈與國際技術社群之間的「資訊落差」。&lt;/p&gt;</description></item><item><title>Redmine Smart Companion：重塑工時管理的桌面自動化工具</title><link>https://sirichiu.github.io/2025/01/redmine-smart-companion%E9%87%8D%E5%A1%91%E5%B7%A5%E6%99%82%E7%AE%A1%E7%90%86%E7%9A%84%E6%A1%8C%E9%9D%A2%E8%87%AA%E5%8B%95%E5%8C%96%E5%B7%A5%E5%85%B7/</link><pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate><author>sirichiu8632@gmail.com (Siri Chiu)</author><guid>https://sirichiu.github.io/2025/01/redmine-smart-companion%E9%87%8D%E5%A1%91%E5%B7%A5%E6%99%82%E7%AE%A1%E7%90%86%E7%9A%84%E6%A1%8C%E9%9D%A2%E8%87%AA%E5%8B%95%E5%8C%96%E5%B7%A5%E5%85%B7/</guid><description>&lt;p&gt;本專案開發了一款跨平台的桌面應用程式，旨在解決工程師在使用 Redmine 系統記錄工時面臨的「操作繁瑣」與「流程斷裂」問題。&lt;/p&gt;</description></item><item><title>About Me</title><link>https://sirichiu.github.io/about/</link><pubDate>Thu, 17 Aug 2023 00:00:00 +0000</pubDate><author>sirichiu8632@gmail.com (Siri Chiu)</author><guid>https://sirichiu.github.io/about/</guid><description>&lt;h3 id="-關於我"&gt;👨🏻‍💻 關於我&lt;/h3&gt;
+
+&lt;link rel="stylesheet" href="https://sirichiu.github.io/css/columns.min.18c50b8fac2bf86b76380613174d71cd459126d4199eb589efae525350dbb5da.css"&gt;
+
+&lt;div class="md-columns"&gt;
+ 
+ &lt;div class="markdown-inner"&gt;
+ 💻 對程式開發富有熱誠，專案經驗豐富&lt;br&gt;
+🌱 對學習充滿熱忱、喜歡接受挑戰&lt;br&gt;
+🌟 自動化系統獨立開發、超音波訊號分析、演算法研發、軟韌體設計、深度機器學習與應用&lt;br&gt;
+🚀 電子工程系→醫學工程所，富有跨領域知識&lt;br&gt;
+🌍 具備跨國會議與外國人交流經驗，英文商務溝通流利&lt;br&gt;
+🥋 持續10年的國內外合氣道訓練，能長期不懈的專注一項事情，也樂於與人交流
+ &lt;/div&gt;
+ 
+ &lt;div class="markdown-inner"&gt;
+ &lt;div style="text-align: center;"&gt;
+ &lt;img src="https://sirichiu.github.io/images/programmer.gif" alt="" width="300px"&gt;
+&lt;/div&gt;
+
+ &lt;/div&gt;
+ 
+&lt;/div&gt;
+&lt;p&gt;&lt;a href="https://linkedin.com/in/sirichiu"&gt;&lt;img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&amp;amp;style=for-the-badge&amp;amp;logo=linkedin&amp;amp;logoColor=white" alt="LinkedIn"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="-經歷"&gt;💼 經歷&lt;/h3&gt;
+&lt;link rel="stylesheet" href="https://sirichiu.github.io/shortcode-timeline/timeline.css"&gt;
+&lt;link rel="stylesheet" href="https://sirichiu.github.io/shortcode-timeline/timeline-mobile.css" media="screen and (max-width: 736px)"&gt;
+&lt;div class="timeline"&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class="container"&gt;
+&lt;div class="content collapsible "&gt;
+&lt;div class="title"&gt;研華科技 Advantech - 軟體工程師&lt;/div&gt;
+
+&lt;div class="duration" id="duration" &gt;
+
+&lt;/div&gt;
+
+&lt;div class="body"&gt;&lt;h6 id="伺服器燒機burn-in自動化測試工具"&gt;伺服器燒機(Burn-in)自動化測試工具:&lt;/h6&gt;
+&lt;ul&gt;
+&lt;li&gt;演算法開發、對數據進行預測與分析&lt;/li&gt;
+&lt;li&gt;即時同步感測器數據至儀錶板&lt;/li&gt;
+&lt;li&gt;Web介面開發、一對多主機同步控制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h6 id="基於openaigitea自動化代碼審查工具"&gt;基於OpenAI，Gitea自動化代碼審查工具:&lt;/h6&gt;
+&lt;ul&gt;
+&lt;li&gt;以Drone CI與Gitea webhook建立觸發事件&lt;/li&gt;
+&lt;li&gt;透過Restful API與OpenAI API，對欲校閱的代碼進行審查&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href="https://sirichiu.github.io/tags/golang"&gt;#Golang&lt;/a&gt;
+,
+&lt;a href="https://sirichiu.github.io/tags/python"&gt;#Python&lt;/a&gt;
+,
+&lt;a href="https://sirichiu.github.io/tags/dl/ml"&gt;#DL/ML&lt;/a&gt;
+,
+&lt;a href="https://sirichiu.github.io/tags/algorithm"&gt;#Algorithm&lt;/a&gt;
+,
+&lt;a href="https://sirichiu.github.io/tags/dashboard"&gt;#Dashboard&lt;/a&gt;
+,
+&lt;a href="https://sirichiu.github.io/tags/docker"&gt;#Docker&lt;/a&gt;
+.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="date"&gt;Present&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+function non0plural(number, name) {
+if (number == 0) {
+return ""
+}
+if (number &gt; 1) {
+return number + " " + name + "s"
+}
+return number + " " +name
+}
+
+el = document.querySelector("#duration");
+function refresh() {
+const t = new Date("2022-11-01"),
+n = new Date,
+e = monthDiff(t, n),
+s = e % 12,
+o = Math.floor(e / 12);
+el.innerHTML = non0plural(o, "year") + " " + non0plural(s, "month")
+}
+
+function monthDiff(e, t) {
+let n;
+return n = (t.getFullYear() - e.getFullYear()) * 12, n -= e.getMonth(), n += t.getMonth(), n &lt;= 0 ? 0 : n
+}
+
+window.setInterval(refresh, 1 * 1e3);
+&lt;/script&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class="container"&gt;
+&lt;div class="content collapsible collapsed"&gt;
+&lt;div class="title"&gt;香港商顯通科技 Sentons - 數位訊號處理工程師&lt;/div&gt;
+
+&lt;div class="duration" &gt;
+ 1 year 
+&lt;/div&gt;
+
+&lt;div class="body"&gt;&lt;h6 id="訊號分析及處理"&gt;訊號分析及處理&lt;/h6&gt;
+&lt;ul&gt;
+&lt;li&gt;使用MATLAB進行超音波訊號的模擬以及觸碰演算法研究&lt;/li&gt;
+&lt;li&gt;※為提出提高工廠生產良率的訊號處理方式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h6 id="韌體設計"&gt;韌體設計&lt;/h6&gt;
+&lt;ul&gt;
+&lt;li&gt;C++韌體開發，將模擬後之最佳效能的參數實作整合至韌體中&lt;/li&gt;
+&lt;li&gt;※訊號參數調適最佳化演算法開發&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h6 id="軟體設計"&gt;軟體設計&lt;/h6&gt;
+&lt;ul&gt;
+&lt;li&gt;C# GUI程式開發，整合超音波訊號與產品裝置間的訊號溝通即顯示介面&lt;/li&gt;
+&lt;li&gt;※開發產品之軟體開發套件(SDK)、簡單化複雜的超音波訊號韌體參數設定步驟&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h6 id="其他"&gt;其他&lt;/h6&gt;
+&lt;ul&gt;
+&lt;li&gt;依據客戶需求，設計出對方所希望的軟體韌體功能&lt;/li&gt;
+&lt;li&gt;協助客戶開發及量產問題、客戶技術支援、專案協調&lt;/li&gt;
+&lt;li&gt;與美國成員、主管進行書信及會議&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href="https://sirichiu.github.io/tags/c&amp;#43;&amp;#43;"&gt;#C++&lt;/a&gt;
+,
+&lt;a href="https://sirichiu.github.io/tags/c"&gt;#C#&lt;/a&gt;
+,
+&lt;a href="https://sirichiu.github.io/tags/matlab"&gt;#MATLAB&lt;/a&gt;
+,
+&lt;a href="https://sirichiu.github.io/tags/git"&gt;#Git&lt;/a&gt;
+,
+&lt;a href="https://sirichiu.github.io/tags/%E9%9F%8C%E9%AB%94%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88"&gt;#韌體程式設計&lt;/a&gt;
+,
+&lt;a href="https://sirichiu.github.io/tags/%E8%BB%9F%E9%AB%94%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88"&gt;#軟體程式設計&lt;/a&gt;
+.&lt;/p&gt;</description></item><item><title>高頻超音波微多普勒成像技術在手指肌腱新生血管評估中的應用</title><link>https://sirichiu.github.io/2022/04/high-frequency-ultrafast-ultrasound-micro-doppler-imaging-for-estimating-finger-tendon-neovascularity-based-on-curvilinear-structure-enhancement/</link><pubDate>Sun, 24 Apr 2022 00:00:00 +0000</pubDate><author>sirichiu8632@gmail.com (Siri Chiu)</author><guid>https://sirichiu.github.io/2022/04/high-frequency-ultrafast-ultrasound-micro-doppler-imaging-for-estimating-finger-tendon-neovascularity-based-on-curvilinear-structure-enhancement/</guid><description>&lt;p&gt;我提出一種微血管成像演算法，能夠清楚的看見老鼠腎臟的血管樹狀結構以及手指受傷肌腱的新生血管資訊，最高解析度可達直徑35um。&lt;/p&gt;</description></item><item><title>射流向量多普勒成像技術在靜脈瓣膜血流分析中的應用</title><link>https://sirichiu.github.io/2022/04/projectile-vector-doppler-imaging/</link><pubDate>Sat, 23 Apr 2022 00:00:00 +0000</pubDate><author>sirichiu8632@gmail.com (Siri Chiu)</author><guid>https://sirichiu.github.io/2022/04/projectile-vector-doppler-imaging/</guid><description>&lt;script type="text/javascript"
+ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"&gt;
+&lt;/script&gt;
+&lt;p&gt;動態向量都卜勒(Projectile Vector Doppler Imaging) 比傳統都卜勒影像提供更多樣的血液資訊，如流速、流動，擾流情況等，給予醫師更多診斷資訊。&lt;/p&gt;</description></item><item><title>Deep Q-Network 實戰：基於 TensorFlow 的四層神經網路貪食蛇代理</title><link>https://sirichiu.github.io/2022/04/dqnsnakegame/</link><pubDate>Fri, 22 Apr 2022 00:00:00 +0000</pubDate><author>sirichiu8632@gmail.com (Siri Chiu)</author><guid>https://sirichiu.github.io/2022/04/dqnsnakegame/</guid><description>&lt;script type="text/javascript"
+ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"&gt;
+&lt;/script&gt;
+&lt;p&gt;本專案將深度強化學習 (Deep Reinforcement Learning) 應用於經典的貪食蛇遊戲中。為了讓代理 (Agent) 能在動態環境中做出最佳決策，我使用 &lt;strong&gt;TensorFlow&lt;/strong&gt; 框架設計了一個&lt;strong&gt;客製化的四層全連接神經網路 (4-Layer Fully Connected Network)&lt;/strong&gt; 作為核心的 Q-Network。&lt;/p&gt;</description></item><item><title>基於 MobileNet 與雲端協同運算的姿態辨識應用</title><link>https://sirichiu.github.io/2022/04/pose-detection/</link><pubDate>Fri, 22 Apr 2022 00:00:00 +0000</pubDate><author>sirichiu8632@gmail.com (Siri Chiu)</author><guid>https://sirichiu.github.io/2022/04/pose-detection/</guid><description>&lt;script type="text/javascript"
+ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"&gt;
+&lt;/script&gt;
+&lt;p&gt;本專案旨在解決高齡化社會中，長輩缺乏運動動機與數位落差的問題。我們開發了一套基於 AI 肢體辨識的互動遊戲系統，包含「記憶翻牌」與「瑜珈引導」，讓長輩在家中即可透過簡單的設備進行復健與運動。&lt;/p&gt;</description></item><item><title>形態學指紋特徵提取：基於 Bowler-Hat 變換的雜訊抑制與結構增強</title><link>https://sirichiu.github.io/2022/04/fingerprint-dirt-fix/</link><pubDate>Fri, 22 Apr 2022 00:00:00 +0000</pubDate><author>sirichiu8632@gmail.com (Siri Chiu)</author><guid>https://sirichiu.github.io/2022/04/fingerprint-dirt-fix/</guid><description>&lt;script type="text/javascript"
+ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"&gt;
+&lt;/script&gt;
+&lt;p&gt;本專案利用 &lt;strong&gt;MATLAB&lt;/strong&gt; 實作了進階的數學形態學處理流程。透過 &lt;strong&gt;Top-Hat 運算&lt;/strong&gt;濾除背景污漬，並引入 &lt;strong&gt;Bowler-Hat 變換 (Bowler-Hat Transform)&lt;/strong&gt; 進行結構增強。實驗結果證實，此演算法能有效還原受汙損指紋的脊線特徵，同時也驗證了該演算法在不同領域影像處理上的通用性。&lt;/p&gt;</description></item><item><title>手指肌腱位移評估技術</title><link>https://sirichiu.github.io/2022/04/evaluation-of-hand-tendon-movement/</link><pubDate>Fri, 22 Apr 2022 00:00:00 +0000</pubDate><author>sirichiu8632@gmail.com (Siri Chiu)</author><guid>https://sirichiu.github.io/2022/04/evaluation-of-hand-tendon-movement/</guid><description>&lt;p&gt;向量都卜勒成像(Vector Doppler Imaging)能夠觀測更多的目標運動變化，除了應用在血液流速的估算外，也可以應用在肌腱上評估肌腱的滑動性，進而提供肌腱的位移資訊給予醫師更多評估的信息。&lt;/p&gt;</description></item><item><title>智慧醫療輔助診斷：基於 ResNet50 的胸腔 X 光肺炎分類器</title><link>https://sirichiu.github.io/2022/04/covid19-chestxray/</link><pubDate>Fri, 22 Apr 2022 00:00:00 +0000</pubDate><author>sirichiu8632@gmail.com (Siri Chiu)</author><guid>https://sirichiu.github.io/2022/04/covid19-chestxray/</guid><description>&lt;script type="text/javascript"
+ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"&gt;
+&lt;/script&gt;
+&lt;p&gt;本專案旨在開發一套基於深度學習的自動化輔助診斷系統，協助醫療人員快速判讀胸腔 X 光影像 (CXR)。&lt;/p&gt;</description></item><item><title>機構合成的最佳化：基於 MATLAB 數值分析的四連桿路徑生成器</title><link>https://sirichiu.github.io/2022/04/4-bar-linkage/</link><pubDate>Fri, 22 Apr 2022 00:00:00 +0000</pubDate><author>sirichiu8632@gmail.com (Siri Chiu)</author><guid>https://sirichiu.github.io/2022/04/4-bar-linkage/</guid><description>&lt;script type="text/javascript"
+ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"&gt;
+&lt;/script&gt;
+&lt;p&gt;本專案探討了機構學中的經典難題——「路徑生成 (Path Generation)」。目標是設計一組四連桿機構 (4-Bar Linkage)，使其連桿曲線 (Coupler Curve) 能精確通過空間中指定的 9 個目標點。&lt;/p&gt;</description></item><item><title>物聯網溫溼度感測器即時監控系統</title><link>https://sirichiu.github.io/2022/04/%E7%89%A9%E8%81%AF%E7%B6%B2%E6%BA%AB%E6%BA%BC%E5%BA%A6%E6%84%9F%E6%B8%AC%E5%99%A8%E5%8D%B3%E6%99%82%E7%9B%A3%E6%8E%A7%E7%B3%BB%E7%B5%B1/</link><pubDate>Wed, 20 Apr 2022 00:00:00 +0000</pubDate><author>sirichiu8632@gmail.com (Siri Chiu)</author><guid>https://sirichiu.github.io/2022/04/%E7%89%A9%E8%81%AF%E7%B6%B2%E6%BA%AB%E6%BA%BC%E5%BA%A6%E6%84%9F%E6%B8%AC%E5%99%A8%E5%8D%B3%E6%99%82%E7%9B%A3%E6%8E%A7%E7%B3%BB%E7%B5%B1/</guid><description>&lt;p&gt;使用MQTT傳輸協定為基礎，透過Raspberry Pi、NodeMCU等裝置來實現基本的物聯網遠端即時監控系統&lt;/p&gt;</description></item><item><title>長照2.0服務整合平台</title><link>https://sirichiu.github.io/2022/04/%E9%95%B7%E7%85%A72.0%E6%9C%8D%E5%8B%99%E6%95%B4%E5%90%88%E5%B9%B3%E5%8F%B0/</link><pubDate>Wed, 20 Apr 2022 00:00:00 +0000</pubDate><author>sirichiu8632@gmail.com (Siri Chiu)</author><guid>https://sirichiu.github.io/2022/04/%E9%95%B7%E7%85%A72.0%E6%9C%8D%E5%8B%99%E6%95%B4%E5%90%88%E5%B9%B3%E5%8F%B0/</guid><description>&lt;p&gt;為了改善台灣長照環境所設計的長照服務整合平台。
+此專題的理念是將長照環境搬進家中，減少家中子女負擔。
+透過設計便捷的APP呼叫方式，以便年長者自行操作系統。&lt;/p&gt;</description></item></channel></rss>
