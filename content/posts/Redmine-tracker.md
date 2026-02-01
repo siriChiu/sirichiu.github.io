@@ -1,21 +1,26 @@
 ---
 title: Redmine Smart Companion：重塑工時管理的桌面自動化工具
-date: 2025-11-27
+date: 2025-01-27
 categories:
 - 專業技術
 tags:
 - Vibe Coding
-- 自動化
-- AI
+- Deep Learning/Machine Learning
 - Redmine
 - Python
-- Reat
+- React
+- Electron
+- FastAPI
+- Automation
+- CI/CD
+
+thumbnailImagePosition: left
+thumbnailImage: /postImg/Redmine-tracker/main.jpg
 ---
 
 本專案開發了一款跨平台的桌面應用程式，旨在解決工程師在使用 Redmine 系統記錄工時面臨的「操作繁瑣」與「流程斷裂」問題。
 
 <!--more-->
-*Created: April 24, 2022 1:46 PM*
 
 ---
 

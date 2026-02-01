@@ -1,23 +1,24 @@
 ---
 title: 全自動化技術資訊聚合平台：基於 n8n 與本地 LLM 的內容工作流
-date: 2023-08-15
+date: 2025-08-15
 categories:
 - 專業技術
-tags:
-- 自動化
+tags: 
+- Automation
 - n8n
 - Ollama
-- AI
-- 爬蟲
+- Deep Learning/Machine Learning
+- Web Scraping
 - RSS
 - WordPress
+thumbnailImagePosition: left
+thumbnailImage: /postImg/lightnews/1.jpg
 ---
 
 本專案構建了一套端到端 (End-to-End) 的自動化內容發布系統，旨在解決繁體中文圈與國際技術社群之間的「資訊落差」。
 
 <!--more-->
 
-*Created: April 24, 2022 1:16 AM*
 
 ## 📋 專案摘要 (Abstract)
 

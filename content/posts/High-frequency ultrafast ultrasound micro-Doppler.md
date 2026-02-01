@@ -1,5 +1,5 @@
 ---
-title: High-frequency ultrafast ultrasound micro-Doppler imaging for estimating finger tendon neovascularity based on curvilinear structure enhancement
+title: 高頻超音波微多普勒成像技術在手指肌腱新生血管評估中的應用
 slug: High-frequency ultrafast ultrasound micro-Doppler imaging for estimating finger tendon neovascularity based on curvilinear structure enhancement
 date: 2022-04-24
 categories:
@@ -7,6 +7,11 @@ categories:
 tags:
 - MATLAB
 - Ultrasound
+- Micro-Doppler
+- Neovascularization
+- Medical Imaging
+- Signal Processing
+
 thumbnailImagePosition: left
 thumbnailImage: /postImg/HFUDCEI/00.png
 coverImage: 
@@ -16,9 +21,10 @@ coverImage:
 
 <!--more-->
 
-Created: April 24, 2022 8:11 PM
 
 ## Abstract
+
+High-frequency ultrafast ultrasound micro-Doppler imaging for estimating finger tendon neovascularity based on curvilinear structure enhancement
 
 我提出一種演算法他能夠清楚的看見老鼠腎臟以及手指受傷肌腱的血管變化。
 這裡的超音波影像是老鼠的腎臟以及脾臟，腎臟的大小大約在9mmX5mm左右，脾臟大約在6mmX3mm左右，這兩個器官在解剖學上具有標準的血管樹狀結構，向這樣的大小在臨床儀器中是不可能看到其中血流的變化的。但是透過我們的儀器以及我提出的演算法可以很輕易地看見其中血流分布的資訊。

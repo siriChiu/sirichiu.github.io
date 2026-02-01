@@ -105,7 +105,7 @@
     align-items: stretch;
     background: white;
     border-radius: 12px;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     transition: all 0.3s ease;
     border: 1px solid #f1f3f5;
@@ -254,19 +254,18 @@
         font-size: 1.2rem;
     }
     
-    /* Stack cards vertically on mobile */
+    /* Keep horizontal layout on mobile, just make image smaller */
     .glass-card {
-        flex-direction: column;
+        flex-direction: row;
     }
     
     .card-image-link {
-        width: 100%;
-        min-height: auto;
-        max-height: 200px;
+        width: 120px;
+        min-height: 100px;
     }
     
     .card-image {
-        max-height: 200px;
+        padding: 10px;
     }
     
     .card-content {

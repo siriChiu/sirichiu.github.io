@@ -128,7 +128,7 @@
           const matchYear = yearFilter === 'all' || cardYear === yearFilter;
           
           if (matchCategory && matchYear) {
-            card.style.display = 'block';
+            card.style.display = 'flex';
             card.classList.add('fade-in');
           } else {
             card.style.display = 'none';

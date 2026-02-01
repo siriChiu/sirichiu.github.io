@@ -1,5 +1,5 @@
 ---
-title: Projectile Vector Doppler Imaging
+title:  射流向量多普勒成像技術在靜脈瓣膜血流分析中的應用
 slug: Projectile Vector Doppler Imaging
 date: 2022-04-23
 categories:
@@ -7,6 +7,10 @@ categories:
 tags:
 - MATLAB
 - Ultrasound
+- Vector Doppler
+- Signal Processing
+- Medical Imaging
+
 thumbnailImagePosition: left
 thumbnailImage: /postImg/ProjectileVectorDopplerImaging/0.png
 katex: true
@@ -18,7 +22,6 @@ katex: true
 動態向量都卜勒(Projectile Vector Doppler Imaging) 比傳統都卜勒影像提供更多樣的血液資訊，如流速、流動，擾流情況等，給予醫師更多診斷資訊。
 
 <!--more-->
-*Created: April 24, 2022 1:46 PM*
 
 ## 摘要
 
@@ -26,6 +29,7 @@ katex: true
 
 ## 方法
 
+Projectile Vector Doppler Imaging
 
 超音波向量都卜勒公式是由不同的超音波發射角度與一般的超音波都卜勒公式所推導而來的，如下圖。
 ![Untitled](/postImg/ProjectileVectorDopplerImaging/1.png)
