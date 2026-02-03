@@ -11,7 +11,7 @@
       window.scrollTo(0, window.scrollY); // Reset horizontal scroll without affecting vertical
 
       // Responsive sidebar width: 60px on mobile, 250px on desktop
-      const isMobile = window.innerWidth <= 768;
+      const isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
       const sidebarWidth = isMobile ? 60 : 250;
 
       const $sidebar = $('#sidebar');

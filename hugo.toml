@@ -184,12 +184,12 @@ disqusShortname = "hugo-tranquilpeak-theme"
   name = "標籤 Tags"
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-tags\"></i>"
   url = "/tags"
-[[menu.main]]
-  weight = 4
-  identifier = "檔案庫 archives"
-  name = "檔案庫 Archives"
-  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-archive\"></i>"
-  url = "/archives"
+#[[menu.main]]
+#  weight = 4
+#  identifier = "檔案庫 archives"
+#  name = "檔案庫 Archives"
+#  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-archive\"></i>"
+#  url = "/archives"
 [[menu.main]]
   weight = 5
   identifier = "關於 about"

@@ -16,7 +16,7 @@ tags:
 - CI/CD
 
 thumbnailImagePosition: left
-thumbnailImage: /postImg/Redmine-tracker/main.jpg
+thumbnailImage: /postImg/Redmine-Tracker/main.jpg
 ---
 
 本專案開發了一款跨平台的桌面應用程式，旨在解決工程師在使用 Redmine 系統記錄工時面臨的「操作繁瑣」與「流程斷裂」問題。
