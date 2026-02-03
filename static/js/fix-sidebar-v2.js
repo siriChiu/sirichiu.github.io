@@ -10,24 +10,30 @@
       document.documentElement.scrollLeft = 0;
       window.scrollTo(0, window.scrollY); // Reset horizontal scroll without affecting vertical
 
+      // Responsive sidebar width: 60px on mobile, 250px on desktop
+      const isMobile = window.innerWidth <= 768;
+      const sidebarWidth = isMobile ? 60 : 250;
+
       const $sidebar = $('#sidebar');
       const $blog = $('#blog');
       const $main = $('#main');
       const $headerTitle = $('.header-title');
       const $bottomBar = $('#bottom-bar');
       const $postHeader = $('.post-header-cover');
+      const $header = $('#header');
 
       // 1. Force Sidebar
       if ($sidebar.length) {
           $sidebar[0].style.setProperty('left', '0', 'important');
           $sidebar[0].style.setProperty('display', 'block', 'important');
           $sidebar[0].style.setProperty('transform', 'none', 'important');
+          $sidebar[0].style.setProperty('width', sidebarWidth + 'px', 'important');
           
           // Ensure it has the class
           if (!$sidebar.hasClass('pushed')) $sidebar.addClass('pushed');
       }
 
-      // 2. Force Content Elements
+      // 2. Force Content Elements with responsive margin
       const contentElements = [
           $main[0], 
           $headerTitle[0], 
@@ -37,19 +43,28 @@
 
       contentElements.forEach(function(el) {
           if (el) {
-              el.style.setProperty('margin-left', '250px', 'important');
-              el.style.setProperty('width', 'calc(100% - 250px)', 'important');
               el.style.setProperty('transform', 'none', 'important');
-              el.style.setProperty('transition', 'none', 'important');
+              // Allow CSS transitions for smooth resize animation
+              
+              // Allow CSS transitions for smooth resize animation
               
               if (el.id === 'main') {
                   el.style.setProperty('background-color', '#fff', 'important');
                   el.style.setProperty('min-height', '100vh', 'important');
               }
+              
+              el.style.setProperty('margin-left', sidebarWidth + 'px', 'important');
+              el.style.setProperty('width', 'calc(100% - ' + sidebarWidth + 'px)', 'important');
           }
       });
 
-      // 3. Force Wrapper Class
+      // 3. Force Header with responsive left offset
+      if ($header.length) {
+          $header[0].style.setProperty('left', sidebarWidth + 'px', 'important');
+          $header[0].style.setProperty('width', 'calc(100% - ' + sidebarWidth + 'px)', 'important');
+      }
+
+      // 4. Force Wrapper Class
       if ($blog.length && !$blog.hasClass('pushed')) {
           $blog.addClass('pushed');
       }

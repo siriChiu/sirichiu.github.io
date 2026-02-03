@@ -63,6 +63,33 @@ html body #blog #sidebar,
     transform: none !important;
     display: block !important;
     visibility: visible !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* IE and Edge */
+    transition: width 0.3s ease !important; /* Smooth resize animation */
+}
+
+/* Sidebar inner elements also need transition */
+#sidebar .sidebar-container,
+#sidebar .sidebar-profile,
+#sidebar .sidebar-buttons,
+#sidebar .sidebar-button {
+    transition: all 0.3s ease !important;
+}
+
+/* Center profile picture */
+#sidebar .sidebar-profile {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+#sidebar::-webkit-scrollbar,
+.sidebar-container::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
 }
 
 /* 2. Hide Hamburger Menu */
@@ -73,17 +100,6 @@ html body #blog #sidebar,
 /* 3. Shift Content Permanently - Use width: auto to let browser calculate */
 /* CRITICAL: The issue is that calc(100% - 250px) may compute incorrectly */
 /* Using width: auto with margin-left lets the block naturally fill available space */
-#main,
-#main[data-behavior],
-#main[data-behavior="1"],
-#main[data-behavior="2"],
-#main[data-behavior="3"],
-#main[data-behavior="4"],
-#main[data-behavior="5"],
-#main[data-behavior="6"],
-html body #blog #main,
-html body #blog #main[style],
-html body #blog #main.pushed,
 #blog #main,
 #blog #main.pushed {
     display: block !important;
@@ -93,7 +109,7 @@ html body #blog #main.pushed,
     margin-right: 0 !important;
     width: auto !important; /* Let browser calculate naturally */
     transform: none !important;
-    transition: none !important;
+    transition: margin-left 0.3s ease, width 0.3s ease !important; /* Smooth resize */
     background-color: #fff !important;
     min-height: 100vh !important;
     left: auto !important;
@@ -108,7 +124,7 @@ html body #header,
     left: 250px !important;
     width: calc(100% - 250px) !important;
     transform: none !important;
-    transition: none !important;
+    transition: left 0.3s ease, width 0.3s ease !important; /* Smooth resize */
 }
 
 /* Header title no longer needs margin-left since parent is moved */
@@ -119,7 +135,7 @@ html body .header-title[style],
     margin-right: 0 !important;
     width: auto !important;
     transform: none !important;
-    transition: none !important;
+    transition: margin-left 0.3s ease !important; /* Smooth resize */
 }
 
 html body #bottom-bar,
@@ -146,12 +162,94 @@ html body #bottom-bar[style],
 
 /* 5. Mobile Override - Enforce same layout on small screens */
 @media only screen and (max-width: 768px) {
+    /* Narrow sidebar - 60px width, icons only */
+    html body #blog #sidebar,
+    #sidebar[data-behavior],
+    #sidebar[style],
+    #sidebar {
+        width: 60px !important;
+        min-width: 60px !important;
+    }
+    
+    /* Hide profile picture and text on mobile */
+    #sidebar .sidebar-profile-picture {
+        width: 40px !important;
+        height: 40px !important;
+    }
+    
+    #sidebar .sidebar-profile-name,
+    #sidebar .sidebar-profile-bio {
+        display: none !important;
+    }
+    
+    /* Hide button text, show only icons */
+    #sidebar .sidebar-button-desc {
+        display: none !important;
+    }
+    
+    /* Center icons in narrower sidebar */
+    #sidebar .sidebar-button-link {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 12px 0 !important;
+        width: 100% !important;
+    }
+    
+    #sidebar .sidebar-button-icon {
+        margin: 0 auto !important;
+        text-align: center !important;
+    }
+    
+    #sidebar .sidebar-button {
+        display: flex !important;
+        justify-content: center !important;
+        width: 100% !important;
+    }
+    
+    /* Center profile picture on mobile */
+    #sidebar .sidebar-profile {
+        padding: 10px 0 !important;
+    }
+    
+    #sidebar .sidebar-profile-picture {
+        margin: 0 auto !important;
+    }
+    
+    /* Adjust main content to match narrower sidebar - ultra high specificity */
     html body #blog #main,
+    html body #blog #main[data-behavior],
+    html body #blog #main[data-behavior="1"],
+    html body #blog #main[data-behavior="2"],
+    html body #blog #main[data-behavior="3"],
+    html body #blog #main[data-behavior="4"],
+    html body #blog #main[data-behavior="5"],
+    html body #blog #main[data-behavior="6"],
+    html body #blog #main[style],
+    html body #blog #main.pushed {
+        margin-left: 60px !important;
+        transform: none !important;
+        min-width: 0;
+    }
+    
     html body .header-title,
     html body #bottom-bar {
-        margin-left: 250px !important;
+        margin-left: 60px !important;
         transform: none !important;
-        min-width: 0; /* flexible width */
+        min-width: 0;
+    }
+    
+    /* Adjust header to match narrower sidebar */
+    #header,
+    html body #header,
+    #header[style] {
+        left: 60px !important;
+        width: calc(100% - 60px) !important;
+    }
+    
+    /* Hide hamburger on mobile too */
+    #btn-open-sidebar {
+        display: none !important;
     }
 }
 

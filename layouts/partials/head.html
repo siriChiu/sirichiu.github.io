@@ -250,6 +250,16 @@
         width: auto !important;
         transform: none !important;
       }
+      /* Mobile: Narrow sidebar (icons only) */
+      @media only screen and (max-width: 768px) {
+        #sidebar { width: 60px !important; }
+        #sidebar .sidebar-button-desc,
+        #sidebar .sidebar-profile-name,
+        #sidebar .sidebar-profile-bio { display: none !important; }
+        #sidebar .sidebar-button-link { justify-content: center !important; }
+        #main, #blog #main, #blog #main.pushed { margin-left: 60px !important; }
+        #header { left: 60px !important; width: calc(100% - 60px) !important; }
+      }
     </style>
     <script>
       // CRITICAL FIX: Prevent theme JS from scrolling body horizontally
