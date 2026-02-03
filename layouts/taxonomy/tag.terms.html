@@ -23,7 +23,7 @@
             <h3 class="skill-section-title">{{ i18n "taxonomy.core_competencies" }}</h3>
             <div class="cards-container skill-grid-core">
               {{ range $topTags }}
-                <a href="{{ .Name | urlize | relURL }}" class="glass-card skill-card-core" style="display: flex;">
+                <a href="{{ .Page.RelPermalink }}" class="glass-card skill-card-core" style="display: flex;">
                   <div class="skill-header">
                     <span class="skill-name">{{ .Name }}</span>
                     <span class="skill-count-badge">{{ .Count }}</span>
@@ -43,7 +43,7 @@
             <div class="skill-cloud-container glass-card">
               <div class="tag-cloud">
                 {{ range $otherTags }}
-                  <a href="{{ .Name | urlize | relURL }}" class="tag-pill-cloud" style="font-size: 1rem;">
+                  <a href="{{ .Page.RelPermalink }}" class="tag-pill-cloud" style="font-size: 1rem;">
                     {{ .Name }} <span class="tag-count-small">({{ .Count }})</span>
                   </a>
                 {{ end }}

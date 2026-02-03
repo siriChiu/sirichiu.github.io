@@ -23,7 +23,7 @@
                   {{ $latestPage = . }}
                 {{ end }}
                 
-                <a href="{{ $name | urlize | relURL }}" class="glass-card knowledge-tile" style="display: flex;">
+                <a href="{{ $taxonomy.Page.RelPermalink }}" class="glass-card knowledge-tile" style="display: flex;">
                   <div class="tile-header">
                     <h3 class="tile-title">{{ $name | humanize }}</h3>
                     <span class="tile-count">{{ $taxonomy.Count }} {{ i18n "taxonomy.posts_count" }}</span>
