@@ -12,7 +12,7 @@
         
         <section class="main-content-wrap glass-portfolio">
           <div class="portfolio-content">
-            <h2 class="category-title">Knowledge Domains</h2>
+            <h2 class="category-title">{{ i18n "taxonomy.knowledge_domains" | upper }}</h2>
             
             <div class="cards-container knowledge-grid">
               {{/* Iterate over all categories */}}
@@ -26,13 +26,13 @@
                 <a href="{{ $name | urlize | relURL }}" class="glass-card knowledge-tile" style="display: flex;">
                   <div class="tile-header">
                     <h3 class="tile-title">{{ $name | humanize }}</h3>
-                    <span class="tile-count">{{ $taxonomy.Count }} Posts</span>
+                    <span class="tile-count">{{ $taxonomy.Count }} {{ i18n "taxonomy.posts_count" }}</span>
                   </div>
                   
                   <div class="tile-body">
                     {{ if $latestPage }}
                     <div class="latest-snapshot">
-                      <span class="snapshot-label">LATEST</span>
+                      <span class="snapshot-label">{{ i18n "taxonomy.latest" }}</span>
                       <p class="snapshot-title">{{ $latestPage.Title }}</p>
                       <span class="snapshot-date">{{ $latestPage.Date.Format "Jan 2, 2006" }}</span>
                     </div>
@@ -40,7 +40,7 @@
                   </div>
                   
                   <div class="tile-footer">
-                     <span class="explore-link">Explore Domain →</span>
+                     <span class="explore-link">{{ i18n "taxonomy.explore_domain" }}</span>
                   </div>
                 </a>
               {{ end }}

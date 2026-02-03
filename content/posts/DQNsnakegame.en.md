@@ -9,7 +9,7 @@ tags:
 - TensorFlow
 - Reinforcement Learning
 - Deep Q-Network
-- Deep Learning/Machine Learning
+- Deep Learning & Machine Learning
 
 thumbnailImagePosition: left
 thumbnailImage: /postImg/DQNsnakegame/1.png

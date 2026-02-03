@@ -12,7 +12,7 @@
         
         <section class="main-content-wrap glass-portfolio">
           <div class="portfolio-content">
-            <h2 class="category-title">Growth Timeline</h2>
+            <h2 class="category-title">{{ i18n "taxonomy.growth_timeline" | upper }}</h2>
             
             <div class="timeline-container">
               {{/* Safely get posts. Hardcoding 'posts' since mainSections might be undefined */}}
@@ -50,7 +50,7 @@
                 </div>
                 {{ end }}
               {{ else }}
-                <p>No posts found.</p>
+                <p>{{ i18n "taxonomy.no_posts_found" }}</p>
               {{ end }}
             </div>
 

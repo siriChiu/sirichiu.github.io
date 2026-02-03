@@ -12,7 +12,7 @@
         
         <section class="main-content-wrap glass-portfolio">
           <div class="portfolio-content">
-            <h2 class="category-title">Skill Dashboard</h2>
+            <h2 class="category-title">{{ i18n "taxonomy.skill_dashboard" | upper }}</h2>
             
             {{/* Logic to separate Top Tags vs Others */}}
             {{ $allTags := .Data.Terms.ByCount }}
@@ -20,7 +20,7 @@
             {{ $otherTags := after 8 $allTags }}
 
             <!-- SECTION 1: Core Competencies -->
-            <h3 class="skill-section-title">Core Competencies</h3>
+            <h3 class="skill-section-title">{{ i18n "taxonomy.core_competencies" }}</h3>
             <div class="cards-container skill-grid-core">
               {{ range $topTags }}
                 <a href="{{ .Name | urlize | relURL }}" class="glass-card skill-card-core" style="display: flex;">
@@ -39,7 +39,7 @@
             </div>
 
             <!-- SECTION 2: The Full Stack -->
-            <h3 class="skill-section-title" style="margin-top: 50px;">The Full Stack / Exploration</h3>
+            <h3 class="skill-section-title" style="margin-top: 50px;">{{ i18n "taxonomy.full_stack" }}</h3>
             <div class="skill-cloud-container glass-card">
               <div class="tag-cloud">
                 {{ range $otherTags }}

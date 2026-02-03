@@ -6,7 +6,7 @@ categories:
 - 研究生專題
 tags:
 - MATLAB
-- Deep Learning/Machine Learning
+- Deep Learning & Machine Learning
 - Medical Imaging
 - Classification
 

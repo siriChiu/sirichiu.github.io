@@ -8,7 +8,7 @@ tags:
 - Automation
 - n8n
 - Ollama
-- Deep Learning/Machine Learning
+- Deep Learning & Machine Learning
 - Web Scraping
 - RSS
 - WordPress

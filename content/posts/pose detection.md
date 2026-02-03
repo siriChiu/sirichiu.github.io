@@ -10,7 +10,7 @@ tags:
 - MobileNet
 - WebSocket
 - Cloud Computing
-- Deep Learning/Machine Learning
+- Deep Learning & Machine Learning
 thumbnailImagePosition: left
 thumbnailImage: /postImg/pose-detection/1.jpg
 katex: true

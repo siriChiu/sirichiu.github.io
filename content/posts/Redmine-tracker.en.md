@@ -6,7 +6,7 @@ categories:
 - Professional Technology
 tags:
 - Vibe Coding
-- Deep Learning/Machine Learning
+- Deep Learning & Machine Learning
 - Redmine
 - Python
 - React

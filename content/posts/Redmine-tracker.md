@@ -6,7 +6,7 @@ categories:
 - 專業技術
 tags:
 - Vibe Coding
-- Deep Learning/Machine Learning
+- Deep Learning & Machine Learning
 - Redmine
 - Python
 - React

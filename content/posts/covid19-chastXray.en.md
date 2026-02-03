@@ -6,7 +6,7 @@ categories:
 - Graduate Project
 tags:
 - MATLAB
-- Deep Learning/Machine Learning
+- Deep Learning & Machine Learning
 - Medical Imaging
 - Classification
 

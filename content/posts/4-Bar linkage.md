@@ -10,7 +10,7 @@ tags:
 - Kinematics
 - Optimization
 - Numerical Analysis
-- Deep Learning/Machine Learning
+- Deep Learning & Machine Learning
 
 thumbnailImagePosition: left
 thumbnailImage: /postImg/4-Bar Linkage/1.png
