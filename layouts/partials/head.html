@@ -237,9 +237,15 @@
         width: auto !important;
         transform: none !important;
         background-color: #fff !important;
+        padding-top: 70px !important; /* Space for fixed header */
+      }
+      /* Move header to right of sidebar */
+      #header {
+        left: 250px !important;
+        width: calc(100% - 250px) !important;
       }
       .header-title, #bottom-bar {
-        margin-left: 250px !important;
+        margin-left: 0 !important;
         margin-right: 0 !important;
         width: auto !important;
         transform: none !important;

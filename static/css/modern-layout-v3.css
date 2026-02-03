@@ -78,14 +78,24 @@ html body #blog #main.pushed,
     min-height: 100vh !important;
     left: auto !important;
     right: auto !important;
-    padding-top: 0 !important;
+    padding-top: 70px !important; /* Space for fixed header */
 }
 
-/* Target header-title and bottom-bar with same approach */
+/* Fix #header to start at sidebar edge, not covered by sidebar */
+#header,
+html body #header,
+#header[style] {
+    left: 250px !important;
+    width: calc(100% - 250px) !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+/* Header title no longer needs margin-left since parent is moved */
 html body .header-title,
 html body .header-title[style],
 .header-title {
-    margin-left: 250px !important;
+    margin-left: 0 !important;
     margin-right: 0 !important;
     width: auto !important;
     transform: none !important;
