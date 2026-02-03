@@ -3,16 +3,62 @@
     <div id="blog">
       {{ partial "header.html" . }}
       {{ partial "sidebar.html" . }}
-      <div id="main"
+      {{ partial "post/header-cover.html" . }}
+      
+      <div id="main" data-behavior="{{ .Scratch.Get "sidebarBehavior" }}"
         class="{{ with .Params.coverImage }}hasCover{{ end }}
                {{ if eq .Params.coverMeta "out" }}hasCoverMetaOut{{ else }}hasCoverMetaIn{{ end }}
                {{ with .Params.coverCaption }}hasCoverCaption{{ end }}">
-        <div id="archives" class="main-content-wrap">
-          <form id="filter-form" action="#">
-            <input name="date" type="text" class="form-control input--xlarge" placeholder="{{ i18n "global.search_date" }}" autofocus="autofocus">
-          </form>
-          {{ partial "archive-post.html" (where .Site.RegularPages "Type" "in" site.Params.mainSections) }}
-        </div>
+        
+        <section class="main-content-wrap glass-portfolio">
+          <div class="portfolio-content">
+            <h2 class="category-title">Growth Timeline</h2>
+            
+            <div class="timeline-container">
+              {{/* Safely get posts. Hardcoding 'posts' since mainSections might be undefined */}}
+              {{ $archivePages := where .Site.RegularPages "Type" "posts" }}
+              
+              {{/* Fallback if Type isn't set, try Section */}}
+              {{ if eq (len $archivePages) 0 }}
+                 {{ $archivePages = where .Site.RegularPages "Section" "posts" }}
+              {{ end }}
+
+              {{ if gt (len $archivePages) 0 }}
+                {{ range $archivePages.GroupByDate "2006" }}
+                <div class="timeline-year-group">
+                  <div class="timeline-year-label">{{ .Key }}</div>
+                  
+                  <div class="timeline-posts">
+                    {{ range .Pages }}
+                    <article class="timeline-item">
+                      <div class="timeline-marker"></div>
+                      <div class="timeline-content glass-card hover-lift">
+                        <div class="timeline-date">{{ .Date.Format "Jan 02" }}</div>
+                        <h3 class="timeline-post-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                        
+                        {{ if .Params.tags }}
+                        <div class="timeline-tags">
+                          {{ range first 3 .Params.tags }}
+                          <span class="timeline-tag">#{{ . }}</span>
+                          {{ end }}
+                        </div>
+                        {{ end }}
+                      </div>
+                    </article>
+                    {{ end }}
+                  </div>
+                </div>
+                {{ end }}
+              {{ else }}
+                <p>No posts found.</p>
+              {{ end }}
+            </div>
+
+
+          </div>
+        </section>
+
+        {{ partial "footer.html" . }}
       </div>
     </div>
-{{ partial "foot.html" . }}
+    {{ partial "foot.html" . }}

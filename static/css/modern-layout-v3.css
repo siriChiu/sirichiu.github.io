@@ -717,3 +717,317 @@ html body #bottom-bar[style],
 #sidebar .sidebar-button-link:hover {
     background-color: rgba(255, 255, 255, 0.05) !important;
 }
+
+/* ===== Knowledge Tile (Categories) ===== */
+.knowledge-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+}
+
+.knowledge-tile {
+    text-decoration: none;
+    color: inherit;
+    justify-content: space-between !important;
+    min-height: 240px;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa) !important;
+    border: 1px solid rgba(255,255,255,0.6) !important;
+}
+
+.knowledge-tile:hover {
+    background: white !important;
+    border-color: #349EF3 !important;
+}
+
+.tile-header {
+    background: transparent;
+    padding: 24px 24px 10px;
+}
+
+.tile-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin: 0 0 5px 0;
+    background: -webkit-linear-gradient(45deg, #1a1a2e, #4a4e69);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.tile-count {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #349EF3;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: rgba(52, 158, 243, 0.1);
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.tile-body {
+    padding: 0 24px;
+    flex-grow: 1;
+}
+
+.latest-snapshot {
+    margin-top: 15px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px dashed #e9ecef;
+}
+
+.snapshot-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #adb5bd;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.snapshot-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #495057;
+    margin: 0 0 4px 0;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.snapshot-date {
+    font-size: 0.8rem;
+    color: #adb5bd;
+}
+
+.tile-footer {
+    padding: 15px 24px 24px;
+    border-top: 1px solid transparent;
+}
+
+.explore-link {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #349EF3;
+    opacity: 0.8;
+    transition: all 0.2s ease;
+}
+
+/* ===== Skill Dashboard (Tags) ===== */
+
+.skill-section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #495057;
+    margin-bottom: 20px;
+    padding-left: 5px;
+    border-left: 4px solid #349EF3;
+    line-height: 1.2;
+}
+
+.skill-grid-core {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
+    gap: 20px !important;
+}
+
+.skill-card-core {
+    flex-direction: column !important;
+    justify-content: center !important;
+    padding: 20px 24px !important;
+    min-height: 120px !important;
+    background: white !important;
+    border: 1px solid #e9ecef !important;
+    text-decoration: none !important;
+}
+
+.skill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.skill-name {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #212529;
+}
+
+.skill-count-badge {
+    background: #349EF3;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 12px;
+    min-width: 24px;
+    text-align: center;
+}
+
+.skill-bar-container {
+    width: 100%;
+    height: 6px;
+    background: #f1f3f5;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.skill-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #349EF3, #66d9e8);
+    border-radius: 3px;
+}
+
+.skill-card-core:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(52, 158, 243, 0.15) !important;
+    border-color: #349EF3 !important;
+}
+
+/* Full Stack Cloud */
+.skill-cloud-container {
+    padding: 30px !important;
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(10px);
+}
+
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.tag-pill-cloud {
+    background: white;
+    border: 1px solid #dee2e6;
+    color: #495057;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tag-count-small {
+    color: #adb5bd;
+    font-size: 0.8rem;
+}
+
+.tag-pill-cloud:hover {
+    background: #349EF3;
+    color: white;
+    border-color: #349EF3;
+    transform: translateY(-2px);
+}
+
+/* ===== Growth Timeline (Archives) ===== */
+.timeline-container {
+    position: relative;
+    padding: 20px 0;
+}
+
+.timeline-year-group {
+    position: relative;
+    margin-bottom: 50px;
+}
+
+.timeline-year-label {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: rgba(52, 158, 243, 0.15); /* Faded accent color */
+    position: absolute;
+    top: -20px;
+    left: -10px;
+    z-index: 0;
+    line-height: 1;
+}
+
+.timeline-posts {
+    position: relative;
+    z-index: 1;
+    border-left: 2px solid rgba(52, 158, 243, 0.3);
+    margin-left: 20px;
+    padding-left: 30px;
+    padding-top: 10px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -37px; /* Adjust based on border-left + padding-left */
+    top: 20px;
+    width: 12px;
+    height: 12px;
+    background: #349EF3;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px rgba(52, 158, 243, 0.3);
+    z-index: 2;
+}
+
+.timeline-content {
+    background: rgba(255,255,255,0.85) !important;
+    padding: 15px 20px !important;
+    border: 1px solid rgba(255,255,255,0.8) !important;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.timeline-date {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #349EF3;
+    text-transform: uppercase;
+}
+
+.timeline-post-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.timeline-post-title a {
+    color: #495057;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.timeline-post-title a:hover {
+    color: #349EF3;
+}
+
+.timeline-tags {
+    margin-top: 5px;
+    display: flex;
+    gap: 8px;
+}
+
+.timeline-tag {
+    font-size: 0.75rem;
+    color: #adb5bd;
+    background: rgba(0,0,0,0.03);
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+/* Hover Effect for Timeline */
+.timeline-item:hover .timeline-marker {
+    background: #fff;
+    border-color: #349EF3;
+    transform: scale(1.2);
+}
+
+.timeline-item:hover .timeline-content {
+    border-color: #349EF3 !important;
+    transform: translateX(5px);
+}
