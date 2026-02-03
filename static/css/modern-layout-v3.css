@@ -2,6 +2,13 @@
 /* Only override widths within the content area, DO NOT touch global margins */
 html {
     overflow-y: scroll !important; /* Force scrollbar to prevent layout shift */
+    scrollbar-width: none; /* Firefox: Hide scrollbar but keep functionality */
+    -ms-overflow-style: none;  /* IE 10+ */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+html::-webkit-scrollbar {
+    display: none;
 }
 
 /* CRITICAL FIX: Prevent theme JS from scrolling the body horizontally */
