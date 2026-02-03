@@ -15,8 +15,31 @@
             <h2 class="category-title">{{ i18n "taxonomy.knowledge_domains" | upper }}</h2>
             
             <div class="cards-container knowledge-grid">
-              {{/* Iterate over all categories */}}
-              {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
+              {{/* Custom Order Logic */}}
+              {{ $categories := .Site.Taxonomies.categories }}
+              {{ $orderedList := slice }}
+              {{ $preferredOrder := slice "專業技術" "研究所論文" "研究生專題" "大學生專題" }}
+
+              {{/* 1. Add preferred items first */}}
+              {{ range $preferredOrder }}
+                {{ $key := . }}
+                {{ with (index $categories $key) }}
+                  {{ $orderedList = $orderedList | append (dict "Name" $key "Taxonomy" .) }}
+                {{ end }}
+              {{ end }}
+
+              {{/* 2. Add remaining items */}}
+              {{ range $key, $val := $categories }}
+                {{ if not (in $preferredOrder $key) }}
+                  {{ $orderedList = $orderedList | append (dict "Name" $key "Taxonomy" $val) }}
+                {{ end }}
+              {{ end }}
+
+              {{/* 3. Render Final List */}}
+              {{ range $orderedList }}
+                {{ $name := .Name }}
+                {{ $taxonomy := .Taxonomy }}
+                
                 {{/* Get the latest page safely */}}
                 {{ $latestPage := "" }}
                 {{ range first 1 $taxonomy.Pages }}
