@@ -683,10 +683,11 @@ html body #bottom-bar[style],
 }
 
 /* ===== Hide old styles ===== */
-.postShorten,
+/* ===== Hide old styles (Removed: causing blank taxonomy pages) ===== */
+/* .postShorten,
 .postShorten-group .postShorten {
     display: none !important;
-}
+} */
 
 /* ===== Footer Override ===== */
 #footer {

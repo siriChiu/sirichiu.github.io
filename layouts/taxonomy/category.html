@@ -1,0 +1,78 @@
+{{ partial "head.html" . }}
+  <body>
+    <div id="blog">
+      {{ partial "header.html" . }}
+      {{ partial "sidebar.html" . }}
+      {{ partial "post/header-cover.html" . }}
+      <div id="main"
+        class="{{ with .Params.coverimage }}hasCover{{ end }}
+               {{ if eq .Params.covermeta "out" }}hasCoverMetaOut{{ else }}hasCoverMetaIn{{ end }}
+               {{ with .Params.coverCaption }}hasCoverCaption{{ end }}">
+        
+        <section class="main-content-wrap glass-portfolio">
+          
+          <div class="portfolio-content">
+            <div class="category-section" style="display: block;">
+              <h2 class="category-title">{{ .Title }}</h2>
+              <div class="cards-container">
+                {{/* Generic Paginator */}}
+                {{ $paginator := .Paginate .Data.Pages }}
+                {{ range $paginator.Pages }}
+                <article class="glass-card" 
+                         style="display: flex;"
+                         data-year="{{ .Date.Format "2006" }}"
+                         data-tags="{{ range .Params.tags }}{{ . | urlize }} {{ end }}">
+                  
+                  {{- $thumbnailImage := "" }}
+                  {{- if .Params.thumbnailImage }}
+                    {{- $thumbnailImage = .Params.thumbnailImage }}
+                  {{- else if .Params.coverImage }}
+                    {{- $thumbnailImage = .Params.coverImage }}
+                  {{- end }}
+                  
+                  {{- if $thumbnailImage }}
+                  <a href="{{ .RelPermalink }}" class="card-image-link">
+                    <div class="card-image">
+                      <img alt="{{ .Title }}" src="{{ $thumbnailImage }}" loading="lazy"/>
+                    </div>
+                  </a>
+                  {{- end }}
+
+                  <div class="card-header-top">
+                    <h3 class="card-title">
+                      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                    </h3>
+                  </div>
+                  
+                  <div class="card-content">
+                    <p class="card-description">
+                      {{- if .Params.Summary }}
+                        {{ .Params.Summary | markdownify | plainify | truncate 150 }}
+                      {{- else }}
+                        {{ .Summary | plainify | truncate 150 }}
+                      {{- end }}
+                    </p>
+                    <div class="card-extra-text">...more like</div>
+                    
+                    {{- with .Params.tags }}
+                    <div class="card-tags">
+                      {{- range first 4 . }}
+                      <span class="tag-pill">#{{ . }}</span>
+                      {{- end }}
+                    </div>
+                    {{- end }}
+                    
+                    <a href="{{ .RelPermalink }}" class="card-read-more">Read More →</a>
+                  </div>
+                </article>
+                {{- end }}
+              </div>
+            </div>
+          </div>
+          
+          {{ partial "pagination.html" . }}
+        </section>
+        {{ partial "footer.html" . }}
+      </div>
+    </div>
+{{ partial "foot.html" . }}
