@@ -24,9 +24,147 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
   <head>
-    {{ partial "head_start.html" . }}
-    {{ partial "schema.html" . }}
-    {{ partial "meta.html" . }}
+    <!-- partial "head_start.html" inlined (empty) -->
+    <!-- partial "schema.html" inlined -->
+<script type="application/ld+json">
+{{ if eq .Section "posts" }}
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ .Title }},
+  {{ if .Params.coverimage }}
+  "image": {{ .Params.coverImage | absURL }},
+  {{ else if .Params.thumbnailImage }}
+  "image": {{ .Params.thumbnailImage | absURL }},
+  {{ end }}
+  "datePublished": {{ .PublishDate }},
+  "dateModified": {{ .Lastmod }},
+  "author": {
+    "@type": "Person",
+    "name": {{ .Site.Author.name }},
+    {{ with ($.Scratch.Get "authorPicture") }}
+    "image": {{ . }}
+    {{ end }}
+  },
+  "mainEntityOfPage": { 
+    "@type": "WebPage",
+    "@id": "{{ .Permalink }}" 
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ .Site.Title }},
+    {{ with ($.Scratch.Get "authorPicture") }}
+    "logo": {
+      "@type": "ImageObject",
+      "url": {{ . }}
+    }
+    {{ end }}
+  },
+  "description": {{ .Summary | plainify | safeHTML }},
+  "keywords": [{{ with .Keywords }}{{ delimit . ", " }}{{ end }}{{ if .Site.Params.keywords }}, {{ delimit .Site.Params.keywords ", " }}{{ end }}]
+}
+{{ else }}
+{  
+  "@context":"http://schema.org",
+  "@type":"Website",
+  "@id":"{{ .Site.BaseURL }}",
+  "author": {
+    "@type": "Person",
+    "name": {{ .Site.Author.name }},
+    {{ with ($.Scratch.Get "authorPicture") }}
+    "image": {{ . }}
+    {{ end }}
+  },
+  "name":"{{ .Site.Title }}",
+  "description":"{{ if .Description }}{{ .Description }}{{ else if .IsPage }}{{ .Summary }}{{ else }}{{ .Site.Params.description }}{{ end }}",
+  "url":"{{ .Permalink }}",
+  "keywords":"[{{ with .Keywords }}{{ delimit . ", " }}{{ end }}{{ if .Site.Params.keywords }}, {{ delimit .Site.Params.keywords ", " }}{{ end }}]"
+}
+{{ end }}
+</script>
+    <!-- partial "meta.html" inlined -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo {{ hugo.Version }} with theme Tranquilpeak 0.5.3-BETA">
+<meta name="author" content="{{ .Site.Author.name }}">
+<meta name="keywords" content="{{ with .Keywords }}{{ delimit . ", " }}{{ end }}{{ if .Site.Params.keywords }}, {{ delimit .Site.Params.keywords ", " }}{{ end }}">
+<meta name="description" content="{{ if .Description }}{{ .Description }}{{ else if .IsPage }}{{ .Summary }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+
+<!-- Meta Social -->
+<meta property="og:description" content="{{ if .Description }}{{ .Description }}{{ else if .IsPage }}{{ .Summary }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:title" content="{{ with .Title }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}">
+<meta name="twitter:title" content="{{ with .Title }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="twitter:url" content="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:description" content="{{ if .Description }}{{ .Description }}{{ else if .IsPage }}{{ .Summary }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta name="twitter:description" content="{{ if .Description }}{{ .Description }}{{ else if .IsPage }}{{ .Summary }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta property="og:locale" content="{{ .Lang }}">
+{{ if .IsPage }}
+  {{ if not .PublishDate.IsZero }}
+    <meta property="article:published_time" content="{{ .PublishDate.Format "2006-01-02T15:04:05" }}">
+  {{ end }}
+  {{ if not .Lastmod.IsZero }}
+    <meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05" }}">
+  {{ end }}
+  {{ if not .ExpiryDate.IsZero }}
+    <meta property="article:expiration_time" content="{{ .ExpiryDate.Format "2006-01-02T15:04:05" }}">
+  {{ end }}
+  {{ with .Params.categories }}
+    {{ range $v := . }}
+      <meta property="article:section" content="{{ $v }}">
+    {{ end }}
+  {{ end }}
+  {{ with .Params.tags }}
+    {{ range $v := . }}
+      <meta property="article:tag" content="{{ $v }}">
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+<meta name="twitter:card" content="summary">
+{{ with .Site.Author.twitter }}
+  <meta name="twitter:site" content="@{{ . }}">
+{{ end }}
+{{ if .Params.twitter }}
+  <meta name="twitter:creator" content="@{{ .Params.twitter }}">
+{{ else if .Site.Author.twitter }}
+  <meta name="twitter:creator" content="@{{ .Site.Author.twitter }}">
+{{ end }}
+
+{{ with .Site.Params.fbAppId }}
+  <meta property="fb:app_id" content="{{ . }}">
+{{ end }}
+{{ with .Site.Params.fbAdminIds }}
+  {{ range . }}
+      <meta property="fb:admins" content="{{ . }}">
+  {{ end }}
+{{ end }}
+
+{{ if .Scratch.Get "gravatarEmail" }}
+  <meta property="og:image" content="https://www.gravatar.com/avatar/{{ (md5 (.Scratch.Get "gravatarEmail")) | urlize }}?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/{{ (md5 (.Scratch.Get "gravatarEmail")) | urlize }}?s=640">
+{{ else if .Site.Author.picture }}
+  <meta property="og:image" content="{{ .Site.Author.picture | absURL }}">
+  <meta property="twitter:image" content="{{ .Site.Author.picture | absURL }}">
+{{ end }}
+
+{{ with .Params.gallery }}
+  {{ range . }}
+    <meta property="og:image" content="{{ range first 1 (split . " ") }}{{ . | absURL }}{{ end }}">
+    <meta property="twitter:image" content="{{ range first 1 (split . " ") }}{{ . | absURL }}{{ end }}">
+  {{ end }}
+{{ end }}
+{{ with .Params.coverImage }}
+  <meta property="og:image" content="{{ . | absURL }}">
+  <meta property="twitter:image" content="{{ . | absURL }}">
+{{ end }}
+{{ with .Params.thumbnailImage }}
+  <meta property="og:image" content="{{ . | absURL }}">
+  <meta property="twitter:image" content="{{ . | absURL }}">
+{{ end }}
     <title>{{ with .Title }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}</title>
 
     <link rel="icon" href="{{ with .Site.Params.favicon }}{{ . | absURL }}{{ else }}/favicon.png{{ end }}">
@@ -38,7 +176,7 @@
       <link rel="publisher" href="https://plus.google.com/{{ . | urlize }}">
     {{ end }}
 
-    <link rel="canonical" href="{{ .Permalink }}">
+    <link rel="canonical" href="{{ .RelPermalink }}">
 
     <!--EXTERNAL STYLES-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -52,12 +190,94 @@
     <!--STYLES END-->
     {{ range .Site.Params.customCSS }}
       {{ if isset . "href" }}
-        <link {{ if not (isset . "rel" ) }}rel="stylesheet" {{ end }}{{ range $key, $value := . }} {{ if eq $key "href" }}{{ (printf "%s=\"%s\"" $key ($value | absURL)) | safeHTMLAttr }}{{ else }}{{ (printf "%s=\"%s\"" $key (string $value)) | safeHTMLAttr }}{{ end }}{{ end }}>
+        <link {{ if not (isset . "rel" ) }}rel="stylesheet" {{ end }}{{ range $key, $value := . }} {{ if eq $key "href" }}{{ (printf "%s=\"%s?v=%d\"" $key ($value | absURL) now.Unix) | safeHTMLAttr }}{{ else }}{{ (printf "%s=\"%s\"" $key (string $value)) | safeHTMLAttr }}{{ end }}{{ end }}>
       {{ else }}
-        <link rel="stylesheet" href="{{ . | absURL }}">
+        <link rel="stylesheet" href="{{ . | absURL }}?v={{ now.Unix }}">
       {{ end }}
     {{ end }}
 
     {{ template "_internal/google_analytics.html" . }}
-    {{ partial "head_end.html" . }}
+    <!-- partial "head_end.html" inlined (empty) -->
+    <!-- Critical CSS: Prevent layout shift before JS loads -->
+    <style>
+      /* CRITICAL FIX: Prevent theme JS from scrolling body horizontally */
+      body { overflow-x: hidden !important; }
+      /* CRITICAL FIX: #blog is shifted -20px left on taxonomy pages */
+      #blog {
+        position: relative !important;
+        left: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        transform: none !important;
+        width: 100% !important;
+      }
+      /* Force permanent sidebar layout immediately */
+      #sidebar, #sidebar[data-behavior] { 
+        left: 0 !important; 
+        transform: none !important; 
+        display: block !important; 
+      }
+      #btn-open-sidebar { display: none !important; }
+      /* Main content positioning */
+      #main,
+      #main[data-behavior],
+      #main[data-behavior="1"],
+      #main[data-behavior="2"],
+      #main[data-behavior="3"],
+      #main[data-behavior="4"],
+      #main[data-behavior="5"],
+      #main[data-behavior="6"],
+      #blog #main, 
+      #blog #main.pushed {
+        display: block !important;
+        float: none !important;
+        position: relative !important;
+        margin-left: 250px !important;
+        margin-right: 0 !important;
+        width: auto !important;
+        transform: none !important;
+        background-color: #fff !important;
+      }
+      .header-title, #bottom-bar {
+        margin-left: 250px !important;
+        margin-right: 0 !important;
+        width: auto !important;
+        transform: none !important;
+      }
+    </style>
+    <script>
+      // CRITICAL FIX: Prevent theme JS from scrolling body horizontally
+      // Strategy: Continuously reset scroll, then freeze after page loads
+      (function() {
+        // Aggressive scroll reset function using native methods
+        function resetScroll() {
+          // Use multiple methods to reset horizontal scroll
+          if (window.scrollX > 0 || window.pageXOffset > 0) {
+            window.scroll({ left: 0, behavior: 'instant' });
+          }
+          // Also try direct scroll call
+          try { window.scrollTo(0, window.scrollY || window.pageYOffset || 0); } catch(e) {}
+        }
+        
+        // Run immediately
+        resetScroll();
+        
+        // Run aggressively every 10ms for first 5 seconds
+        var interval = setInterval(resetScroll, 10);
+        setTimeout(function() { 
+          clearInterval(interval);
+          // After 5s, run less frequently
+          setInterval(resetScroll, 100);
+        }, 5000);
+        
+        // Also run on every possible event
+        document.addEventListener('DOMContentLoaded', resetScroll);
+        window.addEventListener('load', resetScroll);
+        window.addEventListener('scroll', function() {
+          if (window.scrollX > 0) {
+            setTimeout(resetScroll, 0);
+          }
+        });
+      })();
+    </script>
   </head>

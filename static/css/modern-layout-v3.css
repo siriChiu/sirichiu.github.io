@@ -1,5 +1,25 @@
-/* ===== Full-Width Container Overrides ===== */
+/* ===== Full-Width Container Overrides (Updated: 2026-02-03 - Permanent Sidebar) ===== */
 /* Only override widths within the content area, DO NOT touch global margins */
+html {
+    overflow-y: scroll !important; /* Force scrollbar to prevent layout shift */
+}
+
+/* CRITICAL FIX: Prevent theme JS from scrolling the body horizontally */
+/* Theme JS sets body.scrollLeft = 20, causing -20px layout shift on taxonomy pages */
+body {
+    overflow-x: hidden !important;
+}
+
+/* CRITICAL FIX: #blog is shifted -20px left on taxonomy pages due to scrollbar compensation bug */
+/* Browser agent found: categories page #blog rect.left = -20px, homepage #blog rect.left = 0px */
+#blog {
+    position: relative !important;
+    left: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    transform: none !important;
+    width: 100% !important;
+}
 .main-content-wrap {
     max-width: none !important;
     width: auto !important;
@@ -12,17 +32,96 @@
     box-sizing: border-box;
 }
 
-#main {
-    /* Explicitly push content for sidebar */
-    margin-left: 250px !important; 
-    width: auto !important;
+/* ===== Permanent Sidebar Implementation (Updated: 2026-02-03 - Race Condition Fix) ===== */
+
+/* 1. Force Sidebar Permanently Open - ultra high specificity */
+html body #blog #sidebar,
+#sidebar[data-behavior],
+#sidebar[style],
+#sidebar {
+    left: 0 !important;
+    transform: none !important;
     display: block !important;
-    float: none !important; /* Fix: Prevent being pushed to the right */
+    visibility: visible !important;
 }
 
+/* 2. Hide Hamburger Menu */
+#btn-open-sidebar {
+    display: none !important;
+}
+
+/* 3. Shift Content Permanently - Use width: auto to let browser calculate */
+/* CRITICAL: The issue is that calc(100% - 250px) may compute incorrectly */
+/* Using width: auto with margin-left lets the block naturally fill available space */
+#main,
+#main[data-behavior],
+#main[data-behavior="1"],
+#main[data-behavior="2"],
+#main[data-behavior="3"],
+#main[data-behavior="4"],
+#main[data-behavior="5"],
+#main[data-behavior="6"],
+html body #blog #main,
+html body #blog #main[style],
+html body #blog #main.pushed,
+#blog #main,
+#blog #main.pushed {
+    display: block !important;
+    float: none !important;
+    position: relative !important;
+    margin-left: 250px !important;
+    margin-right: 0 !important;
+    width: auto !important; /* Let browser calculate naturally */
+    transform: none !important;
+    transition: none !important;
+    background-color: #fff !important;
+    min-height: 100vh !important;
+    left: auto !important;
+    right: auto !important;
+    padding-top: 0 !important;
+}
+
+/* Target header-title and bottom-bar with same approach */
+html body .header-title,
+html body .header-title[style],
+.header-title {
+    margin-left: 250px !important;
+    margin-right: 0 !important;
+    width: auto !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+html body #bottom-bar,
+html body #bottom-bar[style],
+#bottom-bar {
+    margin-left: 250px !important;
+    margin-right: 0 !important;
+    width: auto !important;
+    transform: none !important;
+    transition: none !important;
+    background-color: #fff !important;
+    min-height: 100vh !important;
+}
+
+/* 4. Disable pushed state logic */
+#main.slide,
+#main.pushed.slide,
+#blog.pushed #main {
+    margin-left: 250px !important;
+    margin-right: 0 !important;
+    width: auto !important;
+    transform: none !important;
+}
+
+/* 5. Mobile Override - Enforce same layout on small screens */
 @media only screen and (max-width: 768px) {
-    #main {
-        margin-left: 0 !important;
+    html body #blog #main,
+    html body .header-title,
+    html body #bottom-bar {
+        margin-left: 250px !important;
+        transform: none !important;
+        min-width: 0; /* flexible width */
     }
 }
 
@@ -461,4 +560,24 @@
     padding: 20px 0;
     box-sizing: border-box !important;
     max-width: 100% !important;
+}
+
+/* ===== Sidebar Button Highlight Standardization (Updated: 2026-02-03) ===== */
+/* Remove default full-width background and apply side-strip style */
+#sidebar .sidebar-button-link {
+    transition: all 0.2s ease;
+    border-left: 0 solid transparent;
+}
+
+/* Use, box-shadow for the strip to prevent layout shifting */
+#sidebar .sidebar-button-link:hover,
+#sidebar .sidebar-button-link.active {
+    background-color: transparent !important; /* Remove full white fill */
+    box-shadow: inset 5px 0 0 #fff !important; /* The white strip on the left */
+    color: #fff !important;
+}
+
+/* Add a very subtle hover background for better feedback */
+#sidebar .sidebar-button-link:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
 }

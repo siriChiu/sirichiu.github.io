@@ -1,6 +1,7 @@
 # Tranquilpeak
 # Version : 0.5.3-BETA
 # Author : Thibaud Leprêtre
+# Force Rebuild Trigger
 
 # I STRONGLY recommend you to use a CDN to speed up loading of pages.
 # There is many free CDN like Cloudinary or you can also use indirectly
@@ -13,17 +14,83 @@
 # use grunt task `build` to synchronize assets
 
 baseURL = "https://sirichiu.github.io/"
-languageCode = "en-us"
-defaultContentLanguage = "en-us"
+defaultContentLanguage = "zh-tw"
 title = "SiriC's Blog"
+
 # theme = "hugo-tranquilpeak-theme"
 theme = ["hugo-tranquilpeak-theme", "hugo-shortcode-timeline"]
+
+
+[languages]
+  [languages.zh-tw]
+    languageName = "繁體中文"
+    weight = 1
+    title = "SiriC's Blog"
+    languageCode = "zh-tw"
+
+  [languages.en]
+    languageName = "English"
+    weight = 2
+    title = "SiriC's Blog (En)"
+    languageCode = "en-us"
+
+  # English-only menu labels
+  [[languages.en.menus.main]]
+    weight = 1
+    identifier = "home"
+    name = "Home"
+    pre = "<i class=\"sidebar-button-icon fa fa-lg fa-home\"></i>"
+    url = "/"
+  [[languages.en.menus.main]]
+    weight = 2
+    identifier = "categories"
+    name = "Categories"
+    pre = "<i class=\"sidebar-button-icon fa fa-lg fa-bookmark\"></i>"
+    url = "/categories"
+  [[languages.en.menus.main]]
+    weight = 3
+    identifier = "tags"
+    name = "Tags"
+    pre = "<i class=\"sidebar-button-icon fa fa-lg fa-tags\"></i>"
+    url = "/tags"
+  [[languages.en.menus.main]]
+    weight = 4
+    identifier = "archives"
+    name = "Archives"
+    pre = "<i class=\"sidebar-button-icon fa fa-lg fa-archive\"></i>"
+    url = "/archives"
+  [[languages.en.menus.main]]
+    weight = 5
+    identifier = "about"
+    name = "About"
+    pre = "<i class=\"sidebar-button-icon fa fa-lg fa-question\"></i>"
+    url = "/#about"
+  [[languages.en.menus.main]]
+    weight = 6
+    identifier = "resume"
+    name = "Resume"
+    pre = "<i class=\"sidebar-button-icon fa fa-lg fa-file-alt\"></i>"
+    url = "/#resume"
+
+  [[languages.en.menus.links]]
+    weight = 1
+    identifier = "github"
+    name = "GitHub"
+    pre = "<i class=\"sidebar-button-icon fab fa-lg fa-github\" aria-hidden=\"true\"></i>"
+    url = "https://github.com/siriChiu"
+  [[languages.en.menus.links]]
+    weight = 2
+    identifier = "linkedin"
+    name = "LinkedIn"
+    pre = "<i class=\"sidebar-button-icon fab fa-lg fa-linkedin\" aria-hidden=\"true\"></i>"
+    url = "https://linkedin.com/in/sirichiu"
+
 
 disqusShortname = "hugo-tranquilpeak-theme"
 # googleAnalytics = "UA-123-45"
 [pagination]
   pagerSize = 7
-canonifyurls = true
+# canonifyurls = true  # Disabled - causes localhost issues with absolute URLs
 
 [permalinks]
   posts = "/:year/:month/:slug/"
@@ -263,11 +330,15 @@ canonifyurls = true
      href = "css/modern-layout-v3.css"
    [[params.customCSS]]
      href = "css/resume.css"
+   [[params.customCSS]]
+     href = "css/post-fixes.css"
 
   # Custom JS. Put here your custom JS files. They are loaded after the theme JS;
   # they have to be referred from static root. Example
   #  [[params.customJS]]
   #     src = "js/myscript.js"
+  [[params.customJS]]
+    src = "js/fix-sidebar-v2.js"
   [[params.customJS]]
     src = "js/resume.js"
   [[params.customJS]]

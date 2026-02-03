@@ -10,7 +10,7 @@
   
   {{/* Image Section - Always on top for card layout */}}
   {{ if .Scratch.Get "thumbnailImage" }}
-    <a href="{{ .Permalink }}" aria-label="Open post: {{ .Title }}">
+    <a href="{{ .RelPermalink }}" aria-label="Open post: {{ .Title }}">
       <div class="postShorten-thumbnailimg">
         <img alt="{{ .Title }}" src="{{ .Scratch.Get "thumbnailImage" }}"/>
       </div>
@@ -21,7 +21,7 @@
   <div class="postShorten-wrap">
     <div class="postShorten-header">
       <h1 class="postShorten-title">
-        <a class="link-unstyled" href="{{ .Permalink }}" aria-label="Open post: {{ .Title }}">
+        <a class="link-unstyled" href="{{ .RelPermalink }}" aria-label="Open post: {{ .Title }}">
           {{ .Title }}
         </a>
       </h1>
@@ -35,6 +35,6 @@
       {{ end }}
     </div>
     {{/* Optional: Read More Link */}}
-    <a href="{{ .Permalink }}" class="postShorten-excerpt_link link" aria-label="Read more about {{ .Title }}">{{ i18n "post.read_more" }}</a>
+    <a href="{{ .RelPermalink }}" class="postShorten-excerpt_link link" aria-label="Read more about {{ .Title }}">{{ i18n "post.read_more" }}</a>
   </div>
 </article>

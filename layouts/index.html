@@ -4,23 +4,30 @@
       {{ partial "header.html" . }}
       {{ partial "sidebar.html" . }}
       {{ partial "post/header-cover.html" . }}
-      <div id="main" data-behavior="{{ .Scratch.Get "sidebarBehavior" }}"
+      <div id="main"
         class="{{ with .Params.coverimage }}hasCover{{ end }}
                {{ if eq .Params.covermeta "out" }}hasCoverMetaOut{{ else }}hasCoverMetaIn{{ end }}
                {{ with .Params.coverCaption }}hasCoverCaption{{ end }}">
         
         <section class="main-content-wrap glass-portfolio">
           
-          <!-- Define your category order here -->
-          {{- $categoryOrder := slice "專業技術" "研究所論文" "研究生專題" "大學生專題"}}
+          <!-- Language-aware category order -->
+          {{- $isEnglish := eq .Site.Language.Lang "en" }}
+          {{- $categoryOrder := slice }}
+          {{- if $isEnglish }}
+            {{- $categoryOrder = slice "Professional Technology" "Master's Thesis" "Graduate Project" "Undergraduate Project" }}
+          {{- else }}
+            {{- $categoryOrder = slice "專業技術" "研究所論文" "研究生專題" "大學生專題" }}
+          {{- end }}
           
           
           <!-- Filter Bar -->
           <div class="glass-filter-bar">
             <div class="filter-tabs">
-              <button class="filter-tab active" data-filter="all">All</button>
+              <button class="filter-tab active" data-filter="all">{{ if $isEnglish }}All{{ else }}全部{{ end }}</button>
               {{- range $catName := $categoryOrder }}
-                {{- if index $.Site.Taxonomies.categories $catName }}
+                {{- $catKey := cond $isEnglish ($catName | lower) $catName }}
+                {{- if index $.Site.Taxonomies.categories $catKey }}
               <button class="filter-tab" data-filter="{{ $catName | urlize }}">{{ $catName }}</button>
                 {{- end }}
               {{- end }}
@@ -46,12 +53,21 @@
           <!-- Category Sections -->
           <div class="portfolio-content">
             {{- range $catName := $categoryOrder }}
-              {{- $pages := index $.Site.Taxonomies.categories $catName }}
+              {{- $catKey := cond $isEnglish ($catName | lower) $catName }}
+              {{- $allPages := index $.Site.Taxonomies.categories $catKey }}
+              {{- $pages := slice }}
+              {{- if $allPages }}
+                {{- range $allPages.Pages }}
+                  {{- if eq .Lang $.Site.Language.Lang }}
+                    {{- $pages = $pages | append . }}
+                  {{- end }}
+                {{- end }}
+              {{- end }}
               {{- if $pages }}
               <div class="category-section" data-category="{{ $catName | urlize }}">
                 <h2 class="category-title">{{ $catName }}</h2>
                 <div class="cards-container">
-                  {{- range $pages.Pages }}
+                  {{- range $pages }}
                   <article class="glass-card" 
                            data-category="{{ $catName | urlize }}" 
                            data-year="{{ .Date.Format "2006" }}"
@@ -65,7 +81,7 @@
                     {{- end }}
                     
                     {{- if $thumbnailImage }}
-                    <a href="{{ .Permalink }}" class="card-image-link">
+                    <a href="{{ .RelPermalink }}" class="card-image-link">
                       <div class="card-image">
                         <img alt="{{ .Title }}" src="{{ $thumbnailImage }}" loading="lazy"/>
                       </div>
@@ -74,7 +90,7 @@
 
                     <div class="card-header-top">
                       <h3 class="card-title">
-                        <a href="{{ .Permalink }}">{{ .Title }}</a>
+                        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
                       </h3>
                     </div>
                     
@@ -96,7 +112,7 @@
                       </div>
                       {{- end }}
                       
-                      <a href="{{ .Permalink }}" class="card-read-more">Read More →</a>
+                      <a href="{{ .RelPermalink }}" class="card-read-more">Read More →</a>
                     </div>
                   </article>
                   {{- end }}
@@ -105,6 +121,7 @@
               {{- end }}
             {{- end }}
           </div>
+
           
         </section>
         {{ partial "footer.html" . }}

@@ -1,5 +1,6 @@
 ---
 title: 全自動化技術資訊聚合平台：基於 n8n 與本地 LLM 的內容工作流
+slug: lightnews
 date: 2025-08-15
 categories:
 - 專業技術

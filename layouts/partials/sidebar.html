@@ -1,0 +1,47 @@
+<nav id="sidebar" data-behavior="{{ .Scratch.Get "sidebarBehavior" }}">
+  <div class="sidebar-container">
+    {{ with ($.Scratch.Get "authorPicture") }}
+      <div class="sidebar-profile">
+        <a href="{{ if $.Site.Params.sidebar.profile.url }}{{ $.Site.Params.sidebar.profile.url }}{{ else }}{{ "/#about" }}{{ end }}" aria-label="{{ i18n "global.read_more_about_author"}}">
+          <img class="sidebar-profile-picture" src="{{ . }}{{ if in . "//www.gravatar.com/avatar/" }}?s=110{{ end }}" alt="{{ i18n "global.author_picture" }}" />
+        </a>
+        <h4 class="sidebar-profile-name">{{ $.Site.Author.name }}</h4>
+        {{ with $.Site.Author.bio }}
+          <h5 class="sidebar-profile-bio">{{ . | markdownify }}</h5>
+        {{ end }}
+      </div>
+    {{ end }}
+    <ul class="sidebar-buttons">
+      {{ partial "menu.html" (dict "menu" .Site.Menus.main "root" $) }}
+    </ul>
+    <ul class="sidebar-buttons">
+      {{ partial "menu.html" (dict "menu" .Site.Menus.links "root" $) }}
+    </ul>
+    <ul class="sidebar-buttons">
+      {{ partial "menu.html" (dict "menu" .Site.Menus.misc "root" $) }}
+    </ul>
+
+    <!-- Language Switcher -->
+    <ul class="sidebar-buttons">
+      <li class="sidebar-button">
+        <span class="sidebar-button-desc" style="padding-left: 20px; font-weight:bold; color:rgba(255,255,255,0.6); font-size: 0.8em; text-transform: uppercase;">Language</span>
+      </li>
+      {{ range .Site.Languages }}
+        {{ $lang := . }}
+        {{ $url := $lang.Lang | relLangURL }}
+        {{ range $.AllTranslations }}
+          {{ if eq .Language.Lang $lang.Lang }}
+            {{ $url = .RelPermalink }}
+          {{ end }}
+        {{ end }}
+        <li class="sidebar-button">
+          <a class="sidebar-button-link" href="{{ $url }}">
+            <i class="sidebar-button-icon fa fa-lg fa-globe"></i>
+            <span class="sidebar-button-desc">{{ $lang.LanguageName }}</span>
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+
+  </div>
+</nav>

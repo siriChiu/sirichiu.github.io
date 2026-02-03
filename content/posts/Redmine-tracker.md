@@ -1,5 +1,6 @@
 ---
 title: Redmine Smart Companion：重塑工時管理的桌面自動化工具
+slug: redmine-tracker
 date: 2025-01-27
 categories:
 - 專業技術
