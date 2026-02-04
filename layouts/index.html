@@ -15,9 +15,9 @@
           {{- $isEnglish := eq .Site.Language.Lang "en" }}
           {{- $categoryOrder := slice }}
           {{- if $isEnglish }}
-            {{- $categoryOrder = slice "Professional Technology" "Master's Thesis" "Graduate Project" "Undergraduate Project" }}
+            {{- $categoryOrder = slice "Personal Experience" "Professional Technology" "Master's Thesis" "Graduate Project" "Undergraduate Project" }}
           {{- else }}
-            {{- $categoryOrder = slice "專業技術" "研究所論文" "研究生專題" "大學生專題" }}
+            {{- $categoryOrder = slice "個人經歷" "專業技術" "研究所論文" "研究生專題" "大學生專題" }}
           {{- end }}
           
           
