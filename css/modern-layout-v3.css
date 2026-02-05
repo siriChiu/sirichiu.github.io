@@ -1,0 +1,1033 @@
+/* ===== Full-Width Container Overrides (Updated: 2026-02-03 - Permanent Sidebar) ===== */
+/* Only override widths within the content area, DO NOT touch global margins */
+html {
+    overflow-y: scroll !important; /* Force scrollbar to prevent layout shift */
+    scrollbar-width: none; /* Firefox: Hide scrollbar but keep functionality */
+    -ms-overflow-style: none;  /* IE 10+ */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+html::-webkit-scrollbar {
+    display: none;
+}
+
+/* CRITICAL FIX: Prevent theme JS from scrolling the body horizontally */
+/* Theme JS sets body.scrollLeft = 20, causing -20px layout shift on taxonomy pages */
+body {
+    overflow-x: hidden !important;
+}
+
+/* CRITICAL FIX: #blog is shifted -20px left on taxonomy pages due to scrollbar compensation bug */
+/* Browser agent found: categories page #blog rect.left = -20px, homepage #blog rect.left = 0px */
+#blog {
+    position: relative !important;
+    left: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    transform: none !important;
+    width: 100% !important;
+}
+.main-content-wrap {
+    max-width: none !important;
+    width: auto !important;
+    padding: 0 20px;
+}
+
+/* Post header - center the container but left-align text inside */
+/* Using max-width + margin auto to center a limited-width block */
+.post-header.main-content-wrap {
+    max-width: 1200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: left !important;
+    padding: 0 40px !important;
+}
+
+/* Title and meta will naturally left-align within the centered block */
+.post-header.main-content-wrap .post-title {
+    text-align: left !important;
+}
+
+.post-header.main-content-wrap .postShorten-meta,
+.post-header.main-content-wrap .post-meta {
+    text-align: left !important;
+}
+
+.glass-portfolio {
+    width: 100% !important;
+    padding: 30px 20px;
+    box-sizing: border-box;
+}
+
+/* ===== Permanent Sidebar Implementation (Updated: 2026-02-03 - Race Condition Fix) ===== */
+
+/* 1. Force Sidebar Permanently Open - ultra high specificity */
+html body #blog #sidebar,
+#sidebar[data-behavior],
+#sidebar[style],
+#sidebar {
+    left: 0 !important;
+    transform: none !important;
+    display: block !important;
+    visibility: visible !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* IE and Edge */
+    transition: width 0.3s ease !important; /* Smooth resize animation */
+}
+
+/* Sidebar inner elements also need transition */
+#sidebar .sidebar-container,
+#sidebar .sidebar-profile,
+#sidebar .sidebar-buttons,
+#sidebar .sidebar-button {
+    transition: all 0.3s ease !important;
+}
+
+/* Center profile picture */
+#sidebar .sidebar-profile {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+#sidebar::-webkit-scrollbar,
+.sidebar-container::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+}
+
+/* 2. Hide Hamburger Menu */
+#btn-open-sidebar {
+    display: none !important;
+}
+
+/* 3. Shift Content Permanently - Use width: auto to let browser calculate */
+/* CRITICAL: The issue is that calc(100% - 250px) may compute incorrectly */
+/* Using width: auto with margin-left lets the block naturally fill available space */
+#blog #main,
+#blog #main.pushed {
+    display: block !important;
+    float: none !important;
+    position: relative !important;
+    margin-left: 250px !important;
+    margin-right: 0 !important;
+    width: auto !important; /* Let browser calculate naturally */
+    transform: none !important;
+    transition: margin-left 0.3s ease, width 0.3s ease !important; /* Smooth resize */
+    background-color: #fff !important;
+    min-height: 100vh !important;
+    left: auto !important;
+    right: auto !important;
+    padding-top: 70px !important; /* Space for fixed header */
+}
+
+/* Fix #header to start at sidebar edge, not covered by sidebar */
+#header,
+html body #header,
+#header[style] {
+    left: 250px !important;
+    width: calc(100% - 250px) !important;
+    transform: none !important;
+    transition: left 0.3s ease, width 0.3s ease !important; /* Smooth resize */
+}
+
+/* Header title no longer needs margin-left since parent is moved */
+html body .header-title,
+html body .header-title[style],
+.header-title {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: auto !important;
+    transform: none !important;
+    transition: margin-left 0.3s ease !important; /* Smooth resize */
+}
+
+html body #bottom-bar,
+html body #bottom-bar[style],
+#bottom-bar {
+    margin-left: 250px !important;
+    margin-right: 0 !important;
+    width: auto !important;
+    transform: none !important;
+    transition: none !important;
+    background-color: #fff !important;
+    min-height: 100vh !important;
+}
+
+/* 4. Disable pushed state logic */
+#main.slide,
+#main.pushed.slide,
+#blog.pushed #main {
+    margin-left: 250px !important;
+    margin-right: 0 !important;
+    width: auto !important;
+    transform: none !important;
+}
+
+/* 5. Mobile Override - Enforce same layout on small screens */
+@media only screen and (max-width: 768px) {
+    /* Narrow sidebar - 60px width, icons only */
+    html body #blog #sidebar,
+    #sidebar[data-behavior],
+    #sidebar[style],
+    #sidebar {
+        width: 60px !important;
+        min-width: 60px !important;
+    }
+    
+    /* Hide profile picture and text on mobile */
+    #sidebar .sidebar-profile-picture {
+        width: 40px !important;
+        height: 40px !important;
+    }
+    
+    #sidebar .sidebar-profile-name,
+    #sidebar .sidebar-profile-bio {
+        display: none !important;
+    }
+    
+    /* Hide button text, show only icons */
+    #sidebar .sidebar-button-desc {
+        display: none !important;
+    }
+    
+    /* Center icons in narrower sidebar */
+    #sidebar .sidebar-button-link {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 12px 0 !important;
+        width: 100% !important;
+    }
+    
+    #sidebar .sidebar-button-icon {
+        margin: 0 auto !important;
+        text-align: center !important;
+    }
+    
+    #sidebar .sidebar-button {
+        display: flex !important;
+        justify-content: center !important;
+        width: 100% !important;
+    }
+    
+    /* Center profile picture on mobile */
+    #sidebar .sidebar-profile {
+        padding: 10px 0 !important;
+    }
+    
+    #sidebar .sidebar-profile-picture {
+        margin: 0 auto !important;
+    }
+    
+    /* Adjust main content to match narrower sidebar - ultra high specificity */
+    html body #blog #main,
+    html body #blog #main[data-behavior],
+    html body #blog #main[data-behavior="1"],
+    html body #blog #main[data-behavior="2"],
+    html body #blog #main[data-behavior="3"],
+    html body #blog #main[data-behavior="4"],
+    html body #blog #main[data-behavior="5"],
+    html body #blog #main[data-behavior="6"],
+    html body #blog #main[style],
+    html body #blog #main.pushed {
+        margin-left: 60px !important;
+        transform: none !important;
+        min-width: 0;
+    }
+    
+    html body .header-title,
+    html body #bottom-bar {
+        margin-left: 60px !important;
+        transform: none !important;
+        min-width: 0;
+    }
+    
+    /* Adjust header to match narrower sidebar */
+    #header,
+    html body #header,
+    #header[style] {
+        left: 60px !important;
+        width: calc(100% - 60px) !important;
+    }
+    
+    /* Hide hamburger on mobile too */
+    #btn-open-sidebar {
+        display: none !important;
+    }
+}
+
+/* ===== Clean Filter Bar ===== */
+.glass-filter-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 0 0 40px; /* Removed side margins to prevent overflow */
+    padding: 15px 0;
+    border-bottom: 1px solid #e9ecef;
+    background: transparent;
+    width: 100%;
+}
+
+.filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.filter-tab {
+    padding: 8px 18px;
+    border: none;
+    background: #f8f9fa;
+    color: #6c757d;
+    font-size: 1.3rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-tab:hover {
+    background: #e9ecef;
+    color: #495057;
+}
+
+.filter-tab.active {
+    background: #349EF3;
+    color: white;
+}
+
+.filter-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.year-select,
+.tag-select {
+    padding: 8px 16px;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    background: white;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #495057;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 140px;
+}
+
+.year-select:hover,
+.year-select:focus,
+.tag-select:hover,
+.tag-select:focus {
+    border-color: #349EF3;
+    outline: none;
+}
+
+/* ===== Category Sections ===== */
+.portfolio-content {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.category-section {
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.category-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #349EF3;
+    display: inline-block;
+}
+
+/* ===== Masonry Layout (CSS Grid for Stability) ===== */
+.cards-container {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    width: 100%;
+    align-items: start;
+}
+
+/* Responsive Columns */
+@media only screen and (max-width: 1400px) {
+    .cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+@media only screen and (max-width: 900px) {
+    .cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 20px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== Pinterest-Style Compact Card ===== */
+.glass-card {
+    display: flex !important; /* Restore Flex for vertical stack */
+    flex-direction: column !important;
+    width: 100%;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid #f1f3f5;
+    position: relative;
+    cursor: pointer;
+    margin: 0 !important;
+    height: auto !important; /* Allow natural height, don't stretch to row height */
+    align-self: start; /* Ensure it sticks to top of grid cell */
+    box-sizing: border-box !important;
+}
+
+/* Utility for filtering */
+.glass-card.is-hidden {
+    display: none !important;
+}
+
+/* Ensure children respect box model */
+.glass-card * {
+    box-sizing: border-box !important;
+}
+
+/* Force children to fill width but respect padding */
+.glass-card > * {
+    width: 100%;
+    margin: 0;
+}
+
+.glass-card:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px) scale(1.02);
+    z-index: 100;
+}
+
+/* ===== Card Image (Top) ===== */
+.card-image-link {
+    display: flex; /* Use flex to center content */
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    width: 100%;
+    background: #f8f9fa;
+    overflow: hidden;
+    margin: 0;
+    max-height: 520px; /* Limit maximum height */
+}
+
+.card-image {
+    width: auto !important; /* Allow width to conform to image aspect ratio */
+    max-width: 100%;
+    display: block;
+    padding: 0;
+    margin: 0;
+    height: auto !important;
+    max-height: 520px !important; /* match container limit */
+}
+
+.card-image img {
+    display: block;
+    width: auto !important; /* Allow width to shrink */
+    max-width: 100%;
+    height: auto !important;
+    max-height: 520px !important; /* Hard limit on image height */
+    object-fit: contain; /* Ensure full image is visible */
+    transition: transform 0.4s ease;
+}
+
+.glass-card:hover .card-image img {
+    transform: scale(1.05); /* Increased scale slightly for effect */
+}
+
+/* ===== Card Header (Middle) ===== */
+.card-header-top {
+    padding: 15px 24px 5px; /* Aligned padding with content */
+    background: white;
+}
+
+.card-title {
+    font-size: 1.55rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.3;
+    word-break: break-word;
+    hyphens: auto;
+}
+
+.card-title a {
+    color: #1a1a2e;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.card-title a:hover {
+    color: #349EF3;
+}
+
+/* ===== Card Content (Bottom) ===== */
+.card-content {
+    padding: 12px 24px 30px; /* Increased bottom padding to 30px */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: white;
+    width: 100%; /* Ensure it fills parent */
+}
+
+/* ===== Compact Description ===== */
+.card-description {
+    color: #5c677d;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    margin: 0;
+    width: 100%;
+    max-width: 100%; /* Prevent overflow */
+    /* Truncation logic */
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    transition: all 0.3s ease;
+    max-height: 1.5em; /* Fallback for height limits */
+}
+
+/* ===== Extra Text "...more like" ===== */
+.card-extra-text {
+    font-size: 0.95rem;
+    color: #adb5bd;
+    font-style: italic;
+    display: block;
+    margin-top: -5px;
+}
+
+/* ===== Tags ===== */
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 5px;
+}
+
+.tag-pill {
+    background: #f1f3f5;
+    color: #495057;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.tag-pill:hover {
+    background: #349EF3;
+    color: white;
+}
+
+/* ===== Read More Link ===== */
+.card-read-more {
+    display: none; 
+    margin-top: 5px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #349EF3;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.card-read-more:hover {
+    color: #1a7fd4;
+    text-decoration: underline;
+}
+
+/* ===== Expanded State on Hover ===== */
+.glass-card:hover .card-description {
+    display: block !important; /* Unset box layout to show full text */
+    -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
+    max-height: 800px !important;
+    height: auto !important;
+    overflow: visible !important;
+}
+
+.glass-card:hover .card-read-more {
+    display: inline-block;
+}
+
+.glass-card:hover .card-extra-text {
+    display: none;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+/* ===== Responsive Design ===== */
+@media only screen and (max-width: 1400px) {
+    .cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .glass-portfolio {
+        padding: 20px 25px;
+    }
+    
+    .cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .glass-portfolio {
+        padding: 20px 15px;
+    }
+    
+    .glass-filter-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .filter-tabs {
+        width: 100%;
+    }
+    
+    .filter-tab {
+        padding: 8px 14px;
+        font-size: 1.5rem;
+    }
+    
+    .filter-controls {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .year-select,
+    .tag-select {
+        width: 100%;
+    }
+    
+    .cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+    }
+    
+    .card-content {
+        padding: 15px;
+    }
+    
+    .card-title {
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== Override Main Content Wrap ===== */
+.main-content-wrap {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 20px;
+}
+
+@media only screen and (min-width: 1024px) {
+    .main-content-wrap {
+        max-width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
+
+/* ===== Hide old styles ===== */
+/* ===== Hide old styles (Removed: causing blank taxonomy pages) ===== */
+/* .postShorten,
+.postShorten-group .postShorten {
+    display: none !important;
+} */
+
+/* ===== Footer Override ===== */
+#footer {
+    margin: 0 !important;
+    width: 100% !important;
+    padding: 20px 0;
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+}
+
+/* ===== Sidebar Button Highlight Standardization (Updated: 2026-02-03) ===== */
+/* Remove default full-width background and apply side-strip style */
+#sidebar .sidebar-button-link {
+    transition: all 0.2s ease;
+    border-left: 0 solid transparent;
+}
+
+/* Use, box-shadow for the strip to prevent layout shifting */
+#sidebar .sidebar-button-link:hover,
+#sidebar .sidebar-button-link.active {
+    background-color: transparent !important; /* Remove full white fill */
+    box-shadow: inset 5px 0 0 #fff !important; /* The white strip on the left */
+    color: #fff !important;
+}
+
+/* Add a very subtle hover background for better feedback */
+#sidebar .sidebar-button-link:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* ===== Knowledge Tile (Categories) ===== */
+.knowledge-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+}
+
+.knowledge-tile {
+    text-decoration: none;
+    color: inherit;
+    justify-content: space-between !important;
+    min-height: 240px;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa) !important;
+    border: 1px solid rgba(255,255,255,0.6) !important;
+}
+
+.knowledge-tile:hover {
+    background: white !important;
+    border-color: #349EF3 !important;
+}
+
+.tile-header {
+    background: transparent;
+    padding: 24px 24px 10px;
+}
+
+.tile-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin: 0 0 5px 0;
+    background: -webkit-linear-gradient(45deg, #1a1a2e, #4a4e69);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.tile-count {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #349EF3;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: rgba(52, 158, 243, 0.1);
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.tile-body {
+    padding: 0 24px;
+    flex-grow: 1;
+}
+
+.latest-snapshot {
+    margin-top: 15px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px dashed #e9ecef;
+}
+
+.snapshot-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #adb5bd;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.snapshot-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #495057;
+    margin: 0 0 4px 0;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.snapshot-date {
+    font-size: 0.8rem;
+    color: #adb5bd;
+}
+
+.tile-footer {
+    padding: 15px 24px 24px;
+    border-top: 1px solid transparent;
+}
+
+.explore-link {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #349EF3;
+    opacity: 0.8;
+    transition: all 0.2s ease;
+}
+
+/* ===== Skill Dashboard (Tags) ===== */
+
+.skill-section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #495057;
+    margin-bottom: 20px;
+    padding-left: 5px;
+    border-left: 4px solid #349EF3;
+    line-height: 1.2;
+}
+
+.skill-grid-core {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
+    gap: 20px !important;
+}
+
+.skill-card-core {
+    flex-direction: column !important;
+    justify-content: center !important;
+    padding: 20px 24px !important;
+    min-height: 120px !important;
+    background: white !important;
+    border: 1px solid #e9ecef !important;
+    text-decoration: none !important;
+}
+
+.skill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.skill-name {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #212529;
+}
+
+.skill-count-badge {
+    background: #349EF3;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 12px;
+    min-width: 24px;
+    text-align: center;
+}
+
+.skill-bar-container {
+    width: 100%;
+    height: 6px;
+    background: #f1f3f5;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.skill-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #349EF3, #66d9e8);
+    border-radius: 3px;
+}
+
+.skill-card-core:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(52, 158, 243, 0.15) !important;
+    border-color: #349EF3 !important;
+}
+
+/* Full Stack Cloud */
+.skill-cloud-container {
+    padding: 30px !important;
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(10px);
+}
+
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.tag-pill-cloud {
+    background: white;
+    border: 1px solid #dee2e6;
+    color: #495057;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tag-count-small {
+    color: #adb5bd;
+    font-size: 0.8rem;
+}
+
+.tag-pill-cloud:hover {
+    background: #349EF3;
+    color: white;
+    border-color: #349EF3;
+    transform: translateY(-2px);
+}
+
+/* ===== Growth Timeline (Archives) ===== */
+.timeline-container {
+    position: relative;
+    padding: 20px 0;
+}
+
+.timeline-year-group {
+    position: relative;
+    margin-bottom: 50px;
+}
+
+.timeline-year-label {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: rgba(52, 158, 243, 0.15); /* Faded accent color */
+    position: absolute;
+    top: -20px;
+    left: -10px;
+    z-index: 0;
+    line-height: 1;
+}
+
+.timeline-posts {
+    position: relative;
+    z-index: 1;
+    border-left: 2px solid rgba(52, 158, 243, 0.3);
+    margin-left: 20px;
+    padding-left: 30px;
+    padding-top: 10px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -37px; /* Adjust based on border-left + padding-left */
+    top: 20px;
+    width: 12px;
+    height: 12px;
+    background: #349EF3;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px rgba(52, 158, 243, 0.3);
+    z-index: 2;
+}
+
+.timeline-content {
+    background: rgba(255,255,255,0.85) !important;
+    padding: 15px 20px !important;
+    border: 1px solid rgba(255,255,255,0.8) !important;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.timeline-date {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #349EF3;
+    text-transform: uppercase;
+}
+
+.timeline-post-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.timeline-post-title a {
+    color: #495057;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.timeline-post-title a:hover {
+    color: #349EF3;
+}
+
+.timeline-tags {
+    margin-top: 5px;
+    display: flex;
+    gap: 8px;
+}
+
+.timeline-tag {
+    font-size: 0.75rem;
+    color: #adb5bd;
+    background: rgba(0,0,0,0.03);
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+/* Hover Effect for Timeline */
+.timeline-item:hover .timeline-marker {
+    background: #fff;
+    border-color: #349EF3;
+    transform: scale(1.2);
+}
+
+.timeline-item:hover .timeline-content {
+    border-color: #349EF3 !important;
+    transform: translateX(5px);
+}

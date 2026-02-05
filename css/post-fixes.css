@@ -1,0 +1,214 @@
+/* ===== Post Page Fixes ===== */
+/* Note: Sidebar positioning is now handled by the theme's data-behavior system */
+/* Do NOT override #sidebar left/transform - it breaks hamburger menu toggle */
+
+
+/* Fix 2: Post content margins - add nice padding on left and right */
+.post .post-content {
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+}
+
+.post .post-content .main-content-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Post footer also needs margins */
+.post-footer.main-content-wrap {
+    max-width: 900px !important;
+    margin: 0 auto !important;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+}
+
+/* Better post header styling */
+.post .post-header .post-title {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+/* Post meta styling */
+.post .post-header .post-meta {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+/* Mobile adjustments - Keep padding small but rely on modern-layout-v3 for layout */
+@media only screen and (max-width: 768px) {
+    .post .post-content {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+    
+    .post-footer.main-content-wrap {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+}
+
+
+/* Fix 3: Improve post readability */
+.post-content p,
+.post-content li {
+    line-height: 1.8;
+    margin-bottom: 1.2em;
+}
+
+.post-content h2,
+.post-content h3,
+.post-content h4 {
+    margin-top: 2em;
+    margin-bottom: 0.8em;
+}
+
+/* Code blocks should have some space */
+.post-content pre {
+    margin: 1.5em 0;
+    border-radius: 8px;
+}
+
+/* Images in posts */
+.post-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1.5em auto;
+    display: block;
+}
+
+/* ===== Sidebar Display Fix for Post Pages ===== */
+/* Ensure sidebar shows correctly even on article pages */
+body article + #sidebar,
+body .post + #sidebar {
+    display: block !important;
+}
+
+/* Fix sidebar button alignment on article pages */
+.post .sidebar-button {
+    display: block;
+}
+
+/* ===== Sidebar Layout Fix ===== */
+/* Let the theme's default inline-block layout work correctly */
+/* Only override if necessary to fix spacing issues */
+
+/* ===== Project Page Layout Fixes ===== */
+/* Ensure white background across full width of content area */
+#main {
+
+    background-color: #fff;
+}
+
+/* Center post content with comfortable side margins */
+article.post {
+    max-width: 100%;
+    /* padding: 0 calc((100% - 900px) / 2);  Remove complex calc */
+    padding: 20px 0; /* Add top/bottom padding */
+    background-color: #fff;
+    width: 100%;
+}
+
+/* Post content centering */
+.post .post-content .main-content-wrap,
+.post .post-header .main-content-wrap,
+.post-footer.main-content-wrap {
+    max-width: 900px !important; /* Force override modern-layout-v3.css */
+    margin: 0 auto !important;
+    padding: 0 20px;
+    width: 100% !important;
+}
+
+/* Background image fix - ensure full coverage */
+#cover {
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+/* Mobile: less padding on small screens */
+@media only screen and (max-width: 768px) {
+    article.post {
+        padding: 0;
+    }
+}
+
+
+
+
+
+
+/* ===== Transparent Overlay Sidebar Implementation ===== */
+
+/* 1. Make body/html transparent (optional, but good for glass effect consistency) */
+html, body {
+    background-color: transparent !important;
+    overflow-x: hidden;
+}
+
+/* 2. Make Sidebar Glassy */
+#sidebar {
+    background: rgba(255, 255, 255, 0.1) !important; /* Semi-transparent light */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 9999 !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 3. Ensure sidebar button is visible */
+.sidebar-button {
+    z-index: 10000 !important;
+}
+
+/* 4. Content Shifting is now managed dynamically in modern-layout-v3.css */
+
+
+
+
+
+
+
+/* ===== Tag Styling Fixes ===== */
+/* Position tags below title */
+.post-header-tags {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding-left: 40px; /* Match title padding */
+    padding-right: 40px;
+}
+
+/* Modern, Small, Cute Tag Style */
+.post-header-tags .tag {
+    display: inline-block;
+    padding: 4px 12px;
+    margin: 0 6px 6px 0;
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #555; /* Soft dark text */
+    background-color: #f0f2f5; /* Very light grey/blue background */
+    border-radius: 20px; /* Pill shape */
+    transition: all 0.2s ease;
+    text-decoration: none !important;
+    border: 1px solid transparent;
+}
+
+/* Hover effects */
+.post-header-tags .tag:hover {
+    background-color: #e1e4e8;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    color: #333;
+}
+
+/* Optional: Add a cute icon before tags? Or keep it clean. */
+/* Keeping it clean as per "modern" request. */
+
+/* Mobile adjustment */
+@media only screen and (max-width: 768px) {
+    .post-header-tags {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
