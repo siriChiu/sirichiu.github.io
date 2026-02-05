@@ -17,7 +17,7 @@ tags:
 - Ultrasound
 
 thumbnailImagePosition: left
-thumbnailImage: /postImg/job_sentos/2.jpg
+thumbnailImage: /postImg/job_sentos/0.jpg
 katex: true
 ---
 

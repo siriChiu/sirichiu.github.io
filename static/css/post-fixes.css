@@ -168,3 +168,47 @@ html, body {
 
 
 
+
+/* ===== Tag Styling Fixes ===== */
+/* Position tags below title */
+.post-header-tags {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding-left: 40px; /* Match title padding */
+    padding-right: 40px;
+}
+
+/* Modern, Small, Cute Tag Style */
+.post-header-tags .tag {
+    display: inline-block;
+    padding: 4px 12px;
+    margin: 0 6px 6px 0;
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #555; /* Soft dark text */
+    background-color: #f0f2f5; /* Very light grey/blue background */
+    border-radius: 20px; /* Pill shape */
+    transition: all 0.2s ease;
+    text-decoration: none !important;
+    border: 1px solid transparent;
+}
+
+/* Hover effects */
+.post-header-tags .tag:hover {
+    background-color: #e1e4e8;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    color: #333;
+}
+
+/* Optional: Add a cute icon before tags? Or keep it clean. */
+/* Keeping it clean as per "modern" request. */
+
+/* Mobile adjustment */
+@media only screen and (max-width: 768px) {
+    .post-header-tags {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}

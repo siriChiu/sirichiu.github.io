@@ -21,9 +21,11 @@ tags:
 - Streamlit
 - Prometheus
 - Ansible
+- SNMP
+- Network Automation
 
 thumbnailImagePosition: left
-thumbnailImage: /postImg/ice_algo/0.jpg
+thumbnailImage: /postImg/job_advantech/0.jpg
 katex: true
 ---
 
@@ -47,22 +49,22 @@ Specializing in **Full-Stack Automation**, **Server Thermal Algorithms** (patent
 
 #### Industrial/AI Server Fan Control Tool Development
 
-1.  **Fan curve algorithm optimization, data collection, and deployment**
+1.  **Fan curve algorithm optimization, data collection, and deployment** [Project Details](/en/new-pid-for-server/)
     *   `#Golang`, `#BashScript`, `#Algorithm`, `#Fancurve`, `#PIDalgorithm`, `#ipmitool`, `#BMC`
     *   **Innovative R&D**: Developed a methodology to analyze server endurance limits through pre-testing, automatically generating optimized temperature control algorithms.
     *   **Quantitative Results**: Testing verified that the new algorithm **improved performance by approximately 20%~40%** compared to traditional open-loop control strategies, effectively optimizing cooling efficiency and energy saving (Patent Pending).
 
-2.  **Automated server stress testing tool development**
+2.  **Automated server stress testing tool development** [Project Details](/en/smart-stress-testing/)
     *   `#Golang`, `#BashScript`, `#Algorithm`
     *   **Smart Burn-in Prediction**: Established a **Mathematical Regression Model** for burn-in testing. Used various stress scripts (CPU, GPU, RAM, FIO, ETH) as input variables to accurately predict and combine them to achieve target loads (e.g., precisely controlling at 50% or 100% loading).
     *   **Solving Pain Points**: Resolved the difficulty of precise load control in traditional testing, providing a high-reliability environment for airflow evaluation.
 
-3.  **Real-time sensor data visualization and storage**
-    *   `#Python`, `#Golang`, `#MySQL`, `#Grafana`
-    *   **Multi-Device Synchronization**: Developed automation tools enabling real-time synchronous monitoring for **1-to-5** servers.
-    *   **Visual Dashboard**: Integrated Grafana and MySQL to visualize and store sensor data in real-time, providing R&D personnel with intuitive performance analysis views.
+3.  **Rack Monitoring System Development** [Project Details](/en/rack-monitor/)
+    *   `#Golang`, `#IPMI`, `#SNMP`, `#Prometheus`, `#Grafana`
+    *   **Comprehensive Device Monitoring**: Developed a Golang Agent using IPMI and SNMP protocols to integrate various Switch (Netgear, Cisco) and PDU (Raritan) brands, collecting multi-dimensional data such as temperature, traffic, and vibration.
+    *   **Visualization Dashboard**: Built a Prometheus + Grafana monitoring platform to visualize data center equipment status in real-time, providing an intuitive war-room view for the operations team.
 
-4.  **Remote/Local server testing tool development**
+4.  **Remote/Local server testing tool development** [Project Details](/en/redmine-tracker/)
     *   `#Golang`, `#Python`, `#Linux`, `#BashScript`
     *   **Hybrid Architecture Design**: Combined Golang's high concurrency with Python's rich ecosystem to build high-efficiency remote/local testing vehicles.
     *   **Cross-Platform Support**: Ensured tool compatibility and stability across different Linux distributions and hardware architectures.

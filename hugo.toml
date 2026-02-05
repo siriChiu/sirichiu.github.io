@@ -93,7 +93,7 @@ disqusShortname = "hugo-tranquilpeak-theme"
 # canonifyurls = true  # Disabled - causes localhost issues with absolute URLs
 
 [permalinks]
-  posts = "/:year/:month/:slug/"
+  posts = "/:slug/"
 
 [taxonomies]
   tag = "tags"

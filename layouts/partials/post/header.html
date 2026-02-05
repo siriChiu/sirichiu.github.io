@@ -11,4 +11,14 @@
     </h1>
   {{ end }}
   {{ partial "post/meta.html" . }}
+  {{ if (not (eq .Params.showTags false)) }}
+    {{ with .Params.tags }}
+      {{ $tagsLength := len . }}
+      {{ if gt $tagsLength 0 }}
+        <div class="post-header-tags">
+          {{ partial "post/tag.html" $ }}
+        </div>
+      {{ end }}
+    {{ end }}
+  {{ end }}
 </div>

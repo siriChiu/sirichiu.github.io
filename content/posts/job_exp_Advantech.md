@@ -21,9 +21,11 @@ tags:
 - Streamlit
 - Prometheus
 - Ansible
+- SNMP
+- Network Automation
 
 thumbnailImagePosition: left
-thumbnailImage: /postImg/ice_algo/0.jpg
+thumbnailImage: /postImg/job_advantech/0.jpg
 katex: true
 ---
 
@@ -48,22 +50,22 @@ katex: true
 
 #### 工業/AI伺服器之風扇控制相關工具開發
 
-1.  **最佳化風扇曲線演算法開發、數據進行蒐集與演算法導入**
+1.  **最佳化風扇曲線演算法開發、數據進行蒐集與演算法導入** [專案詳情](/new-pid-for-server/)
     *   `#Golang`, `#BashScript`, `#Algorithm`, `#Fancurve`, `#PIDalgorighm`, `#ipmitool`, `#BMC`
     *   **創新研發**：透過前測試 (Pre-test) 分析伺服器耐力極限，自動化生成最適化的溫控演算法。
     *   **量化成效**：經實測驗證，新演算法相較於傳統 Openloop 控制策略，**效能提升約 20%~40%**，有效優化散熱效率與節能表現（專利申請中）。
 
-2.  **自動化伺服器壓力測試工具開發**
+2.  **自動化伺服器壓力測試工具開發** [專案詳情](/smart-stress-testing/)
     *   `#Golang`, `#BashScript`, `#Algorithm`
     *   **智慧燒機預測**：針對燒機測試 (Burn-in)，建立 **數學回歸模型 (Mathematical Regression Model)**。將各類壓力腳本（CPU, GPU, RAM, FIO, ETH）作為輸入變數，精準預測並組合出目標負載（如精確控制在 50% 或 100% Loading）。
     *   **解決痛點**：解決了傳統測試難以精確控制負載的問題，為風流評估提供高可信度的測試環境。
 
-3.  **即時感測器數據資料繪製與保存**
-    *   `#Python`, `#Golang`, `#MySQL`, `#Grafana`
-    *   **多機同步監控**：開發自動化控制工具，實現**一對多（1-to-5）**伺服器的即時同步監控。
-    *   **可視化儀表板**：整合 Grafana 與 MySQL，即時繪製並保存感測器數據，提供研發人員直觀的效能分析視圖。
+3.  **機櫃監控系統開發 (Rack Monitoring System)** [專案詳情](/rack-monitor/)
+    *   `#Golang`, `#IPMI`, `#SNMP`, `#Prometheus`, `#Grafana`
+    *   **全方位設備監控**：開發 Golang Agent 透過 IPMI 與 SNMP 協定，整合不同品牌 Switch (Netgear, Cisco) 與 PDU (Raritan)，採集溫度、流量、震動等多維度數據。
+    *   **可視化儀表板**：建構 Prometheus + Grafana 監控平台，即時繪製機房設備運作狀態，提供運維團隊直觀的戰情室視圖。
 
-4.  **遠端/本機端伺服器測試工具開發**
+4.  **遠端/本機端伺服器測試工具開發** [專案詳情](/redmine-tracker/)
     *   `#Golang`, `#Python`, `#Linux`, `#BashScript`
     *   **混合架構設計**：結合 Golang 的高併發特性與 Python 的豐富生態，構建高效率的遠端/本機測試載具。
     *   **跨平台支援**：確保工具在不同 Linux 發行版與硬體架構下的相容性與穩定性。
