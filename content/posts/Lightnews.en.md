@@ -13,17 +13,17 @@ tags:
 - RSS
 - WordPress
 thumbnailImagePosition: left
-thumbnailImage: /postImg/lightnews/1.jpg
+thumbnailImage: /postImg/lightnews/thumbnail.png
 ---
 
-This project built an end-to-end automated content publishing system, aimed at solving the "information gap" between the Traditional Chinese community and international tech communities.
+This project builds an end-to-end automated content publishing workflow to reduce the time gap between international technical sources and Traditional Chinese readers.
 
 <!--more-->
 
 
 ## 📋 Abstract
 
-Traditional technical knowledge dissemination relies on manual translation and transfer, often resulting in delays of days or even weeks. To solve this problem, I set up **n8n** automation workflow on a Linux server and integrated **Ollama local large language model (gpt-oss)** to achieve a fully unattended workflow from RSS monitoring, content extraction, AI summary translation, smart image selection, to final WordPress publishing. This system can instantly transform first-hand international technical information into high-quality Chinese content, significantly improving the efficiency and breadth of information acquisition.
+Technical news curation often depends on manual translation and reposting, which can introduce delays of days or weeks. To reduce that cost, I set up an **n8n** workflow on a Linux server and integrated **Ollama local large language model (gpt-oss)** for RSS monitoring, content extraction, summarization, translation, image retrieval, and WordPress publishing. The system is designed to produce reviewable drafts first, leaving final judgment to a human editor when needed.
 
 ---
 
@@ -35,7 +35,9 @@ To ensure system stability and privacy security, this project adopted a fully pr
 
 * **Linux Server:** Serves as the foundational environment for computing and service hosting.
 * **Workflow Orchestration (n8n):** Uses n8n as the automation hub, responsible for connecting various API nodes and logical judgments, replacing traditional cumbersome Python Crontab scripts.
-* **Local LLM Inference (Ollama):** Deploys Ollama framework running `gpt-oss` model, enabling large-scale text processing without relying on expensive external APIs with privacy concerns.
+* **Local LLM Inference (Ollama):** Runs the `gpt-oss` model through Ollama, reducing dependence on external APIs for large-volume text processing.
+
+![Lightnews automated content pipeline](/postImg/lightnews/pipeline.svg)
 
 ### 2. Core Technology: AI-Driven Content Pipeline
 
@@ -55,19 +57,19 @@ The workflow begins with RSS monitoring of specific technical domains. Once new 
 #### 2.2 Context-Aware Media Retrieval
 To make articles visually engaging, I designed a "text-to-image" retrieval logic rather than simply using random images.
 
-1.  **Visual Intent Recognition:** LLM analyzes article content to generate a set of precise English "Visual Keywords."
+1.  **Visual Intent Recognition:** LLM analyzes article content to generate searchable English "Visual Keywords."
 2.  **API Matching:** System automatically calls image library API (Unsplash) using these keywords for search.
-3.  **Optimized Selection:** Based on download count and relevance scores, automatically selects the most suitable image as the article's Featured Image.
+3.  **Optimized Selection:** Based on download count and relevance scores, selects a relevant image as the article's Featured Image.
 
 ### 3. Automated Delivery
 
-In the final stage, n8n creates drafts or directly publishes through the **WordPress REST API** using processed titles, content, tags, and image links. This not only standardizes article format but also achieves 24/7 uninterrupted information updates.
+In the final stage, n8n sends processed titles, content, tags, and image links to the **WordPress REST API** to create drafts or publish posts. This keeps article formatting consistent and supports a steadier update rhythm.
 
 ---
 
 ### Conclusion
 
-This project demonstrates how to use **Low-Code tools (n8n)** and **Local LLM** technology to rapidly build automated systems with commercial value. It not only solves the timeliness of information but also proves the feasibility of running complex AI workflows on low-cost hardware.
+This project demonstrates how **Low-Code tools (n8n)** and **Local LLMs** can support a practical content workflow. The goal is not to replace editorial judgment, but to automate repetitive extraction, summarization, and pre-publishing work so human review can focus on quality control.
 
 
 <iframe src="https://lightnews.tw/" width="100%" height="500px" style="border:none;"></iframe>

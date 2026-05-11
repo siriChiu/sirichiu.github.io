@@ -16,7 +16,7 @@ tags:
 - CI/CD
 
 thumbnailImagePosition: left
-thumbnailImage: /postImg/Redmine-tracker/main.jpg
+thumbnailImage: /postImg/Redmine-Tracker/thumbnail.png
 ---
 
 This project developed a cross-platform desktop application designed to solve the "cumbersome operation" and "workflow interruption" problems engineers face when logging time in the Redmine system.
@@ -27,17 +27,17 @@ This project developed a cross-platform desktop application designed to solve th
 
 ## 📋 Abstract
 
-> **This is a desktop productivity tool combining modern UI with a powerful Python backend.**
+> **This is a desktop productivity tool combining a modern UI with a Python backend.**
 
-By combining **Electron (React)** modern frontend with **Python FastAPI** powerful backend, I built a **"Hybrid Architecture"** solution.
+By combining an **Electron (React)** frontend with a **Python FastAPI** backend, I built a **"Hybrid Architecture"** solution.
 
-This tool simplifies tasks that originally required 10 webpage operations into "one-click completion" and introduces visualization dashboards and smart scheduling features. This not only eliminates the administrative burden of time logging but also reserves architectural flexibility for future AI time prediction features, successfully transforming passive administrative work into an efficient productivity management experience.
+This tool turns a multi-step web workflow into a shorter desktop flow and introduces visualization dashboards and smart scheduling features. It also keeps architectural room for future AI-based time prediction, making time logging easier to maintain as a daily workflow.
 
 ---
 
 ## 🛑 The Problem
 
-In software development workflows, Redmine is a powerful project management tool, but its "Time Logging" experience is quite outdated and user-unfriendly:
+In software development workflows, Redmine is a capable project management tool, but its "Time Logging" experience can be fragmented:
 
 * **⏳ High Time Cost:** Recording one time entry requires approximately 10 clicks and page navigations. Engineers spend about 30 minutes daily handling such administrative tasks.
 * **💔 Context Switch:** To log time, developers must interrupt their flow state and switch browser tabs, causing decreased work efficiency.
@@ -54,13 +54,13 @@ To thoroughly address these pain points, I designed a closed-loop **"Plan ➝ Tr
 * **Track:** Supports drag-and-drop calendar interface. System monitors time in real-time and visually marks gaps (like lunch break) through charts.
 * **Log:** Provides **Automated Workflows**. When tasks complete or end-of-day arrives, the system automatically pushes local data to Redmine API, achieving "seamless logging."
 
-![calender](/postImg/Redmine-Tracker/calender.jpg)
+![Redmine time-tracking calendar screen](/postImg/Redmine-Tracker/calender.jpg)
 
 ### 2. Interactive Dashboard
 * Provides **Weekly Overview** bar chart, letting users grasp weekly time distribution at a glance.
 * Integrates **Project Deep Dive** view, allowing users to check Issue status, priority, and discussion threads without opening a browser.
 
-![main](/postImg/Redmine-Tracker/main.jpg)
+![Redmine Smart Companion dashboard screen](/postImg/Redmine-Tracker/main.jpg)
 
 ---
 
@@ -74,7 +74,7 @@ Unlike traditional Electron Apps that only rely on Node.js, this project adopted
 * **Backend:** Uses **Python FastAPI** as local server, handling Redmine API interactions and data logic.
 
 #### 🤔 Why This Architecture? (Why Python Backend?)
-1.  **Legacy Integration:** Can directly encapsulate and reuse my previously written efficient Python automation scripts, significantly shortening development cycles.
+1.  **Legacy Integration:** Can directly encapsulate and reuse my previously written Python automation scripts, shortening development cycles.
 2.  **AI Readiness:** Preparing for future Roadmap. Python has the richest AI/ML ecosystem. This architecture layer allows me to easily integrate `Scikit-learn` or `Pandas` in the future to implement "history-based smart time prediction" features without restructuring the entire backend.
 
 

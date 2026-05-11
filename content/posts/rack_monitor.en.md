@@ -17,16 +17,18 @@ tags:
 - Data Visualization
 
 thumbnailImagePosition: left
-thumbnailImage: /postImg/rack_monitor/1.jpg
+thumbnailImage: /postImg/rack_monitor/thumbnail.png
 katex: true
 ---
 
-Responsible for the full-stack design and implementation of the Rack Monitoring System. Developed a Golang Agent to collect data from servers, switches, and PDUs via IPMI and SNMP protocols, integrating Prometheus and Grafana to achieve real-time visual monitoring and ensure equipment stability in the data center.
+Responsible for the design and implementation of a Rack Monitoring System. The system uses a Golang agent to collect server, switch, and PDU data through IPMI and SNMP, then integrates Prometheus and Grafana to provide real-time visibility into rack equipment status.
 
 <!--more-->
 
 # Software Engineer
 **Advantech** | 2022/11 – Present
+
+![Rack monitoring system architecture](/postImg/rack_monitor/architecture.svg)
 
 ### 🚀 Core Skills & Expertise
 *   ✅ **Protocol Integration**: In-depth research and implementation of IPMI and SNMP (MIB) protocols, customizing data collection for different brand devices.
@@ -51,8 +53,8 @@ Responsible for the full-stack design and implementation of the Rack Monitoring 
 
 3.  **Grafana Real-time Monitoring Dashboard**
     *   `#Grafana`, `#Dashboard`, `#Visualization`
-    *   **War-Room Level Dashboard**: Designed multi-dimensional **Grafana Dashboards** to display the real-time operational status of all equipment within the rack.
-    *   **Anomaly Alerting**: implemented threshold-based alerting. Visual indicators (color changes) and notifications allow the operations team to react immediately to critical events like overheating, fan failures, or network congestion.
+    *   **Grafana Dashboard**: Designed multi-dimensional dashboards to show the operational status of rack equipment in one place.
+    *   **Anomaly Alerting**: Implemented threshold-based alerting. Visual indicators and notifications help operations personnel locate anomalies faster when overheating, fan failures, or network congestion occurs.
 
 ### 🛠️ Tech Stack
 *   **Languages**: Golang, Python.

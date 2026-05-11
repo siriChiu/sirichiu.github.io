@@ -16,7 +16,7 @@ tags:
 - CI/CD
 
 thumbnailImagePosition: left
-thumbnailImage: /postImg/Redmine-Tracker/main.jpg
+thumbnailImage: /postImg/Redmine-Tracker/thumbnail.png
 ---
 
 本專案開發了一款跨平台的桌面應用程式，旨在解決工程師在使用 Redmine 系統記錄工時面臨的「操作繁瑣」與「流程斷裂」問題。
@@ -27,12 +27,12 @@ thumbnailImage: /postImg/Redmine-Tracker/main.jpg
 
 ## 📋 專案摘要 (Abstract)
 
-> **這是一款結合現代化 UI 與 Python 強大後端的桌面生產力工具。**
+> **這是一款結合現代化 UI 與 Python 後端的桌面生產力工具。**
 
-透過結合 **Electron (React)** 的現代化前端與 **Python FastAPI** 的強大後端，我打造了一個 **「混合架構 (Hybrid Architecture)」**
+透過結合 **Electron (React)** 的現代化前端與 **Python FastAPI** 後端，我打造了一個 **「混合架構 (Hybrid Architecture)」**
 解決方案。
 
-此工具將原本需 10 個步驟的網頁操作簡化為「一鍵完成」，並引入視覺化儀表板與智慧排程功能。這不僅消除了記錄工時的作業感，更為未來導入 AI 工時預測功能預留了架構彈性，成功將被動的行政工作轉化為高效率的生產力管理體驗。
+此工具將原本需多次跳轉的網頁操作整理成較短的桌面流程，並加入視覺化儀表板與智慧排程功能。系統也保留未來導入 AI 工時預測的架構彈性，讓工時記錄從被動行政操作變成更容易維持的日常工作流。
 
 ---
 
@@ -55,19 +55,19 @@ thumbnailImage: /postImg/Redmine-Tracker/main.jpg
 * **Track (追蹤):** 支援拖拉式 (Drag-and-drop) 行事曆介面。系統即時監控工時，並透過視覺化圖表自動標示空檔（如午休時間）。
 * **Log (記錄):** 提供 **Automated Workflows**，當任務完成或下班時間一到，系統自動將本地數據推送至 Redmine API，實現「無感記錄」。
 
-![calender](/postImg/Redmine-Tracker/calender.jpg)
+![Redmine 工時行事曆規劃畫面](/postImg/Redmine-Tracker/calender.jpg)
 
 ### 2. 可視化儀表板 (Interactive Dashboard)
 * 提供 **Weekly Overview** 長條圖，讓使用者一眼掌握本週工時分佈。
 * 整合 **Project Deep Dive** 視圖，無須打開瀏覽器即可查看 Issue 的狀態、優先級與歷史討論串。
 
-![main](/postImg/Redmine-Tracker/main.jpg)
+![Redmine Smart Companion 儀表板畫面](/postImg/Redmine-Tracker/main.jpg)
 
 ---
 
 ## 🛠️ 技術深度剖析 (Technical Case Study)
 
-### 1. 創新的混合式架構 (Hybrid Architecture)
+### 1. 混合式架構 (Hybrid Architecture)
 
 不同於傳統 Electron App 僅依賴 Node.js，本專案採用了 **React (Frontend) + Python FastAPI (Backend)** 的並發架構 (Concurrent Architecture)。
 
@@ -75,7 +75,7 @@ thumbnailImage: /postImg/Redmine-Tracker/main.jpg
 * **Backend:** 使用 **Python FastAPI** 作為本地伺服器，處理與 Redmine API 的交互及資料邏輯。
 
 #### 🤔 為什麼選擇這種架構？ (Why Python Backend?)
-1.  **既有資產整合 (Legacy Integration):** 能夠直接封裝並重用我先前編寫的高效 Python 自動化腳本，大幅縮短開發週期。
+1.  **既有資產整合 (Legacy Integration):** 能夠直接封裝並重用我先前編寫的 Python 自動化腳本，縮短開發週期。
 2.  **AI 擴充性 (AI Readiness):** 為了未來的 Roadmap 做準備。Python 擁有最豐富的 AI/ML 生態系，這層架構讓我未來能輕鬆導入 `Scikit-learn` 或 `Pandas`，實現「基於歷史數據的工時智慧預測」功能，而不必重構整個後端。
 
 

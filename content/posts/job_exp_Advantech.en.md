@@ -25,7 +25,7 @@ tags:
 - Network Automation
 
 thumbnailImagePosition: left
-thumbnailImage: /postImg/job_advantech/0.jpg
+thumbnailImage: /postImg/job_advantech/thumbnail.png
 katex: true
 ---
 
@@ -56,8 +56,8 @@ Specializing in **Full-Stack Automation**, **Server Thermal Algorithms** (patent
 
 2.  **Automated server stress testing tool development** [Project Details](/en/smart-stress-testing/)
     *   `#Golang`, `#BashScript`, `#Algorithm`
-    *   **Smart Burn-in Prediction**: Established a **Mathematical Regression Model** for burn-in testing. Used various stress scripts (CPU, GPU, RAM, FIO, ETH) as input variables to accurately predict and combine them to achieve target loads (e.g., precisely controlling at 50% or 100% loading).
-    *   **Solving Pain Points**: Resolved the difficulty of precise load control in traditional testing, providing a high-reliability environment for airflow evaluation.
+    *   **Smart Burn-in Prediction**: Established a **Mathematical Regression Model** for burn-in testing. Used stress scripts (CPU, GPU, RAM, FIO, ETH) as input variables to estimate and combine conditions close to target loads, such as 50% or 100% loading.
+    *   **Solving Pain Points**: Improved load-control consistency in traditional testing and provided more stable conditions for airflow evaluation.
 
 3.  **Rack Monitoring System Development** [Project Details](/en/rack-monitor/)
     *   `#Golang`, `#IPMI`, `#SNMP`, `#Prometheus`, `#Grafana`
@@ -74,7 +74,7 @@ Specializing in **Full-Stack Automation**, **Server Thermal Algorithms** (patent
 1.  **Automated code review tool using OpenAI API and Gitea Actions**
     *   `#AI`, `#LLM`, `#automatic`, `#workflow`, `#codereview`, `#restfulapi`, `#CI/CD`
     *   **DevOps Integration**: Built an automated review bot using Drone CI and Gitea Webhooks to trigger events and integrate the **OpenAI API**.
-    *   **Workflow Optimization**: Successfully intercepted potential syntax errors and **reduced senior engineers' code review time by approximately 30%**, significantly enhancing team delivery efficiency.
+    *   **Workflow Optimization**: Helped catch potential syntax errors and **reduced senior engineers' code review time by approximately 30%** in the targeted review workflow.
 
 2.  **GenAI-based email content extraction and automated delivery**
     *   `#AI`, `#LLM`, `#workflow`, `#CI`
@@ -93,10 +93,10 @@ Specializing in **Full-Stack Automation**, **Server Thermal Algorithms** (patent
 ### 🖼️ Reference Images
 
 **Image 1: Server Thermal Control Algorithm**
-![alt text](/postImg/ice_algo/0.jpg)
+![Server cooling control algorithm project image](/postImg/ice_algo/0.jpg)
 
 **Image 2: Smart Burn-in Automation System**
-![alt text](/postImg/smartfan/4D_graph.png)
+![4D stress testing heatmap](/postImg/smartfan/4D_graph.png)
 
 **Image 3: Hybrid Architecture Productivity Tool**
-![alt text](/postImg/Redmine-tracker/main.jpg)
+![Redmine Smart Companion main screen](/postImg/Redmine-Tracker/main.jpg)

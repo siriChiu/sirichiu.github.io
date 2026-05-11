@@ -21,34 +21,21 @@ tags:
 
 
 thumbnailImagePosition: left
-thumbnailImage: /postImg/ice_algo/0.jpg
+thumbnailImage: /postImg/ice_algo/thumbnail.png
 ---
 
 <script type="text/javascript"
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-本專案旨在解決資料中心伺服器散熱控制中「研發效率低落」與「能源損耗」的雙重難題。針對傳統開迴路控制（Open-loop）造成的過度設計，以及人工調校 PID 的高昂時間成本，我開發了一套**「自動化熱特徵識別系統」**。
+本專案針對資料中心伺服器散熱控制中的兩個常見問題：開迴路控制造成的過度保守，以及人工調校 PID 所需的時間成本。我開發了一套**自動化熱特徵識別系統**，用來建立較一致的測試流程與控制參數推導方式。
 
 <!--more-->
 
-
-不同於傳統工具僅能被動執行腳本，本系統引入了**物理特性建模**技術，針對 CPU（線性增長）與 Memory/Ethernet（反指數飽和）等元件建立專屬數學模型，進而能逆向推導並精準鎖定目標壓力環境。在數據分析方面，本系統創新設計了整合溫度、轉速、瓦數與時間頻率的 **Grafana 四維熱力圖**，並串接 **AI 視覺模型** 進行自動化圖表解讀。此方案成功將系統驗證流程由人工操作轉型為數據驅動（Data-Driven）的智慧化決策模式，大幅提升了測試的覆蓋率與風險識別效率。
-
-本專案核心技術包含兩大突破：
-
-1. 物理特性預測建模： 針對 CPU（線性增長）與 Memory/Ethernet（反指數飽和）等元件的異質功耗特性，建立可解釋的數學模型。透過線性擬合與演算法逆向推導，實現對系統瓦數與壓力的精準控制。
-
-2. AI 驅動的四維視覺化： 創新設計了整合溫度、轉速、瓦數與時間頻率的 Grafana 四維熱力圖，並串接視覺 AI 模型進行自動化圖表解讀，即時識別潛在的散熱風險與效能瓶頸。 此系統成功將硬體驗證流程由被動執行轉型為主動的數據驅動（Data-Driven）決策模式。
+該系統整合 **Golang** 與 **Python** 自動化腳本，透過環境測試室（Chamber）建立伺服器的穩態熱特徵資料結構（Steady-state Thermal Profile），再透過參數關聯模型推導 PID 參數。此外，針對運算負載劇變（Load Dump）場景，引入「非零積分重置（Non-zero Integral Reset）」機制，降低風扇轉速過度下探與震盪風險。
 
 <!-- --- -->
 
-## 📋 專案摘要 (Executive Summary)
-
-
-該系統整合了 **Golang** 與 **Python** 自動化腳本，透過環境測試室（Chamber）自主建立伺服器的穩態熱特徵資料結構（Steady-state Thermal Profile），並透過獨創的參數關聯模型自動推導最佳化 PID 參數。此外，針對運算負載劇變（Load Dump）場景，引入了「非零積分重置（Non-zero Integral Reset）」機制。最終實現了研發流程的標準化，並顯著提升了伺服器的能效比（PUE）與元件可靠度。
-
----
 
 ## 🛑 產業背景與痛點 (Industry Context & Challenges)
 
@@ -56,11 +43,11 @@ thumbnailImage: /postImg/ice_algo/0.jpg
 
 ### 1. 開迴路控制的過度設計 (Over-design in Open-loop Control)
 傳統的「查表法（Lookup Table）」僅依賴溫度區間對應固定轉速。為了確保系統安全性，業界慣例是基於該機箱支援的**最高階硬體配置 (Maximum Configuration)** 與 **最嚴苛環境條件 (Worst-case Scenario)** 來設定單一散熱曲線。
-* **後果：** 對於中低階配置的伺服器，風扇長期處於非必要的「過轉（Over-speeding）」狀態，導致嚴重的能源浪費與高頻噪音。
+* **後果：** 對於中低階配置的伺服器，風扇可能長期處於非必要的「過轉（Over-speeding）」狀態，造成額外能源消耗與噪音。
 
 ### 2. 傳統 PID 的人工調校瓶頸 (Manual Tuning Inefficiency)
 即便採用閉迴路控制（Closed-loop PID），參數 ($K_p, K_i, K_d$) 的設定往往高度依賴資深工程師的經驗法則（Rule of Thumb）進行反覆試誤（Trial and Error）。
-* **後果：** 缺乏標準化的系統識別（System Identification）流程，導致調校耗時數週，且無法精確適應不同伺服器個體間的微小硬體差異（Lack of Reproducibility）。
+* **後果：** 缺乏標準化的系統識別（System Identification）流程，調校可能耗時數週，且不容易重現到不同伺服器個體。
 
 ### 3. 積分飽和與系統不穩 (Integral Windup & Instability)
 在負載瞬間卸除（Load Dump）的情境下，傳統 PID 容易因積分項累積過多誤差，導致風扇轉速驟降（Undershoot）甚至發生震盪（Oscillation），影響散熱穩定性。
@@ -69,7 +56,7 @@ thumbnailImage: /postImg/ice_algo/0.jpg
 
 ## 🛠️ 技術解決方案 (Technical Solution)
 
-本發明提出一種**「基於穩態熱特徵資料結構的自動化控制參數生成方法」**，將散熱控制從「經驗驅動」轉型為「數據驅動」。
+本方法提出一種**基於穩態熱特徵資料結構的自動化控制參數生成流程**，讓散熱控制從單純經驗調校，逐步轉向資料輔助的參數推導。
 
 ### ■ 系統架構 (System Architecture)
 
@@ -118,11 +105,11 @@ $$I_{new} = \begin{cases} 0 & \text{Traditional Approach (Risky)} \\ I_{base} & 
 
 ### 1. 研發效率與標準化 (Efficiency & Standardization)
 * 將原本耗時 **數週** 的人工調校流程，縮短為 **數小時** 的全自動化程序。
-* 實現了參數生成的「可重現性」，確保不同批次的伺服器皆能搭載最佳化的控制參數，大幅縮短產品上市時間 (Time-to-Market)。
+* 提升參數生成的「可重現性」，讓不同批次的伺服器更容易沿用一致的控制參數推導流程。
 
 ### 2. 極大化熱餘裕與節能 (Energy Optimization & ESG)
-* 透過精準的 PID 溫度追隨，系統能自動維持物理上所需的**最低風扇轉速**，消除無效過冷。
-* 顯著降低資料中心能耗指標 (PUE) 與碳排放，符合綠色運算趨勢。
+* 透過 PID 溫度追隨，系統可嘗試維持接近需求的風扇轉速，減少無效過冷。
+* 有助於降低不必要的風扇功耗，支援後續能效最佳化。
 
 ### 3. 提升硬體可靠度 (Reliability)
 * 平滑的轉速控制與「非零重置」機制，有效避免了風扇轉速劇烈震盪。
@@ -130,7 +117,7 @@ $$I_{new} = \begin{cases} 0 & \text{Traditional Approach (Risky)} \\ I_{base} & 
 
 
 ### 步驟流程圖 (Control Flow Diagram) 
-![alt text](/postImg/ice_algo/1.jpg)
+![PID 控制測試結果圖](/postImg/ice_algo/1.jpg)
 
 ### 控制流程圖 (Process Flow Diagram)
-![alt text](/postImg/ice_algo/2.jpg)
+![PID 控制參數分析圖](/postImg/ice_algo/2.jpg)

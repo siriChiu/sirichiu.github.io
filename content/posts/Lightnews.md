@@ -13,17 +13,17 @@ tags:
 - RSS
 - WordPress
 thumbnailImagePosition: left
-thumbnailImage: /postImg/lightnews/1.jpg
+thumbnailImage: /postImg/lightnews/thumbnail.png
 ---
 
-本專案構建了一套端到端 (End-to-End) 的自動化內容發布系統，旨在解決繁體中文圈與國際技術社群之間的「資訊落差」。
+本專案建立一套端到端 (End-to-End) 的自動化內容發布流程，用來縮短繁體中文讀者與國際技術資訊之間的時間差。
 
 <!--more-->
 
 
 ## 📋 專案摘要 (Abstract)
 
-傳統的技術新知傳播依賴人工翻譯與搬運，往往存在數天甚至數週的時間延遲。為了解決此問題，我利用 Linux 伺服器架設 **n8n** 自動化流程，並整合 **Ollama 本地大型語言模型 (gpt-oss)**，實現了從 RSS 監聽、內容擷取、AI 摘要翻譯、智慧配圖到最終 WordPress 發布的全無人值守工作流。此系統能即時將國外第一手技術資訊轉化為高品質的中文內容，大幅提升了資訊獲取的效率與廣度。
+傳統技術新知的整理常依賴人工翻譯與搬運，容易產生數天到數週的延遲。為了降低這個成本，我在 Linux 伺服器上架設 **n8n** 自動化流程，並整合 **Ollama 本地大型語言模型 (gpt-oss)**，串接 RSS 監聽、內容擷取、摘要翻譯、圖片檢索與 WordPress 發布。系統目標是讓技術資訊先形成可閱讀草稿，再由人工進行必要審閱。
 
 ---
 
@@ -35,7 +35,9 @@ thumbnailImage: /postImg/lightnews/1.jpg
 
 * **Linux Server:** 作為運算與服務託管的基礎環境。
 * **Workflow Orchestration (n8n):** 使用 n8n 作為自動化中樞，負責串接各個 API 節點與邏輯判斷，取代傳統繁瑣的 Python Crontab 腳本。
-* **Local LLM Inference (Ollama):** 部署 Ollama 框架運行 `gpt-oss` 模型，讓大量文本處理無需依賴昂貴且有隱私疑慮的外部 API。
+* **Local LLM Inference (Ollama):** 部署 Ollama 框架運行 `gpt-oss` 模型，降低大量文本處理對外部 API 的依賴。
+
+![Lightnews 自動化內容處理流程](/postImg/lightnews/pipeline.svg)
 
 ### 2. 核心技術：AI 驅動的內容處理管線 (AI-Driven Content Pipeline)
 
@@ -55,19 +57,19 @@ thumbnailImage: /postImg/lightnews/1.jpg
 #### 2.2 上下文感知的媒體檢索 (Context-Aware Media Retrieval)
 為了讓文章圖文並茂，我設計了一套「文轉圖」的檢索邏輯，而非單純使用隨機圖片。
 
-1.  **視覺意圖識別:** 透過 LLM 分析文章內文，生成一組精準的英文「視覺關鍵字 (Visual Keywords)」。
+1.  **視覺意圖識別:** 透過 LLM 分析文章內文，生成一組可用於搜尋的英文「視覺關鍵字 (Visual Keywords)」。
 2.  **API 媒合:** 系統自動呼叫圖庫 API (Unsplash)，利用上述關鍵字進行檢索。
-3.  **最佳化篩選:** 根據圖片的下載量與相關度評分，自動選取最合適的一張作為文章封面圖 (Featured Image)。
+3.  **最佳化篩選:** 根據圖片的下載量與相關度評分，選取相關度較高的圖片作為文章封面圖 (Featured Image)。
 
 ### 3. 自動化交付 (Automated Delivery)
 
-最後階段，n8n 將處理好的標題、內文、標籤與圖片連結，透過 **WordPress REST API** 自動建立草稿或直接發布。這不僅標準化了文章格式，更實現了 24 小時不間斷的資訊更新。
+最後階段，n8n 將處理好的標題、內文、標籤與圖片連結，透過 **WordPress REST API** 建立草稿或發布。這個流程讓文章格式更一致，也讓內容更新可以維持穩定節奏。
 
 ---
 
 ### 總結 (Conclusion)
 
-這個專案展示了如何利用 **Low-Code 工具 (n8n)** 與 **Local LLM** 技術，快速構建具備商業價值的自動化系統。它不僅解決了資訊時效性的問題，更證明了在低成本硬體上運行複雜 AI 工作流的可行性。
+這個專案整理了 **Low-Code 工具 (n8n)** 與 **Local LLM** 在內容流程上的實作方式。它的重點不是取代編輯判斷，而是把重複性的整理、摘要與發布前處理自動化，讓人工可以集中在最後審閱與品質控制。
 
 
 <iframe src="https://lightnews.tw/" width="100%" height="500px" style="border:none;"></iframe>

@@ -17,11 +17,11 @@ tags:
 - Ultrasound
 
 thumbnailImagePosition: left
-thumbnailImage: /postImg/job_sentos/0.jpg
+thumbnailImage: /postImg/job_sentos/thumbnail.png
 katex: true
 ---
 
-Specializing in **Ultrasound Signal Processing (DSP)** and **Firmware Development**, successfully implementing technologies in consumer electronics like the ROG Phone. Led the development of a C# (WPF) automated calibration SDK, analyzing sliding gestures through algorithms to maximize the efficiency of complex production line tuning processes. Possesses **full English cross-border collaboration** capabilities, familiar with mass production technical support and crisis management during PVT/MP stages.
+Focused on **Ultrasound Signal Processing (DSP)** and **Firmware Development**, participating in consumer electronics integration such as the ROG Phone. Led the development of a C# (WPF) automated calibration SDK, using gesture analysis algorithms to simplify production-line tuning. Experienced in English cross-border collaboration and familiar with mass-production technical support during PVT/MP stages.
 
 <!--more-->
 
@@ -44,11 +44,11 @@ Specializing in **Ultrasound Signal Processing (DSP)** and **Firmware Developmen
 *   **WPF SDK Development**: Developed an Ultrasound Sensor Development Kit (SDK) using **C# (WPF)**. Transformed complex firmware parameter settings, which previously required manual config file entries, into an intuitive graphical interface.
 *   **Smart Calibration Mechanism**: Designed an automated parameter adjustment process.
     *   *Solution*: Guided users to perform specific gestures (e.g., swiping left/right) on the sensor, and the program automatically analyzed the waveform to find the most suitable filter frequency.
-    *   *Results*: Greatly simplified the tedious verification procedures required by differences in materials, hardware, and environments, significantly improving customer production line tuning efficiency and user experience.
+    *   *Results*: Simplified verification procedures caused by differences in materials, hardware, and environments, improving customer production-line tuning efficiency and user-experience consistency.
 
 #### 2. Algorithm & Firmware Engineering
 *   **Signal Processing**: Conducted ultrasound signal analysis using **MATLAB**. Implemented noise filtering (including linear and non-linear filters) and developed touch algorithms to optimize gesture recognition accuracy.
-*   **Firmware Implementation**: Wrote firmware using **C++**. Ported optimized performance parameters and new features (such as virtual button trigger mechanisms) into the firmware, successfully integrating them into products like smartphones (e.g., ROG Phone) and laptop touchpads.
+*   **Firmware Implementation**: Wrote firmware using **C++**. Ported validated performance parameters and new features, such as virtual button trigger mechanisms, into firmware to support integration in smartphones and laptop touchpads.
 
 #### 3. Global Collaboration & MP Support
 *   **Technical Communication in English**: Participated in **weekly English technical synchronization meetings**, collaborating closely with the US headquarters engineering team to ensure technical specification alignment.
@@ -66,8 +66,8 @@ Specializing in **Ultrasound Signal Processing (DSP)** and **Firmware Developmen
 
 **Image 1: Smart Calibration SDK Interface**
 
-![alt text](/postImg/job_sentos/1.jpg)
+![Ultrasound touch module test screen](/postImg/job_sentos/1.jpg)
 
 **Image 2: Signal Processing Flowchart**
 
-![alt text](/postImg/job_sentos/2.jpg)
+![Firmware and touch calibration test screen](/postImg/job_sentos/2.jpg)
