@@ -20,7 +20,7 @@ katex: true
 <script type="text/javascript"
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-This project explores a classic problem in mechanism design—"Path Generation." The goal is to design a four-bar linkage whose coupler curve precisely passes through 9 specified target points in space.
+This project explores path generation in mechanism design: designing a four-bar linkage whose coupler curve stays as close as possible to 9 specified target points.
 <!--more-->
 
 
@@ -28,7 +28,7 @@ This project explores a classic problem in mechanism design—"Path Generation."
 
 ## 📋 Abstract
 
-Unlike traditional graphical or trial-and-error methods, this project employs a **numerical optimization** strategy. Using **MATLAB**, I built a kinematic model based on the Vector Loop Equation and utilized the `fminsearch` algorithm for multi-variable iterative solving of link lengths and initial angles. The result successfully identified optimal mechanism parameters with minimal error while satisfying Grashof's theorem (full rotation condition).
+Unlike traditional graphical or trial-and-error methods, this project employs a **numerical optimization** strategy. Using **MATLAB**, I built a kinematic model based on the Vector Loop Equation and utilized the `fminsearch` algorithm for multi-variable iterative solving of link lengths and initial angles. The process produced a feasible set of low-error mechanism parameters while satisfying Grashof's theorem (full rotation condition).
 
 ---
 
@@ -59,7 +59,7 @@ $$r_2 e^{i\theta_2} + r_3 e^{i\theta_3} - r_4 e^{i\theta_4} - r_1 = 0$$
 
 Through this equation, for each input driving angle $\theta_2$, we can derive the follower angle $\theta_4$ and coupler angle $\theta_3$ using geometric relationships, thereby calculating the precise coordinates $(x, y)$ of trajectory point $P$.
 
-![Untitled](/postImg/4-Bar linkage/1.png)
+![Four-bar linkage vector loop diagram](/postImg/4-Bar Linkage/1.png)
 
 ### 2. Optimization Strategy
 
@@ -89,11 +89,11 @@ In implementation, I used the **Penalty Function** technique: before calculating
 
 ## 📊 Results & Conclusion
 
-Through hundreds of iterations, the program converged to an optimal set of link length parameters. When plotted, the resulting coupler curve successfully passed through the 9 target points (or with acceptable error margin), and the mechanism operated smoothly without dead points.
+Through hundreds of iterations, the program converged to a feasible set of link length parameters. When plotted, the resulting coupler curve stayed close to the 9 target points, and the mechanism operated without obvious dead points.
 
-This project gave me a deep appreciation for:
-1.  **Mathematics is the Language of Engineering:** Through Euler's formula and vector methods, complex mechanical motions can be precisely quantified.
-2.  **The Power of Numerical Methods:** When analytical solutions are difficult to obtain, properly setting objective functions and constraints allows algorithms to effectively solve engineering optimization problems.
+This project clarified two engineering takeaways:
+1.  **Mathematical modeling reduces trial-and-error:** Euler's formula and vector methods turn mechanical motion into computable parameters.
+2.  **Numerical methods are useful for nonlinear constraints:** When analytical solutions are difficult to obtain, clear objective functions and constraints can produce verifiable approximate solutions.
 
 ## Results
 

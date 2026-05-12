@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="520" viewBox="0 0 1100 520" role="img" aria-labelledby="title desc">
+  <title id="title">Hand tendon Vector Doppler workflow</title>
+  <desc id="desc">Diagram showing ultrasound acquisition, high-pass filtering, vector Doppler estimation, displacement integration, and visualization of tendon movement.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2563eb"/>
+    </marker>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 700 30px Arial, sans-serif; fill: #111827; }
+      .subtitle { font: 400 14px Arial, sans-serif; fill: #526070; }
+      .card { fill: #ffffff; stroke: #d9e2ec; stroke-width: 1.5; }
+      .a { fill: #eaf2ff; stroke: #93c5fd; }
+      .b { fill: #e8f8ef; stroke: #86efac; }
+      .c { fill: #fff3df; stroke: #fdba74; }
+      .d { fill: #f1ecff; stroke: #c4b5fd; }
+      .label { font: 700 16px Arial, sans-serif; fill: #111827; }
+      .small { font: 400 13px Arial, sans-serif; fill: #526070; }
+      .line { stroke: #2563eb; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect class="bg" width="1100" height="520"/>
+  <text class="title" x="550" y="48" text-anchor="middle">Hand Tendon Movement Evaluation Workflow</text>
+  <text class="subtitle" x="550" y="76" text-anchor="middle">Vector Doppler estimates tendon velocity from multi-angle ultrasound information.</text>
+
+  <rect class="card a" x="70" y="170" width="170" height="120" rx="18"/>
+  <text class="label" x="155" y="210" text-anchor="middle">Ultrasound</text>
+  <text class="small" x="155" y="238" text-anchor="middle">longitudinal and</text>
+  <text class="small" x="155" y="260" text-anchor="middle">transverse views</text>
+
+  <rect class="card b" x="290" y="170" width="170" height="120" rx="18"/>
+  <text class="label" x="375" y="210" text-anchor="middle">Filtering</text>
+  <text class="small" x="375" y="238" text-anchor="middle">reduce natural</text>
+  <text class="small" x="375" y="260" text-anchor="middle">hand tremor</text>
+
+  <rect class="card c" x="510" y="170" width="170" height="120" rx="18"/>
+  <text class="label" x="595" y="210" text-anchor="middle">Vector Doppler</text>
+  <text class="small" x="595" y="238" text-anchor="middle">solve v_z and v_x</text>
+  <text class="small" x="595" y="260" text-anchor="middle">from angle data</text>
+
+  <rect class="card d" x="730" y="170" width="170" height="120" rx="18"/>
+  <text class="label" x="815" y="210" text-anchor="middle">Displacement</text>
+  <text class="small" x="815" y="238" text-anchor="middle">integrate velocity</text>
+  <text class="small" x="815" y="260" text-anchor="middle">over time</text>
+
+  <rect class="card" x="930" y="170" width="120" height="120" rx="18"/>
+  <text class="label" x="990" y="210" text-anchor="middle">Visualize</text>
+  <text class="small" x="990" y="238" text-anchor="middle">movement</text>
+  <text class="small" x="990" y="260" text-anchor="middle">animation</text>
+
+  <path class="line" d="M240 230 L280 230"/>
+  <path class="line" d="M460 230 L500 230"/>
+  <path class="line" d="M680 230 L720 230"/>
+  <path class="line" d="M900 230 L920 230"/>
+
+  <text class="small" x="550" y="390" text-anchor="middle">Output: a quantitative view of tendon sliding distance for rehabilitation assessment research.</text>
+</svg>

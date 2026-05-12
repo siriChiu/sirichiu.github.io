@@ -20,7 +20,7 @@ katex: true
 <script type="text/javascript"
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-This project implements an advanced mathematical morphology processing pipeline using **MATLAB**. Through **Top-Hat operations** to filter out background stains, and introducing **Bowler-Hat Transform** for structure enhancement. Experimental results confirm that this algorithm can effectively restore ridge features of contaminated fingerprints while also validating the algorithm's versatility for image processing in different domains.
+This project implements a mathematical morphology processing pipeline using **MATLAB**. It uses **Top-Hat operations** to filter background stains and introduces the **Bowler-Hat Transform** for structure enhancement. The results show improved readability of contaminated fingerprint ridges and provide an additional validation case for line-structure image processing.
 
 <!--more-->
 
@@ -88,8 +88,8 @@ The figure below shows the algorithm's processing results:
 *Figure 1: Fingerprint enhancement before-after comparison. Left: Original image with severe stains and noise; Right: Result after Bowler-Hat Transform and binarization.*
 
 **Analysis Results:**
-* **Noise Reduction:** The large-area blur stains in the top-left corner and edges of the original image were successfully removed. This is because the geometric scale of these stains exceeds our defined structuring element $B$, so they were treated as background and filtered out in Top-Hat operations.
-* **Structure Enhancement:** The spiral structure (Whorl) at the fingerprint center became clearly visible, and ridge continuity and separation significantly improved, proving BHT's effectiveness in enhancing tubular structures.
+* **Noise Reduction:** The large-area blur stains in the top-left corner and edges of the original image were removed. This is because the geometric scale of these stains exceeds our defined structuring element $B$, so they were treated as background and filtered out in Top-Hat operations.
+* **Structure Enhancement:** The spiral structure (Whorl) at the fingerprint center became more visible, and ridge continuity and separation improved, showing that BHT is useful for line-structure enhancement.
 
 ### Conclusion
-This project successfully used morphological techniques to solve noise interference problems in fingerprint extraction. More importantly, it served as a validation set, proving that my developed **vascular enhancement algorithm** has strong robustness and cross-domain application potential, capable of effectively processing various biomedical images with "tubular structure" characteristics.
+This project uses morphological techniques to reduce noise interference in fingerprint extraction. It also serves as a validation set for observing how my **vascular enhancement algorithm** behaves on other images with line-like or tubular structures.

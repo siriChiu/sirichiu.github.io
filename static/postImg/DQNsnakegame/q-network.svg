@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="520" viewBox="0 0 1100 520" role="img" aria-labelledby="title desc">
+  <title id="title">Four-layer Q-network architecture</title>
+  <desc id="desc">Diagram showing an eleven input feature vector passing through two dense hidden layers and producing three Q values for straight, right, and left actions.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2563eb"/>
+    </marker>
+    <style>
+      .bg { fill: #f7fafc; }
+      .title { font: 700 30px Arial, sans-serif; fill: #111827; }
+      .label { font: 700 16px Arial, sans-serif; fill: #111827; }
+      .small { font: 400 13px Arial, sans-serif; fill: #526070; }
+      .node { fill: #ffffff; stroke: #2563eb; stroke-width: 2; }
+      .hidden { fill: #eff6ff; stroke: #60a5fa; stroke-width: 2; }
+      .output { fill: #ecfdf5; stroke: #34d399; stroke-width: 2; }
+      .link { stroke: #94a3b8; stroke-width: 1.2; opacity: .65; }
+      .arrow { stroke: #2563eb; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect class="bg" width="1100" height="520"/>
+  <text class="title" x="550" y="48" text-anchor="middle">Four-Layer Dense Q-Network</text>
+  <text class="small" x="550" y="76" text-anchor="middle">The model estimates the expected reward of each action from compact state features.</text>
+
+  <g transform="translate(90 120)">
+    <text class="label" x="70" y="-20" text-anchor="middle">Input</text>
+    <text class="small" x="70" y="286" text-anchor="middle">11 state features</text>
+    <circle class="node" cx="70" cy="20" r="14"/>
+    <circle class="node" cx="70" cy="56" r="14"/>
+    <circle class="node" cx="70" cy="92" r="14"/>
+    <circle class="node" cx="70" cy="128" r="14"/>
+    <circle class="node" cx="70" cy="164" r="14"/>
+    <circle class="node" cx="70" cy="200" r="14"/>
+    <circle class="node" cx="70" cy="236" r="14"/>
+  </g>
+  <g transform="translate(330 100)">
+    <text class="label" x="80" y="0" text-anchor="middle">Dense + ReLU</text>
+    <circle class="hidden" cx="80" cy="50" r="17"/>
+    <circle class="hidden" cx="80" cy="92" r="17"/>
+    <circle class="hidden" cx="80" cy="134" r="17"/>
+    <circle class="hidden" cx="80" cy="176" r="17"/>
+    <circle class="hidden" cx="80" cy="218" r="17"/>
+    <circle class="hidden" cx="80" cy="260" r="17"/>
+  </g>
+  <g transform="translate(590 100)">
+    <text class="label" x="80" y="0" text-anchor="middle">Dense + ReLU</text>
+    <circle class="hidden" cx="80" cy="50" r="17"/>
+    <circle class="hidden" cx="80" cy="92" r="17"/>
+    <circle class="hidden" cx="80" cy="134" r="17"/>
+    <circle class="hidden" cx="80" cy="176" r="17"/>
+    <circle class="hidden" cx="80" cy="218" r="17"/>
+    <circle class="hidden" cx="80" cy="260" r="17"/>
+  </g>
+  <g transform="translate(870 145)">
+    <text class="label" x="80" y="-45" text-anchor="middle">Output Q-values</text>
+    <circle class="output" cx="80" cy="30" r="21"/>
+    <circle class="output" cx="80" cy="102" r="21"/>
+    <circle class="output" cx="80" cy="174" r="21"/>
+    <text class="small" x="146" y="35">Straight</text>
+    <text class="small" x="146" y="107">Right</text>
+    <text class="small" x="146" y="179">Left</text>
+  </g>
+
+  <path class="arrow" d="M190 240 C250 240 260 240 320 240"/>
+  <path class="arrow" d="M455 240 C515 240 525 240 585 240"/>
+  <path class="arrow" d="M715 240 C785 240 800 240 862 240"/>
+  <text class="small" x="550" y="455" text-anchor="middle">Training minimizes the difference between predicted Q-values and Bellman target values.</text>
+</svg>

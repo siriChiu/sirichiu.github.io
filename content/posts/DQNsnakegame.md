@@ -20,14 +20,14 @@ katex: true
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-本專案將深度強化學習 (Deep Reinforcement Learning) 應用於經典的貪食蛇遊戲中。為了讓代理 (Agent) 能在動態環境中做出最佳決策，我使用 **TensorFlow** 框架設計了一個**客製化的四層全連接神經網路 (4-Layer Fully Connected Network)** 作為核心的 Q-Network。
+本專案將深度強化學習 (Deep Reinforcement Learning) 應用於經典的貪食蛇遊戲中。為了讓代理 (Agent) 能在動態環境中根據狀態選擇合理動作，我使用 **TensorFlow** 設計了一個四層全連接神經網路 (4-Layer Fully Connected Network) 作為核心 Q-Network。
 
 <!--more-->
 
 
 ---
 
-透過設計 11 維的環境特徵向量作為輸入，並配合 Bellman Equation 進行 Q 值迭代更新，該模型成功學會了避障、路徑規劃以及長期生存策略。此專案展示了從環境建置、模型架構設計到獎勵函數優化的完整 AI 開發流程。
+透過 11 維環境特徵向量與 Bellman Equation 的 Q 值更新，模型逐步學會避障、靠近食物與延長存活時間。此專案整理了從環境建置、模型架構設計到獎勵函數調整的強化學習實作流程。
 
 ---
 
@@ -46,7 +46,7 @@ katex: true
 
 為了降低輸入維度並加速收斂，我捨棄了原始圖像輸入 (CNN)，改採特徵工程方式，將當前局勢濃縮為一個 **11 維的布林向量 (Boolean Vector)** $S_t$：
 
-> *[圖片佔位符：建議放入一張示意圖，顯示蛇頭周圍的 11 個感測數值定義]* 
+![DQN 貪食蛇 11 維狀態向量設計](/postImg/DQNsnakegame/state-vector.svg)
 
 * **危險感知 (3):** [前方有危險, 右方有危險, 左方有危險]
 * **移動方向 (4):** [左, 右, 上, 下] (One-hot encoding)
@@ -64,7 +64,7 @@ $$f(x) = W_4 \cdot \sigma(W_3 \cdot \sigma(W_2 \cdot \sigma(W_1 \cdot x + b_1) +
 * **Hidden Layer 1 & 2 (Dense):** 透過兩層隱藏層（配合 ReLU 激活函數 $\sigma$）進行特徵交叉與提取，增加模型的表達能力，使其能理解複雜的死路結構。
 * **Output Layer:** 輸出 3 個 Q 值，分別對應 [直走, 右轉, 左轉] 的預期獎勵。
 
-> *[圖片佔位符：建議放入神經網路架構圖，顯示 Input(11) -> Dense -> Dense -> Output(3) 的層級結構]* 
+![DQN 四層 Q-Network 架構](/postImg/DQNsnakegame/q-network.svg)
 
 ### 3. DQN 演算法與優化 (DQN Algorithm)
 
@@ -83,7 +83,7 @@ $$f(x) = W_4 \cdot \sigma(W_3 \cdot \sigma(W_2 \cdot \sigma(W_1 \cdot x + b_1) +
 * **引導策略:** 若動作使蛇頭與食物的距離**縮短**，給予微小獎勵；若**變遠**，給予微小懲罰。這解決了初期蛇在原地打轉的問題。
 * **時間懲罰:** 每一步固定扣除 $-0.1$，迫使模型尋找最短路徑。
 
-![Untitled](/postImg/DQNsnakegame/1.png)
+![貪食蛇代理訓練結果畫面](/postImg/DQNsnakegame/1.png)
 
 ---
 
@@ -94,11 +94,11 @@ $$f(x) = W_4 \cdot \sigma(W_3 \cdot \sigma(W_2 \cdot \sigma(W_1 \cdot x + b_1) +
 
 1.  **隨機階段:** 模型尚未收斂，蛇經常撞牆。
 2.  **避障階段:** 隱藏層學會了識別「危險特徵」，蛇能長時間存活但在場地繞圈。
-3.  **目標導向:** 四層架構成功融合了「食物方位」與「路徑規劃」，蛇展現出明確的捕食行為。
+3.  **目標導向:** 四層架構能同時利用「食物方位」與「危險感知」特徵，蛇的行為逐漸呈現目標導向。
 
 ### 結論 (Conclusion)
 
-透過 TensorFlow 實作這個自定義的四層 DQN 模型，我驗證了**深度神經網路 (DNN)** 在處理決策問題上的強大能力。這個專案不僅讓我熟悉了 TensorFlow 的模型建構 API，更讓我深刻體會到網路深度 (Depth) 與獎勵函數設計對強化學習效能的決定性影響。
+透過 TensorFlow 實作四層 DQN 模型，我理解了狀態設計、網路深度與獎勵函數如何共同影響強化學習的收斂品質。這個專案也讓我熟悉 TensorFlow 模型建構 API 與訓練迴圈的實作細節。
 
 
 {{< video src="/videos/DQNsnakegame.mp4" type="video/mp4" preload="auto" autoplay="true" loop="true" width="720" height="480">}}

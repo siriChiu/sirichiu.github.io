@@ -20,7 +20,7 @@ katex: true
 <script type="text/javascript"
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-本專案利用 **MATLAB** 實作了進階的數學形態學處理流程。透過 **Top-Hat 運算**濾除背景污漬，並引入 **Bowler-Hat 變換 (Bowler-Hat Transform)** 進行結構增強。實驗結果證實，此演算法能有效還原受汙損指紋的脊線特徵，同時也驗證了該演算法在不同領域影像處理上的通用性。
+本專案利用 **MATLAB** 實作數學形態學處理流程。透過 **Top-Hat 運算**濾除背景污漬，並引入 **Bowler-Hat 變換 (Bowler-Hat Transform)** 進行結構增強。實驗結果顯示，此流程能改善受汙損指紋的脊線可讀性，也可作為線狀結構影像處理的延伸驗證。
 
 <!--more-->
 
@@ -88,8 +88,8 @@ $$BHT(f) = [f - (f \circ B)] - [(f \bullet B) - f]$$
 *Figure 1: 指紋強化前後對比。左圖：帶有嚴重污漬與雜訊的原始影像；右圖：經過 Bowler-Hat 變換與二值化後的結果。*
 
 **分析結果：**
-* **去噪效果 (Noise Reduction):** 原始影像左上角及邊緣的大面積模糊污漬被成功移除。這是因為該污漬的幾何尺度大於我們設定的結構元素 $B$，因此在 Top-Hat 運算中被視為背景而被濾除。
-* **特徵強化 (Structure Enhancement):** 指紋中心的螺旋結構（Whorl）變得清晰可見，脊線的連續性與分離度得到顯著改善，證明了 BHT 在增強管狀結構上的有效性。
+* **去噪效果 (Noise Reduction):** 原始影像左上角及邊緣的大面積模糊污漬被移除。這是因為該污漬的幾何尺度大於我們設定的結構元素 $B$，因此在 Top-Hat 運算中被視為背景而被濾除。
+* **特徵強化 (Structure Enhancement):** 指紋中心的螺旋結構（Whorl）變得較清晰，脊線的連續性與分離度也有所改善，顯示 BHT 對線狀結構增強具有參考價值。
 
 ### 結論 (Conclusion)
-本專案成功利用形態學技術解決了指紋提取中的雜訊干擾問題。更重要的是，它作為一個驗證集 (Validation Set)，證明了我所開發的**血管強化演算法**具備強大的強健性 (Robustness) 與跨領域應用潛力，能有效處理各類具備「管狀結構」特徵的生物醫學影像。
+本專案利用形態學技術改善指紋提取中的雜訊干擾問題。它也作為一個驗證集 (Validation Set)，觀察我所開發的**血管強化演算法**在不同線狀 / 管狀結構影像上的適用性。

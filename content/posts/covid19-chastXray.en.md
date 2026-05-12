@@ -19,7 +19,7 @@ katex: true
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-This project aims to develop a deep learning-based automated diagnostic assistance system to help medical professionals quickly interpret chest X-ray images (CXR).
+This project builds a deep learning-based chest X-ray (CXR) classification model to explore how AI can assist preliminary pneumonia screening.
 
 <!--more-->
 
@@ -27,9 +27,9 @@ This project aims to develop a deep learning-based automated diagnostic assistan
 
 ## 📋 Abstract
 
-This project aims to develop a deep learning-based automated diagnostic assistance system to help medical professionals quickly interpret chest X-ray images (CXR).
+This project builds a deep learning-based chest X-ray (CXR) classification model to explore how AI can assist preliminary pneumonia screening.
 
-Addressing the challenge that COVID-19 and pneumonia features are difficult to distinguish visually on X-rays, this project uses **MATLAB** as the development environment and implements **ResNet50** for binary classification tasks (Normal vs. Pneumonia/COVID-19). Through the Residual Learning mechanism that solves the degradation problem of deep networks, the final model demonstrated excellent Recall on the test set, effectively screening potential pneumonia patients and reducing missed diagnosis risk.
+Addressing the challenge that COVID-19 and pneumonia features are difficult to distinguish visually on X-rays, this project uses **MATLAB** as the development environment and implements **ResNet50** for binary classification tasks (Normal vs. Pneumonia/COVID-19). The model showed relatively high recall on the test set, making it a useful research example for preliminary screening workflows.
 
 ---
 
@@ -110,7 +110,7 @@ Total test set samples: $N = 591$ images
 
 * **Recall / Sensitivity:**
     $$Recall = \frac{TP}{TP + FN} = \frac{308}{308 + 49} \approx 86.3\%$$
-    **This is the most important metric in medical diagnosis.** Results show that among all actual pneumonia patients, the model successfully identified **86.3%** of cases. This means the model serves excellently as a "first-line screening defense," effectively reducing missed diagnoses.
+    Recall is an important metric in medical-image screening. Among all actual pneumonia samples, the model identified **86.3%** of cases, suggesting some value for reducing missed positives in a screening-oriented workflow.
 
 * **Precision:**
     $$Precision = \frac{TP}{TP + FP} = \frac{308}{308 + 84} \approx 78.6\%$$
@@ -118,6 +118,6 @@ Total test set samples: $N = 591$ images
 
 ### Conclusion
 
-This project successfully implemented automated chest X-ray classification using the ResNet50 architecture. Experimental data proves that through the residual learning mechanism, the model can effectively extract pulmonary lesion features and achieve **86.3% high sensitivity**. This system has the potential to become a radiologist's assistive tool, capable of processing large volumes of images in short time and flagging high-risk cases for priority physician review.
+This project implemented automated chest X-ray classification using the ResNet50 architecture. On the test set, the model reached **86.3% recall**, which makes it a research prototype for flagging potentially high-risk images. Practical medical use would still require larger datasets, clinical validation, and integration with professional radiology workflows.
 
 

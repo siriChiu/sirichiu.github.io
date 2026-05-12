@@ -1,5 +1,5 @@
 ---
-title:  射流向量多普勒成像技術在靜脈瓣膜血流分析中的應用
+title: 射流向量多普勒成像技術在靜脈瓣膜血流分析中的應用
 slug: Projectile Vector Doppler Imaging
 date: 2022-04-23
 categories:
@@ -19,20 +19,18 @@ katex: true
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-動態向量都卜勒(Projectile Vector Doppler Imaging) 比傳統都卜勒影像提供更多樣的血液資訊，如流速、流動，擾流情況等，給予醫師更多診斷資訊。
+射流向量都卜勒成像 (Projectile Vector Doppler Imaging) 可在傳統都卜勒影像之外，提供血流方向、速度與局部擾流變化等資訊，作為血管流場分析的參考。
 
 <!--more-->
 
 ## 摘要
 
-都卜勒成像(Doppler Imaging)是醫療超音波中儀器常見的模式，透過超音波都卜勒的公式能夠估算出血液的速度，而其中向量都卜勒成像(Vector Doppler Imaging)，能夠估算出其中更詳細資訊，如相位與速度資訊。
+都卜勒成像 (Doppler Imaging) 是醫療超音波中常見的模式，可透過都卜勒頻移估算血液速度。向量都卜勒成像 (Vector Doppler Imaging) 進一步利用不同發射與接收角度，推估血流在不同方向上的速度分量。
 
 ## 方法
 
-Projectile Vector Doppler Imaging
-
 超音波向量都卜勒公式是由不同的超音波發射角度與一般的超音波都卜勒公式所推導而來的，如下圖。
-![Untitled](/postImg/ProjectileVectorDopplerImaging/1.png)
+![射流向量都卜勒角度示意圖](/postImg/ProjectileVectorDopplerImaging/1.png)
 
 其中θ, φ為超音波發射角與接收角， α為超音波探頭與目標的角度。
 
@@ -62,7 +60,7 @@ $$v = \begin{bmatrix}v_z \\\ v_x\end{bmatrix} = (A^TA)^{-1}A^Tu$$
 ## 結果
 
 **人類膕靜脈(popliteal vein)瓣膜的Projectile Vector Doppler 影像**
-可以清楚看見紅血球在經過靜脈瓣膜的時候因為壓力改變而有噴發的現象，這技術在臨床上可以看見血管健康程度，假設該患部有血栓或靜脈區張，透過此技術可以輕易的看出血流的變化趨勢。
+影像中可觀察到血流經過靜脈瓣膜時的局部流向與速度變化。這類資訊可用於血管健康狀態研究，例如觀察血栓或靜脈曲張相關的血流變化趨勢。
 
 {{< video src="/videos/ProjectileVectorDoppler.mp4" type="video/mp4" preload="auto" autoplay="true" loop="true" width="600" height="500">}}
 

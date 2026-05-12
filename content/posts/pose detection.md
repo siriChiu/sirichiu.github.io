@@ -27,7 +27,7 @@ katex: true
 
 ---
 
-在技術實作上，針對 OpenPose 模型在一般消費級筆電上運行緩慢（低 FPS）的痛點，本專案提出了一種**「雲端協同運算架構 (Cloud-Edge Collaboration)」**。前端設備僅負責影像採集與渲染，繁重的 AI 推論則透過 **WebSocket** 即時傳輸至 **Google Cloud Platform (GCP)** 上的 **MobileNet + OpenPose** 模型進行處理。此架構成功突破了地端硬體的算力限制，實現了跨平台的低延遲、高幀率即時互動體驗。
+在技術實作上，針對 OpenPose 模型在一般消費級筆電上運行緩慢（低 FPS）的問題，本專案提出**雲端協同運算架構 (Cloud-Edge Collaboration)**。前端設備負責影像採集與渲染，AI 推論則透過 **WebSocket** 傳輸至 **Google Cloud Platform (GCP)** 上的 **MobileNet + OpenPose** 模型進行處理，以降低地端硬體負擔並改善互動流暢度。
 
 ---
 
@@ -49,7 +49,7 @@ katex: true
 
 ### 1. 核心模型：MobileNet + OpenPose
 
-我們採用 **MobileNet** 作為 OpenPose 的特徵提取器 (Backbone)。MobileNet 的核心優勢在於使用了 **深度可分離卷積 (Depthwise Separable Convolution)**，大幅減少了參數與運算量。
+我們採用 **MobileNet** 作為 OpenPose 的特徵提取器 (Backbone)。MobileNet 使用 **深度可分離卷積 (Depthwise Separable Convolution)**，能減少參數與運算量。
 
 假設輸入特徵圖大小為 $D_F \times D_F \times M$，卷積核大小為 $D_K \times D_K$，輸出通道數為 $N$。
 
@@ -90,18 +90,18 @@ katex: true
 
 ## 📊 成果展示 (Results)
 
-透過雲端運算的導入，我們成功將遊戲幀率 (FPS) 提升至流暢的可玩水準，並實現了跨平台支援。
+透過雲端運算的導入，遊戲幀率 (FPS) 提升到較流暢的可玩水準，並能支援跨平台使用。
 
 ### 1. 翻牌遊戲實測
 
-![Untitled](/postImg/pose-detection/1.jpg)
-*Figure 1: 使用者透過手部動作隔空控制虛擬卡片。系統精確捕捉手腕位置，實現無接觸式互動。*
+![姿態辨識卡牌控制示範](/postImg/pose-detection/1.jpg)
+*Figure 1: 使用者透過手部動作隔空控制虛擬卡片。系統依據手腕位置觸發無接觸式互動。*
 
 ### 2. 瑜珈遊戲實測
 
-![Untitled](/postImg/pose-detection/2.jpg)
+![姿態辨識互動結果](/postImg/pose-detection/2.jpg)
 *Figure 2: 系統即時比對使用者姿勢（黃色骨架）與標準動作（右上角圖示），並給予即時分數回饋。*
 
 ### 結論 (Conclusion)
 
-本專案證明了在硬體資源受限的場景下，透過合理的**架構設計 (Architecture Design)**——即將繁重的 AI 運算轉移至雲端，並利用 WebSocket 優化傳輸——能夠有效解決效能瓶頸。這不僅降低了使用者的硬體門檻（不需購買昂貴電腦），也為銀髮族提供了一種更易取得的居家運動方案。
+本專案說明在硬體資源受限的場景下，可以透過**架構設計 (Architecture Design)** 將較重的 AI 運算轉移至雲端，並利用 WebSocket 改善傳輸延遲。這降低了使用者的硬體門檻，也為銀髮族居家運動提供一種較容易取得的互動方式。

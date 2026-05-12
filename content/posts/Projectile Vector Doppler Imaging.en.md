@@ -19,20 +19,18 @@ katex: true
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-Projectile Vector Doppler Imaging provides more diverse blood information than traditional Doppler imaging, such as flow velocity, flow direction, and turbulence conditions, giving physicians more diagnostic information.
+Projectile Vector Doppler Imaging can provide additional information beyond traditional Doppler imaging, including flow direction, velocity, and local turbulence changes for vascular flow analysis.
 
 <!--more-->
 
 ## Abstract
 
-Doppler Imaging is a common mode in medical ultrasound equipment. Blood velocity can be estimated through the ultrasound Doppler formula. Among these, Vector Doppler Imaging can estimate more detailed information such as phase and velocity data.
+Doppler Imaging is a common mode in medical ultrasound. It estimates blood velocity through Doppler frequency shift. Vector Doppler Imaging further uses different emission and receiving angles to estimate velocity components in multiple directions.
 
 ## Method
 
-Projectile Vector Doppler Imaging
-
 The ultrasound vector Doppler formula is derived from different ultrasound emission angles and the general ultrasound Doppler formula, as shown below.
-![Untitled](/postImg/ProjectileVectorDopplerImaging/1.png)
+![Projectile Vector Doppler angle diagram](/postImg/ProjectileVectorDopplerImaging/1.png)
 
 Where θ, φ are ultrasound emission and reception angles, α is the angle between ultrasound probe and target.
 
@@ -62,7 +60,7 @@ $$v = \begin{bmatrix}v_z \\\ v_x\end{bmatrix} = (A^TA)^{-1}A^Tu$$
 ## Results
 
 **Projectile Vector Doppler Image of Human Popliteal Vein Valve**
-You can clearly see the ejection phenomenon of red blood cells as they pass through the venous valve due to pressure changes. Clinically, this technique can visualize vascular health. If the patient has a blood clot or varicose veins, this technique can easily reveal blood flow change trends.
+The image shows local flow direction and velocity changes as blood passes through the venous valve. This type of information can support vascular health research, such as observing flow trends related to thrombosis or varicose veins.
 
 {{< video src="/videos/ProjectileVectorDoppler.mp4" type="video/mp4" preload="auto" autoplay="true" loop="true" width="600" height="500">}}
 

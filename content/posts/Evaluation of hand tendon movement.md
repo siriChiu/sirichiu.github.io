@@ -15,14 +15,15 @@ thumbnailImagePosition: left
 thumbnailImage: /postImg/EvaluationOfHandTendonMovement/0.png
 katex: true
 ---
-向量都卜勒成像(Vector Doppler Imaging)能夠觀測更多的目標運動變化，除了應用在血液流速的估算外，也可以應用在肌腱上評估肌腱的滑動性，進而提供肌腱的位移資訊給予醫師更多評估的信息。
+向量都卜勒成像 (Vector Doppler Imaging) 可用來估算目標在不同方向上的運動變化。除了血液流速分析外，本專案也嘗試將此方法應用於手指肌腱滑動評估，提供較量化的位移資訊作為復健評估參考。
 <!--more-->
 
 
 ## 摘要
-Evaluation of hand tendon movement
 
-提出一種臨床評估上手部復健程度的新方法，這裡的目標物也是人類的手指肌腱，透過高通濾波器將人體自然顫動去除，並透過視覺化的演算法顯現出手指肌腱再移動過程中的變化，這個研究希望透過超音波量化病人的肌腱位移距離作為評估患者受傷程度的工具。
+本研究以人類手指肌腱為觀測目標，透過高通濾波降低自然顫動造成的干擾，再以視覺化演算法呈現肌腱移動過程中的速度與位移變化。目標是探索超音波量化肌腱位移距離的可行性，作為後續復健評估工具的基礎。
+
+![手指肌腱 Vector Doppler 位移評估流程](/postImg/EvaluationOfHandTendonMovement/vector-doppler-workflow.svg)
 
 ## 方法
 基於不同超音波發射角度相關的超音波都卜勒公式如下:

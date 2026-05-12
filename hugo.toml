@@ -214,7 +214,7 @@ disqusShortname = "hugo-tranquilpeak-theme"
 [[menu.links]]
   weight = 2
   identifier = "linkedin"
-  name = "Linkedin"
+  name = "LinkedIn"
   pre = "<i class=\"sidebar-button-icon fab fa-lg fa-linkedin\" aria-hidden=\"true\"></i>"
   url = "https://linkedin.com/in/sirichiu"
 
@@ -434,7 +434,7 @@ disqusShortname = "hugo-tranquilpeak-theme"
 #    url = "https://wa.me/?text=%s"
 
   [[params.sharingOptions]]
-    name = "Linkedin"
+    name = "LinkedIn"
     icon = "fab fa-linkedin"
     url = "https://www.linkedin.com/sharing/share-offsite/?url=%s"
 

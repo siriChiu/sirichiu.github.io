@@ -27,7 +27,7 @@ This project aims to address the lack of exercise motivation and digital divide 
 
 ---
 
-In technical implementation, addressing the pain point of OpenPose models running slowly (low FPS) on consumer-grade laptops, this project proposes a **"Cloud-Edge Collaboration Architecture."** The front-end device only handles image capture and rendering, while heavy AI inference is transmitted in real-time via **WebSocket** to **MobileNet + OpenPose** models processed on **Google Cloud Platform (GCP)**. This architecture successfully broke through local hardware computing limitations, achieving cross-platform low-latency, high-frame-rate real-time interactive experience.
+In implementation, this project addresses the low FPS of OpenPose on consumer-grade laptops with a **Cloud-Edge Collaboration Architecture**. The front-end device handles image capture and rendering, while AI inference is sent via **WebSocket** to **MobileNet + OpenPose** running on **Google Cloud Platform (GCP)**. This reduces the local hardware burden and improves interaction smoothness.
 
 ---
 
@@ -49,7 +49,7 @@ To balance accuracy and fluidity, we transformed the architecture from "local co
 
 ### 1. Core Model: MobileNet + OpenPose
 
-We adopted **MobileNet** as OpenPose's feature extractor (Backbone). MobileNet's core advantage is using **Depthwise Separable Convolution**, greatly reducing parameters and computation.
+We adopted **MobileNet** as OpenPose's feature extractor (Backbone). MobileNet uses **Depthwise Separable Convolution** to reduce parameters and computation.
 
 Assuming input feature map size is $D_F \times D_F \times M$, kernel size is $D_K \times D_K$, output channel count is $N$.
 
@@ -90,18 +90,18 @@ By mapping AI-recognized skeleton coordinates to game logic:
 
 ## 📊 Results
 
-Through cloud computing integration, we successfully elevated game frame rate (FPS) to smooth playable levels and achieved cross-platform support.
+Through cloud computing integration, the game frame rate (FPS) improved to a smoother playable level, with cross-platform support.
 
 ### 1. Card Flip Game Demo
 
-![Untitled](/postImg/pose-detection/1.jpg)
-*Figure 1: User controls virtual cards remotely using hand movements. System precisely captures wrist position, enabling contactless interaction.*
+![Pose detection card-control demo](/postImg/pose-detection/1.jpg)
+*Figure 1: User controls virtual cards remotely using hand movements. The system uses wrist position to trigger contactless interaction.*
 
 ### 2. Yoga Game Demo
 
-![Untitled](/postImg/pose-detection/2.jpg)
+![Pose detection interaction result](/postImg/pose-detection/2.jpg)
 *Figure 2: System compares user pose (yellow skeleton) with standard movement (upper right icon) in real-time, providing instant score feedback.*
 
 ### Conclusion
 
-This project proves that in scenarios with limited hardware resources, through proper **Architecture Design**—transferring heavy AI computation to the cloud and optimizing transmission with WebSocket—performance bottlenecks can be effectively resolved. This not only lowers user hardware barriers (no need to purchase expensive computers) but also provides seniors with a more accessible home exercise solution.
+This project shows that, in hardware-limited scenarios, **Architecture Design** can move heavier AI computation to the cloud and use WebSocket to reduce transmission overhead. This lowers the user hardware barrier and provides a more accessible home-exercise interaction pattern for seniors.

@@ -20,14 +20,14 @@ katex: true
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-This project applies Deep Reinforcement Learning to the classic Snake game. To enable the Agent to make optimal decisions in a dynamic environment, I designed a **custom four-layer fully connected network** using the **TensorFlow** framework as the core Q-Network.
+This project applies Deep Reinforcement Learning to the classic Snake game. To help the agent choose reasonable actions from changing game states, I designed a four-layer fully connected network in **TensorFlow** as the core Q-Network.
 
 <!--more-->
 
 
 ---
 
-By designing an 11-dimensional environment feature vector as input and combining it with Bellman Equation for Q-value iterative updates, the model successfully learned obstacle avoidance, path planning, and long-term survival strategies. This project demonstrates the complete AI development process from environment setup, model architecture design, to reward function optimization.
+By using an 11-dimensional environment feature vector and Bellman Equation updates, the model gradually learned obstacle avoidance, food-seeking behavior, and longer survival. This project documents a reinforcement learning implementation from environment setup and model design to reward-function tuning.
 
 ---
 
@@ -46,7 +46,7 @@ In reinforcement learning, designing a network architecture that is "deep enough
 
 To reduce input dimensions and accelerate convergence, I abandoned raw image input (CNN) and instead adopted feature engineering, condensing the current situation into an **11-dimensional Boolean Vector** $S_t$:
 
-> *[Image placeholder: Recommend inserting a diagram showing the 11 sensor value definitions around the snake head]* 
+![DQN Snake 11-dimensional state vector design](/postImg/DQNsnakegame/state-vector.svg)
 
 * **Danger Perception (3):** [Danger ahead, Danger to the right, Danger to the left]
 * **Movement Direction (4):** [Left, Right, Up, Down] (One-hot encoding)
@@ -64,7 +64,7 @@ $$f(x) = W_4 \cdot \sigma(W_3 \cdot \sigma(W_2 \cdot \sigma(W_1 \cdot x + b_1) +
 * **Hidden Layer 1 & 2 (Dense):** Through two hidden layers (with ReLU activation function $\sigma$) for feature crossing and extraction, increasing the model's expressive power to understand complex dead-end structures.
 * **Output Layer:** Outputs 3 Q-values corresponding to expected rewards for [Go straight, Turn right, Turn left].
 
-> *[Image placeholder: Recommend inserting neural network architecture diagram showing Input(11) -> Dense -> Dense -> Output(3) layer structure]* 
+![DQN four-layer Q-Network architecture](/postImg/DQNsnakegame/q-network.svg)
 
 ### 3. DQN Algorithm & Optimization
 
@@ -83,7 +83,7 @@ To guide the snake to learn more efficiently, I designed a refined reward mechan
 * **Guidance Strategy:** If an action **shortens** the distance between snake head and food, give a small reward; if it **increases** the distance, give a small penalty. This solved the problem of the snake spinning in place during early training.
 * **Time Penalty:** Deduct $-0.1$ per step, forcing the model to find the shortest path.
 
-![Untitled](/postImg/DQNsnakegame/1.png)
+![Snake agent training result screen](/postImg/DQNsnakegame/1.png)
 
 ---
 
@@ -94,11 +94,11 @@ After multiple training iterations (Epochs), the Agent's behavioral evolution wa
 
 1.  **Random Phase:** Model hasn't converged yet, snake frequently hits walls.
 2.  **Obstacle Avoidance Phase:** Hidden layers learned to recognize "danger features," snake can survive for long periods but circles the field.
-3.  **Goal-Oriented:** The four-layer architecture successfully integrated "food direction" with "path planning," snake exhibits clear hunting behavior.
+3.  **Goal-Oriented:** The four-layer architecture uses both food-direction and danger-perception features, and the snake gradually shows goal-directed behavior.
 
 ### Conclusion
 
-By implementing this custom four-layer DQN model with TensorFlow, I validated the powerful capability of **Deep Neural Networks (DNN)** in handling decision problems. This project not only familiarized me with TensorFlow's model construction API but also gave me a deep appreciation for the decisive impact of network depth and reward function design on reinforcement learning performance.
+By implementing this four-layer DQN model with TensorFlow, I learned how state design, network depth, and reward shaping jointly affect reinforcement learning convergence. The project also helped me practice TensorFlow model construction APIs and training-loop implementation.
 
 
 {{< video src="/videos/DQNsnakegame.mp4" type="video/mp4" preload="auto" autoplay="true" loop="true" width="720" height="480">}}
