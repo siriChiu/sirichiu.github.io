@@ -3,6 +3,9 @@
   <div class="header-title">
     <a class="header-title-link" href="{{ "/" | relLangURL }}" aria-label="{{ if i18n "global.go_to_homepage" }}{{ i18n "global.go_to_homepage" }}{{ end }}">{{ .Site.Title }}</a>
   </div>
+  <a class="header-presentation-cta" href="{{ "presentation/" | relLangURL }}">
+    {{ if eq .Site.Language.Lang "en" }}Portfolio Deck{{ else }}作品簡報{{ end }}
+  </a>
   {{ with .Site.Params.header.rightLink }}
     {{ if and (in .url ":") (not (in .url (printf "%s" $.Site.BaseURL))) }}
       <a class="{{ if .icon }}header-right-icon {{ else }}header-right-picture {{ end }}{{ with .class }}{{ . }}{{ end }}"

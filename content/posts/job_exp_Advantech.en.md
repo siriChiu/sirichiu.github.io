@@ -14,89 +14,81 @@ tags:
 - Server Thermal Algorithm
 - FastAPI
 - Mathematical Regression
-- Deep Learning & Machine Learning
 - Automation
-- UI/UX
 - Grafana
-- Streamlit
 - Prometheus
-- Ansible
 - SNMP
-- Network Automation
-
+- AI Agent
+- SWQA
+- Hermes
+- BDD
 thumbnailImagePosition: left
-thumbnailImage: /postImg/job_advantech/thumbnail.png
+thumbnailImage: /postImg/job_advantech/thumbnail-v2.png
 katex: true
 ---
 
-Specializing in **Full-Stack Automation**, **Server Thermal Algorithms** (patent pending), and **AI Implementation**. Developed server cooling algorithms, predictive burn-in modules, and an OpenAI code review bot (saving 30% of review time). Expert in Golang/Python full-stack development and DevOps workflow integration.
+At Advantech, my software engineering work spans server thermal control, repeatable stress testing, rack observability, and quality tooling with explicit evidence and write gates. Across these projects, I turn fragmented hardware signals and manual procedures into workflows that can be traced and inspected.
 
 <!--more-->
 
----
-# Software Engineer
-**Advantech** | 2022/11 – Present
+## Role and Scope
 
-### 🚀 Core Skills & Expertise
-*   ✅ **Server Thermal Algorithm**: Specialized in temperature control strategies with patent application experience.
-*   ✅ **AI Implementation**: Integrated OpenAI API into DevOps workflows and utilized mathematical regression models for stress prediction.
-*   ✅ **Full-Stack Automation**: Proficient in Python/Golang backends and modern Electron/React frontend architectures.
-*   ✅ **Infrastructure as Code (IaC) & DevOps**: Experienced with Docker, Drone CI, Gitea Webhook, and BMC/IPMI protocols.
+**Advantech | Software Engineer | 2022/11 – Present**
 
----
+My contributions include Golang/Python automation, BMC/IPMI and SNMP integration, Prometheus/Grafana data pipelines, and AI-assisted quality and development workflows. This work also gave me patent-application experience related to server thermal control; this public article does not disclose filing scope or legal status. The map below presents complementary portfolio themes; it does not imply that every system is integrated into one product.
 
-### 💼 Key Projects & Contributions
+![Advantech engineering portfolio map covering server systems, automation, and quality engineering](/postImg/job_advantech/engineering-portfolio-map.svg)
 
-#### Industrial/AI Server Fan Control Tool Development
+## Server-System Case Studies
 
-1.  **Fan curve algorithm optimization, data collection, and deployment** [Project Details](/en/new-pid-for-server/)
-    *   `#Golang`, `#BashScript`, `#Algorithm`, `#Fancurve`, `#PIDalgorithm`, `#ipmitool`, `#BMC`
-    *   **Innovative R&D**: Developed a methodology to analyze server endurance limits through pre-testing, automatically generating optimized temperature control algorithms.
-    *   **Quantitative Results**: Testing verified that the new algorithm **improved performance by approximately 20%~40%** compared to traditional open-loop control strategies, effectively optimizing cooling efficiency and energy saving (Patent Pending).
+### 1. PID Parameters from Steady-State Thermal Profiles
 
-2.  **Automated server stress testing tool development** [Project Details](/en/smart-stress-testing/)
-    *   `#Golang`, `#BashScript`, `#Algorithm`
-    *   **Smart Burn-in Prediction**: Established a **Mathematical Regression Model** for burn-in testing. Used stress scripts (CPU, GPU, RAM, FIO, ETH) as input variables to estimate and combine conditions close to target loads, such as 50% or 100% loading.
-    *   **Solving Pain Points**: Improved load-control consistency in traditional testing and provided more stable conditions for airflow evaluation.
+A Golang host controller coordinates the SUT/BMC, workload, fan duty, and environmental chamber. It records equilibrium points when `dT/dt ≈ 0`, builds a steady-state thermal profile, and derives control parameters from profile slope and system gain. A non-zero integral reset path is used after load dumps to reduce the risk of RPM undershoot and oscillation.
 
-3.  **Rack Monitoring System Development** [Project Details](/en/rack-monitor/)
-    *   `#Golang`, `#IPMI`, `#SNMP`, `#Prometheus`, `#Grafana`
-    *   **Comprehensive Device Monitoring**: Developed a Golang Agent using IPMI and SNMP protocols to integrate various Switch (Netgear, Cisco) and PDU (Raritan) brands, collecting multi-dimensional data such as temperature, traffic, and vibration.
-    *   **Visualization Dashboard**: Built a Prometheus + Grafana monitoring platform to visualize data center equipment status in real-time, providing an intuitive war-room view for the operations team.
+For the stated internal workflow, this moved a manual tuning process that could take weeks into an automated procedure taking hours. Public material does not disclose tolerances, coefficients, or cross-platform statistics, so I do not generalize this into a universal performance or energy-saving percentage.
 
-4.  **Remote/Local server testing tool development** [Project Details](/en/redmine-tracker/)
-    *   `#Golang`, `#Python`, `#Linux`, `#BashScript`
-    *   **Hybrid Architecture Design**: Combined Golang's high concurrency with Python's rich ecosystem to build high-efficiency remote/local testing vehicles.
-    *   **Cross-Platform Support**: Ensured tool compatibility and stability across different Linux distributions and hardware architectures.
+→ [Read the server cooling case study](/en/new-pid-for-server/)
 
-#### GenAI and Corporate Productivity Enhancement
+### 2. Target-Wattage Stress Testing
 
-1.  **Automated code review tool using OpenAI API and Gitea Actions**
-    *   `#AI`, `#LLM`, `#automatic`, `#workflow`, `#codereview`, `#restfulapi`, `#CI/CD`
-    *   **DevOps Integration**: Built an automated review bot using Drone CI and Gitea Webhooks to trigger events and integrate the **OpenAI API**.
-    *   **Workflow Optimization**: Helped catch potential syntax errors and **reduced senior engineers' code review time by approximately 30%** in the targeted review workflow.
+I developed a distributed Golang agent/controller flow for scheduling SUTs, executing tests, and returning status and logs. Pre-tests characterize approximately linear CPU power response and saturating Memory/Ethernet response, then estimate a mix of CPU, GPU, RAM, FIO, and Ethernet workload intensities for a target wattage. Grafana charts support long-duration review of thermal, fan, and power behavior. AI-based chart review is an assistive module; no public accuracy result supports autonomous diagnosis.
 
-2.  **GenAI-based email content extraction and automated delivery**
-    *   `#AI`, `#LLM`, `#workflow`, `#CI`
-    *   **Automated Workflow**: Utilized LLM technology to automatically analyze and extract key email content, achieving intelligent information distribution and delivery, reducing the time cost of manual filtering.
+→ [Read the smart stress-testing case study](/en/smart-stress-testing/)
 
----
+### 3. Observability across Heterogeneous Rack Equipment
 
-### 🛠️ Tech Stack
-*   **Languages**: Golang, Python, JavaScript/TypeScript (React).
-*   **AI/ML**: Mathematical Regression, OpenAI API, Deep Learning Basics.
-*   **Infrastructure**: Docker, Drone CI, IPMI, Server BMC.
-*   **Frameworks**: FastAPI, Electron.
+The monitoring agent reads server BMC sensors through IPMI and implements SNMP collectors for Netgear/Cisco switches and Raritan PDUs from their MIBs. It normalizes telemetry into Prometheus metrics for Grafana dashboards and threshold alerts. PDU power switching is a separate control capability, not an action performed by the read-only Prometheus/Grafana path.
 
----
+→ [Read the rack-monitoring case study](/en/rack-monitor/)
 
-### 🖼️ Reference Images
+## Quality and Productivity Tooling
 
-**Image 1: Server Thermal Control Algorithm**
-![Server cooling control algorithm project image](/postImg/ice_algo/0.jpg)
+### AI Quality Pilot
 
-**Image 2: Smart Burn-in Automation System**
-![4D stress testing heatmap](/postImg/smartfan/4D_graph.png)
+[AI Quality Pilot](/en/ai-quality-pilot/) is a deterministic-first AI software quality assurance system I designed and developed during my work at Advantech. Hermes provides the conversational entry point, while a Python deterministic engine owns contracts, four-axis test truth, evidence, and remote-write gates. The architecture connects Redmine/Gitea MCP, Pytest/BDD, a Task Graph, and a Knowledge Graph.
 
-**Image 3: Hybrid Architecture Productivity Tool**
-![Redmine Smart Companion main screen](/postImg/Redmine-Tracker/main.jpg)
+The public version generalizes the architecture and excludes internal hosts, accounts, test data, customer information, and lab topology. Its capability matrix is explicitly Supported, Partial, and Planned: this is an evolving gated loop, not a system that delegates every decision and write to an LLM.
+
+### OpenAI-Assisted Review and Email Processing
+
+I also connected Drone CI, Gitea webhooks, and the OpenAI API for automated code-review assistance that flags potential syntax problems in a defined workflow. Another workflow extracts and routes key email content with an LLM. Since no public sample, measurement period, or baseline is available, I do not claim a fixed time-saving percentage.
+
+### Redmine Smart Companion
+
+[Redmine Smart Companion](/en/redmine-tracker/) is a desktop time-entry workflow built with Electron/React/TypeScript and a local FastAPI service. It brings Plan, Track, and Log into one interface and uses PyInstaller plus electron-builder for Windows packaging. History-based prediction remains a roadmap item, not a current AI feature.
+
+## Stack and Engineering Trade-offs
+
+| Area | Technology | Design focus |
+| --- | --- | --- |
+| Automation and services | Golang, Python, Shell, FastAPI | Replace manual steps with repeatable workflows |
+| Server and equipment | BMC, IPMI, SNMP | Normalize heterogeneous device interfaces |
+| Observability | Prometheus, Grafana | Separate collection, storage, visualization, and control |
+| Quality and DevOps | Hermes, Pytest/BDD, Gitea, Redmine, Drone CI | AI interprets context; deterministic code owns truth and writes |
+| Desktop UX | Electron, React, TypeScript | Shorten an existing workflow without overstating roadmap AI |
+
+![Conceptual server thermal-control architecture, not a measurement screenshot](/postImg/ice_algo/0.jpg)
+*Conceptual view of the host, BMC/SUT, and environmental-chamber test loop.*
+
+![Grafana stress-test result view](/postImg/smartfan/4D_graph.png)
+*Result view used to review power, fan, and temperature variables; the visible chart labels remain the authority for its encodings.*

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+<title id="title">SIGNAL TO FIRMWARE workflow</title>
+<desc id="desc">Three-stage technical architecture showing Ultrasound waveform, then MATLAB / WPF, then C++ implementation.</desc>
+<defs><marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#8b5cf6"/></marker>
+<style>.heading{font:700 32px Arial,sans-serif;fill:#e9f7fb}.sub{font:400 15px Arial,sans-serif;fill:#9fc1ce}.label{font:700 20px Arial,sans-serif;fill:#102b3a}.detail{font:400 15px Arial,sans-serif;fill:#496574}.num{font:700 17px Arial,sans-serif;fill:#fff}.arrow{stroke:#8b5cf6;stroke-width:4;fill:none;marker-end:url(#arrowhead)}</style></defs>
+<rect width="1200" height="560" fill="#071827"/><rect x="35" y="35" width="1130" height="490" rx="28" fill="#0b2233" stroke="#1d4960"/>
+<text x="600" y="93" class="heading" text-anchor="middle">SIGNAL TO FIRMWARE</text><text x="600" y="125" class="sub" text-anchor="middle">EVIDENCE-CALIBRATED PORTFOLIO ARCHITECTURE</text>
+<path d="M 375 280 H 415" class="arrow"/><path d="M 730 280 H 770" class="arrow"/><g transform="translate(70 185)">
+  <rect width="300" height="190" rx="22" fill="#ffffff" stroke="#8b5cf6" stroke-width="3"/>
+  <circle cx="45" cy="45" r="22" fill="#8b5cf6"/><text x="45" y="52" class="num" text-anchor="middle">1</text>
+  <text x="150" y="92" class="label" text-anchor="middle">SIGNAL</text>
+  <text x="150" y="128" class="detail" text-anchor="middle">Ultrasound waveform</text>
+</g><g transform="translate(425 185)">
+  <rect width="300" height="190" rx="22" fill="#ffffff" stroke="#8b5cf6" stroke-width="3"/>
+  <circle cx="45" cy="45" r="22" fill="#8b5cf6"/><text x="45" y="52" class="num" text-anchor="middle">2</text>
+  <text x="150" y="92" class="label" text-anchor="middle">ANALYZE</text>
+  <text x="150" y="128" class="detail" text-anchor="middle">MATLAB / WPF</text>
+</g><g transform="translate(780 185)">
+  <rect width="300" height="190" rx="22" fill="#ffffff" stroke="#8b5cf6" stroke-width="3"/>
+  <circle cx="45" cy="45" r="22" fill="#8b5cf6"/><text x="45" y="52" class="num" text-anchor="middle">3</text>
+  <text x="150" y="92" class="label" text-anchor="middle">FIRMWARE</text>
+  <text x="150" y="128" class="detail" text-anchor="middle">C++ implementation</text>
+</g>
+<text x="600" y="465" class="sub" text-anchor="middle">Boundaries and labels reflect the publicly described project scope.</text>
+</svg>

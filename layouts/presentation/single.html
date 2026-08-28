@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="{{ .Site.Language.LanguageCode }}" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{{ .Title }} · {{ .Site.Title }}</title>
+  <meta name="description" content="{{ .Description }}">
+  <meta name="theme-color" content="#07111f">
+  <link rel="canonical" href="{{ .Permalink }}">
+  <meta property="og:title" content="{{ .Title }}">
+  <meta property="og:description" content="{{ .Description }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:image" content="{{ "images/head.jpg" | absURL }}">
+  <link rel="stylesheet" href="{{ "css/presentation.css" | relURL }}">
+</head>
+{{ $deck := .Params.presentation }}
+{{ $slides := $deck.slides }}
+{{ $coreSlides := where $slides "group" "core" }}
+{{ $newTabLabel := "在新分頁開啟" }}
+{{ if eq .Site.Language.Lang "en" }}{{ $newTabLabel = "opens in a new tab" }}{{ end }}
+<body class="presentation-page"
+      data-status-template="{{ $deck.controls.slideStatus }}"
+      data-overview-status="{{ $deck.controls.overviewStatus }}"
+      data-overview-label="{{ $deck.controls.overview }}"
+      data-slides-label="{{ $deck.controls.slides }}"
+      data-core-label="{{ $deck.coreLabel }}"
+      data-appendix-label="{{ $deck.appendixLabel }}"
+      data-fullscreen-label="{{ $deck.controls.fullscreen }}"
+      data-exit-fullscreen-label="{{ $deck.controls.exitFullscreen }}">
+  <a class="skip-link" href="#deck-stage">{{ if eq .Site.Language.Lang "en" }}Skip to slides{{ else }}跳到投影片{{ end }}</a>
+
+  <main class="deck" id="presentation" aria-labelledby="deck-title">
+    <h1 id="deck-title" class="sr-only">{{ .Title }}</h1>
+
+    <header class="deck-topbar" aria-label="{{ if eq .Site.Language.Lang "en" }}Presentation utilities{{ else }}簡報工具{{ end }}">
+      <a class="deck-home" href="{{ "/" | relLangURL }}" aria-label="{{ $deck.backLabel }}">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+        <span>{{ $deck.backLabel }}</span>
+      </a>
+      <p class="deck-brand"><strong>{{ .Title }}</strong><span>{{ $deck.eyebrow }}</span></p>
+      <nav class="deck-utilities" aria-label="{{ if eq .Site.Language.Lang "en" }}Presentation links{{ else }}簡報連結{{ end }}">
+        {{ with index .Translations 0 }}
+          <a class="deck-language" href="{{ .RelPermalink }}" hreflang="{{ .Language.LanguageCode }}">{{ $deck.languageLabel }}</a>
+        {{ end }}
+        <button class="icon-button fullscreen-button" type="button" data-action="fullscreen" aria-label="{{ $deck.controls.fullscreen }}" aria-pressed="false" title="{{ $deck.controls.fullscreen }}">
+          <svg class="enter-fullscreen-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5m13 5h5v-5"/></svg>
+          <svg class="exit-fullscreen-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M3 8h5V3m13 5h-5V3M3 16h5v5m13-5h-5v5"/></svg>
+        </button>
+      </nav>
+    </header>
+
+    <div class="deck-progress" aria-hidden="true"><span></span></div>
+
+    <div class="deck-stage" id="deck-stage" tabindex="-1">
+      {{ range $index, $slide := $slides }}
+        <section class="deck-slide slide-{{ $slide.variant }}"
+                 id="{{ $slide.id }}"
+                 data-slide-index="{{ $index }}"
+                 data-group="{{ $slide.group }}"
+                 aria-labelledby="{{ $slide.id }}-title">
+          <button class="overview-select" type="button" data-select-slide="{{ $index }}" aria-label="{{ $deck.controls.openSlide }}: {{ $slide.title }}">
+            <span aria-hidden="true">↗</span>
+          </button>
+          <div class="slide-number" aria-hidden="true">
+            {{ if eq $slide.group "appendix" }}{{ $deck.appendixLabel }}{{ else }}{{ printf "%02d" (add $index 1) }}{{ end }}
+          </div>
+          <div class="slide-content">
+            <div class="slide-copy">
+              {{ with $slide.kicker }}<p class="slide-kicker">{{ . }}</p>{{ end }}
+              <h2 id="{{ $slide.id }}-title">{{ $slide.title }}</h2>
+              {{ with $slide.summary }}<p class="slide-summary">{{ . }}</p>{{ end }}
+
+              {{ with $slide.tags }}
+                <ul class="tag-list" aria-label="{{ if eq $.Site.Language.Lang "en" }}Core technologies{{ else }}核心技術{{ end }}">
+                  {{ range . }}<li>{{ . }}</li>{{ end }}
+                </ul>
+              {{ end }}
+
+              {{ with $slide.bullets }}
+                <ul class="slide-bullets">
+                  {{ range . }}<li>{{ . }}</li>{{ end }}
+                </ul>
+              {{ end }}
+
+              {{ with $slide.items }}
+                <div class="slide-items{{ if eq $slide.variant "gallery" }} gallery-items{{ end }}">
+                  {{ range . }}
+                    {{ $item := . }}
+                    {{ if $item.href }}
+                      <a class="slide-item" href="{{ strings.TrimPrefix "/" $item.href | relURL }}" target="_blank" rel="noopener">
+                    {{ else }}
+                      <div class="slide-item">
+                    {{ end }}
+                      {{ with $item.image }}<img src="{{ strings.TrimPrefix "/" . | relURL }}" alt="{{ $item.imageAlt }}" loading="lazy">{{ end }}
+                      <span class="item-copy"><strong>{{ $item.title }}</strong>{{ with $item.text }}<span>{{ . }}</span>{{ end }}</span>
+                      {{ if $item.href }}<span class="item-arrow" aria-hidden="true">↗</span><span class="sr-only"> ({{ $newTabLabel }})</span>{{ end }}
+                    {{ if $item.href }}</a>{{ else }}</div>{{ end }}
+                  {{ end }}
+                </div>
+              {{ end }}
+
+              {{ with $slide.note }}<p class="slide-note">{{ . }}</p>{{ end }}
+
+              {{ with $slide.contacts }}
+                <nav class="contact-list" aria-label="{{ if eq $.Site.Language.Lang "en" }}Contact links{{ else }}聯絡連結{{ end }}">
+                  {{ range . }}<a href="{{ .href }}" target="_blank" rel="noopener">{{ .label }} <span aria-hidden="true">↗</span><span class="sr-only"> ({{ $newTabLabel }})</span></a>{{ end }}
+                </nav>
+              {{ end }}
+
+              {{ with $slide.article }}
+                <a class="article-link" href="{{ strings.TrimPrefix "/" .href | relURL }}" target="_blank" rel="noopener">
+                  <span>{{ .label }}</span><span aria-hidden="true">↗</span><span class="sr-only"> ({{ $newTabLabel }})</span>
+                </a>
+              {{ end }}
+              {{ with $slide.closing }}<p class="closing-line">{{ . }}</p>{{ end }}
+            </div>
+
+            {{ with $slide.image }}
+              <figure class="slide-visual">
+                <img src="{{ strings.TrimPrefix "/" . | relURL }}" alt="{{ $slide.imageAlt }}" {{ if gt $index 1 }}loading="lazy"{{ end }}>
+              </figure>
+            {{ end }}
+          </div>
+        </section>
+      {{ end }}
+    </div>
+
+    <footer class="deck-controls" aria-label="{{ if eq .Site.Language.Lang "en" }}Presentation controls{{ else }}簡報控制{{ end }}">
+      <button type="button" class="control-button" data-action="previous" aria-label="{{ $deck.controls.previous }}">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg><span>{{ $deck.controls.previous }}</span>
+      </button>
+      <div class="deck-status-wrap">
+        <span class="deck-count-group" data-count-group aria-hidden="true">{{ $deck.coreLabel }}</span>
+        <span class="deck-count" aria-hidden="true"><strong data-current-count>1</strong> / <span data-total-count>{{ len $coreSlides }}</span></span>
+        <span class="sr-only" data-live-status aria-live="polite" aria-atomic="true"></span>
+      </div>
+      <button type="button" class="control-button overview-button" data-action="overview" aria-pressed="false" aria-label="{{ $deck.controls.overview }}">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>{{ $deck.controls.overview }}</span>
+      </button>
+      <details class="keyboard-help">
+        <summary>{{ $deck.controls.keyboard }}</summary>
+        <p>{{ $deck.controls.keyboardHelp }}</p>
+      </details>
+      <button type="button" class="control-button" data-action="next" aria-label="{{ $deck.controls.next }}">
+        <span>{{ $deck.controls.next }}</span><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+    </footer>
+  </main>
+
+  <script src="{{ "js/presentation.js" | relURL }}" defer></script>
+</body>
+</html>

@@ -146,7 +146,7 @@ disqusShortname = "hugo-tranquilpeak-theme"
   # Your profile picture
   # Overwritten by your gravatar image if `author.gravatarEmail` is filled
 
-  picture = "https://lh3.googleusercontent.com/a-/AOh14GgqSMkrhYfE6qcVmLwDKIyLqiCCcH7oZBlzEfcT=s360-p-rw-no"  
+  picture = "/images/head.jpg"
   # Your Twitter username without the @. E.g : thibaudlepretre
   # twitter = "thibaudlepretre"
   # Your google plus profile id. E.g : +ThibaudLepretre or 114625208755123718311
@@ -332,6 +332,8 @@ disqusShortname = "hugo-tranquilpeak-theme"
      href = "css/resume.css"
    [[params.customCSS]]
      href = "css/post-fixes.css"
+   [[params.customCSS]]
+     href = "css/header-cta.css"
 
   # Custom JS. Put here your custom JS files. They are loaded after the theme JS;
   # they have to be referred from static root. Example

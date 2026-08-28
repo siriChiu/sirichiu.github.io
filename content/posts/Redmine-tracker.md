@@ -1,89 +1,86 @@
 ---
-title: Redmine Smart Companion：重塑工時管理的桌面自動化工具
+title: Redmine Smart Companion：以桌面工作流重新設計工時記錄體驗
 slug: redmine-tracker
 date: 2025-01-27
 categories:
 - 專業技術
 tags:
-- Vibe Coding
-- Deep Learning & Machine Learning
 - Redmine
 - Python
-- React
-- Electron
 - FastAPI
+- React
+- TypeScript
+- Electron
+- PyInstaller
+- Desktop App
 - Automation
+- UI/UX
 - CI/CD
-
 thumbnailImagePosition: left
-thumbnailImage: /postImg/Redmine-Tracker/thumbnail.png
+thumbnailImage: /postImg/Redmine-Tracker/thumbnail-v2.png
 ---
 
-本專案開發了一款跨平台的桌面應用程式，旨在解決工程師在使用 Redmine 系統記錄工時面臨的「操作繁瑣」與「流程斷裂」問題。
+Redmine Smart Companion 是一套以 **Electron／React／TypeScript** 前端搭配本機 **Python FastAPI** 後端的桌面工時工具。我把原本分散在瀏覽器頁面中的規劃、追蹤與登錄步驟，整理成「Plan → Track → Review → Log」工作流，並以 Windows 安裝包交付。
 
 <!--more-->
 
----
+## 問題脈絡：工時登錄打斷工程工作流
 
-## 📋 專案摘要 (Abstract)
+Redmine 能管理 issue 與工時，但在我觀察的既有流程中，建立一筆紀錄可能涉及約十次點擊與頁面跳轉；「每天約 30 分鐘」是當時使用情境的經驗值，不是跨版本、跨團隊的正式 benchmark。
 
-> **這是一款結合現代化 UI 與 Python 後端的桌面生產力工具。**
+真正的問題不只在點擊次數，而是資訊散落：工程師先在其他地方安排工作，再回到 Redmine 選 project、issue、日期、時數與備註，最後還要另外確認本週是否漏記。每次切換都會中斷目前的開發脈絡。
 
-透過結合 **Electron (React)** 的現代化前端與 **Python FastAPI** 後端，我打造了一個 **「混合架構 (Hybrid Architecture)」**
-解決方案。
+![Redmine Smart Companion 的 Plan、Track、Review 與 Log 桌面工作流](/postImg/Redmine-Tracker/plan-track-log-flow.svg)
 
-此工具將原本需多次跳轉的網頁操作整理成較短的桌面流程，並加入視覺化儀表板與智慧排程功能。系統也保留未來導入 AI 工時預測的架構彈性，讓工時記錄從被動行政操作變成更容易維持的日常工作流。
+## 體驗設計：Plan → Track → Review → Log
 
----
+1. **Plan：** 以 daily planner 與常用 profile 建立工作項目，減少重複輸入。
+2. **Track：** 透過週曆與拖放式排程整理工作區段，並保留午休或未分配時段。
+3. **Review：** 由 weekly overview 檢查每日與每週時數分布，回到 issue 脈絡確認內容。
+4. **Log：** 將本機整理的資料送往 Redmine API，完成工時登錄。
 
-## 🛑 問題與背景 (The Problem)
+![Redmine Smart Companion 週曆排程畫面](/postImg/Redmine-Tracker/calender.jpg)
+*實際介面畫面：以週曆呈現工作區段與空檔；截圖能證明 UI surface，但不單獨證明遠端寫入結果。*
 
-在軟體開發流程中，Redmine 是強大的專案管理工具，但其「工時記錄 (Time Logging)」體驗卻相當過時且不人性化：
+![Redmine Smart Companion 儀表板](/postImg/Redmine-Tracker/main.jpg)
+*實際介面畫面：顯示當日／每週摘要與 issue 分布，用來協助登錄前後的人工檢查。*
 
-* **⏳ 高昂的時間成本：** 記錄一筆工時平均需要點擊與跳轉約 10 次，工程師每天需花費約 30 分鐘處理此類行政瑣事。
-* **💔 流程斷裂 (Context Switch)：** 為了記錄工時，開發者必須中斷心流 (Flow)，切換瀏覽器分頁，導致工作效率下降。
-* **📉 缺乏反饋：** 原生介面缺乏即時的數據可視化，使用者難以掌握當週工時狀態，容易造成漏記或超時。
+## 混合式桌面架構
 
----
+系統刻意把桌面體驗與既有 Python 自動化資產分開：
 
-## 💡 解決方案與體驗設計 (Solution & UX Design)
+| 層次 | 技術 | 責任 |
+| --- | --- | --- |
+| Renderer | Vite、React、TypeScript | Calendar、dashboard、profiles 與使用者互動 |
+| Desktop shell | Electron main process | 視窗、應用程式生命週期與 Python 子程序管理 |
+| Local service | FastAPI、Python | Redmine API 封裝、資料邏輯與既有腳本整合 |
+| Remote system | Redmine REST API | Issue context 與工時資料的系統來源 |
 
-為了徹底解決上述痛點，我設計了一套 **"Plan ➝ Track ➝ Log"** 的閉環工作流，並採用 **Glassmorphism (毛玻璃特效)** 風格的深色模式 UI，打造沈浸式的桌面體驗。
+選擇 Python backend 的主要理由，是可以重用既有自動化程式，並讓 UI 不必直接承擔 Redmine 資料邏輯。這也保留未來使用 Pandas／Scikit-learn 分析歷史工時的可能性；**歷史工時預測仍是 roadmap，不是目前已驗證的 AI 功能。**
 
-### 1. 核心工作流 (The "Focus First" Workflow)
-* **Plan (規劃):** 透過 **Smart Daily Planner** 與 **Intelligent Profiles** 功能，使用者可預先載入常用的任務模板（如 Daily Standup），一鍵建立每日待辦。
-* **Track (追蹤):** 支援拖拉式 (Drag-and-drop) 行事曆介面。系統即時監控工時，並透過視覺化圖表自動標示空檔（如午休時間）。
-* **Log (記錄):** 提供 **Automated Workflows**，當任務完成或下班時間一到，系統自動將本地數據推送至 Redmine API，實現「無感記錄」。
+## Windows 封裝與程序生命週期
 
-![Redmine 工時行事曆規劃畫面](/postImg/Redmine-Tracker/calender.jpg)
+我使用 **PyInstaller** 將 FastAPI 與 Python 依賴封裝成 `backend.exe`，由 Electron main process 負責啟動與結束本機服務，再以 **electron-builder** 產生 Windows 安裝程式。這個流程讓使用者不必另外安裝 Python，也需要處理 backend 啟動失敗、graceful shutdown 與 port 8000 衝突（例如 `Errno 10048`）。
 
-### 2. 可視化儀表板 (Interactive Dashboard)
-* 提供 **Weekly Overview** 長條圖，讓使用者一眼掌握本週工時分佈。
-* 整合 **Project Deep Dive** 視圖，無須打開瀏覽器即可查看 Issue 的狀態、優先級與歷史討論串。
+原始文章曾以「跨平台」描述桌面架構，但目前公開證據只涵蓋 Windows 執行檔與安裝包；因此這篇文章只宣稱 **Windows desktop packaging**，不把架構可攜性等同於已完成 macOS／Linux 發布。
 
-![Redmine Smart Companion 儀表板畫面](/postImg/Redmine-Tracker/main.jpg)
+## 遠端寫入與安全邊界
 
----
+工時登錄會改變 Redmine 的正式資料，因此不能只以「無感自動化」描述。公開內容尚未交代 API key 儲存、renderer 與 localhost backend 的認證、TLS、log redaction、送出前預覽、重試去重與錯誤回復等細節。若要正式部署，至少應具備：
 
-## 🛠️ 技術深度剖析 (Technical Case Study)
+- 明確顯示 project、issue、日期、時數與 comment，再由使用者確認。
+- 避免重試造成重複工時，並保留 Redmine 回應與錯誤狀態。
+- 限制本機服務 bind address，保護 credential，且不把 token 寫入 log。
+- 將「本機草稿」與「已成功寫入 Redmine」分成不同狀態。
 
-### 1. 混合式架構 (Hybrid Architecture)
+這些是遠端寫入的必要工程邊界；在缺少程式碼與測試證據時，我不把它們宣稱為目前版本全部完成的能力。
 
-不同於傳統 Electron App 僅依賴 Node.js，本專案採用了 **React (Frontend) + Python FastAPI (Backend)** 的並發架構 (Concurrent Architecture)。
+## 可驗證成果與限制
 
-* **Frontend:** 使用 **Vite + React + TypeScript** 構建，確保極致的渲染效能與型別安全。
-* **Backend:** 使用 **Python FastAPI** 作為本地伺服器，處理與 Redmine API 的交互及資料邏輯。
+目前可由公開內容支持的成果，是桌面 planner/calendar/dashboard 的介面、React + Electron + FastAPI 的混合式設計，以及 Windows backend／installer 封裝流程。公開資料未提供 build log、release artifact、API integration test、操作時間對照或使用者研究，因此不宣稱固定的生產力提升比例。
 
-#### 🤔 為什麼選擇這種架構？ (Why Python Backend?)
-1.  **既有資產整合 (Legacy Integration):** 能夠直接封裝並重用我先前編寫的 Python 自動化腳本，縮短開發週期。
-2.  **AI 擴充性 (AI Readiness):** 為了未來的 Roadmap 做準備。Python 擁有最豐富的 AI/ML 生態系，這層架構讓我未來能輕鬆導入 `Scikit-learn` 或 `Pandas`，實現「基於歷史數據的工時智慧預測」功能，而不必重構整個後端。
+若要量化下一版成效，我會追蹤每筆工時的 median interactions／elapsed time、重複或失敗率、sync 成功率、啟動時間，以及人工修正次數。
 
+## 技術棧
 
-
-### 2. 桌面端封裝與發布 (Packaging & Distribution)
-
-將 Python 環境打包進 Electron 是一大技術挑戰。我建立了一套自動化的 Build Pipeline：
-
-* **後端編譯:** 使用 **PyInstaller** 將 Python FastAPI 環境與依賴庫編譯為單一執行檔 (`backend.exe`)，解決了使用者無需安裝 Python 環境的問題。
-* **跨進程通訊:** Electron Main Process 負責管理 Python 子進程的生命週期（啟動與優雅關閉），並處理 Port 8000 的佔用衝突 (Errno 10048)。
-* **安裝包製作:** 最終透過 **electron-builder** 將 React 前端與 Python 執行檔打包為標準的 Windows 安裝程式 (`.exe`)。
+**Electron · Vite · React · TypeScript · Python · FastAPI · PyInstaller · electron-builder · Redmine REST API**

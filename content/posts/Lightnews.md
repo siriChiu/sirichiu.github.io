@@ -4,7 +4,7 @@ slug: lightnews
 date: 2025-08-15
 categories:
 - 專業技術
-tags: 
+tags:
 - Automation
 - n8n
 - Ollama
@@ -13,63 +13,65 @@ tags:
 - RSS
 - WordPress
 thumbnailImagePosition: left
-thumbnailImage: /postImg/lightnews/thumbnail.png
+thumbnailImage: /postImg/lightnews/thumbnail-v2.png
 ---
 
-本專案建立一套端到端 (End-to-End) 的自動化內容發布流程，用來縮短繁體中文讀者與國際技術資訊之間的時間差。
+Lightnews 是一套架設於 Linux 的技術內容工作流：n8n 監看 RSS、清理網頁、呼叫 Ollama 本地模型完成摘要與繁體中文翻譯，再經圖片檢索與 WordPress REST API 產生可審閱的文章。它把重複性處理自動化，但保留編輯判斷。
 
 <!--more-->
 
+## 專案脈絡
 
-## 📋 專案摘要 (Abstract)
+人工整理國際技術文章需要在來源追蹤、摘要、翻譯、分類、配圖與 CMS 之間來回切換。原文章把「數天到數週」視為可能的資訊延遲；這是工作流觀察，不是正式量測的服務指標。
 
-傳統技術新知的整理常依賴人工翻譯與搬運，容易產生數天到數週的延遲。為了降低這個成本，我在 Linux 伺服器上架設 **n8n** 自動化流程，並整合 **Ollama 本地大型語言模型 (gpt-oss)**，串接 RSS 監聽、內容擷取、摘要翻譯、圖片檢索與 WordPress 發布。系統目標是讓技術資訊先形成可閱讀草稿，再由人工進行必要審閱。
+本專案的目標是先產生結構一致的繁體中文草稿，讓人工把時間放在來源、技術語意、授權與發布判斷，而不是重複搬運欄位。
 
----
+![Lightnews 信任邊界與編輯管線：外部來源、本機推論、CMS 草稿與人工審閱](/postImg/lightnews/editorial-pipeline-v2.svg)
 
-## 🛠️ 技術深度剖析 (Technical Case Study)
+## 架構與資料流
 
-### 1. 系統架構與基礎設施 (Infrastructure)
+1. **RSS 監看與內容擷取：** n8n 監看選定來源；發現新文章後抓取頁面並移除廣告與無關 HTML。
+2. **本地文字推論：** 清理後的文字交給 Ollama 上的 `gpt-oss`，產生摘要、繁體中文翻譯、技術分類與視覺關鍵字。
+3. **外部圖片檢索：** 以視覺關鍵字呼叫 Unsplash API，再依下載量與相關度訊號排序／選擇候選圖。
+4. **CMS 交付：** n8n 整理標題、內文、標籤與圖片連結，透過 WordPress REST API 建立草稿或依流程發布。
+5. **編輯閘門：** 草稿仍需檢查來源語意、翻譯、圖片授權／標示與是否適合公開。
 
-為了確保系統的穩定性與隱私安全性，本專案採用全私有化部署方案：
+這裡的「本地」只指文字推論在自管 Linux host 上執行，降低對外部 LLM API 的依賴。RSS/原始網頁、Unsplash 與 WordPress 仍跨越外部服務邊界，因此不是完全離線或全私有的系統。
 
-* **Linux Server:** 作為運算與服務託管的基礎環境。
-* **Workflow Orchestration (n8n):** 使用 n8n 作為自動化中樞，負責串接各個 API 節點與邏輯判斷，取代傳統繁瑣的 Python Crontab 腳本。
-* **Local LLM Inference (Ollama):** 部署 Ollama 框架運行 `gpt-oss` 模型，降低大量文本處理對外部 API 的依賴。
+![既有 Lightnews 自動化處理流程圖](/postImg/lightnews/pipeline.svg)
+*架構圖：RSS、清理、本地 LLM、圖片選擇與 WordPress 草稿的主要節點。*
 
-![Lightnews 自動化內容處理流程](/postImg/lightnews/pipeline.svg)
+## 技術決策
 
-### 2. 核心技術：AI 驅動的內容處理管線 (AI-Driven Content Pipeline)
+### 為什麼使用 n8n
 
-本系統的核心在於將非結構化的網頁內容，透過 AI 轉化為結構化的發布格式。
+n8n 讓 API 節點、條件分支與失敗路徑能在同一個 orchestration surface 中閱讀，適合這種整合型流程。它取代零散 crontab 腳本的角色，但不代表節點本身免除重試、驗證與監控需求。
 
-#### 2.1 智慧擷取與認知處理 (Ingestion & Cognitive Processing)
-流程始於對特定技術領域的 RSS 監控。一旦發現新文章，系統即觸發以下處理鏈：
+### 為什麼使用本地 LLM
 
-1.  **內容清洗:** 自動爬取原始網頁，去除廣告與無關 HTML 標籤。
-2.  **本地 LLM 推論:** 將清洗後的文本輸入至 Ollama (`gpt-oss`) 進行多維度處理：
-    * **摘要生成 (Summarization):** 提煉文章核心技術點。
-    * **跨語言翻譯 (Translation):** 將英文技術術語準確轉換為繁體中文。
-    * **自動分類 (Auto-Tagging):** 根據內文語意，自動判斷文章所屬的技術領域（如：DevOps, AI, Security）並生成對應標籤。
+摘要、翻譯與分類會處理大量文字，本地 Ollama 可降低文字送往第三方 LLM API 的需求，也保留模型與部署控制權。這個選擇不等於翻譯必然準確；公開資料沒有基準集或人工評分，因此輸出仍是待審草稿。
 
+### 圖片與發布邊界
 
+Unsplash 的下載量與相關度只能作為候選排序訊號，不能證明圖片是「最佳」或已自動滿足每個授權／標示條件。WordPress API 具備建立草稿與發布能力，但較安全的預設敘事是先建立可審閱輸出。
 
-#### 2.2 上下文感知的媒體檢索 (Context-Aware Media Retrieval)
-為了讓文章圖文並茂，我設計了一套「文轉圖」的檢索邏輯，而非單純使用隨機圖片。
+## 可見成果與限制
 
-1.  **視覺意圖識別:** 透過 LLM 分析文章內文，生成一組可用於搜尋的英文「視覺關鍵字 (Visual Keywords)」。
-2.  **API 媒合:** 系統自動呼叫圖庫 API (Unsplash)，利用上述關鍵字進行檢索。
-3.  **最佳化篩選:** 根據圖片的下載量與相關度評分，選取相關度較高的圖片作為文章封面圖 (Featured Image)。
+以下畫面證明已有可瀏覽的繁體中文網站介面；它不代表 uptime、吞吐量、翻譯品質或編輯錯誤率已被量化。
 
-### 3. 自動化交付 (Automated Delivery)
+![Lightnews 繁體中文技術新聞網站畫面](/postImg/lightnews/1.jpg)
+*實際網站畫面：可見文章、分類與發佈時間等閱讀介面。*
 
-最後階段，n8n 將處理好的標題、內文、標籤與圖片連結，透過 **WordPress REST API** 建立草稿或發布。這個流程讓文章格式更一致，也讓內容更新可以維持穩定節奏。
+目前公開內容未提供 n8n workflow export、錯誤重試策略、更新頻率、內容品質評估或授權稽核紀錄。後續若要把系統成效量化，應追蹤每篇人工審閱時間、翻譯修訂率、來源與圖片授權完整度，以及工作流失敗／重試率。
 
----
+## 技術棧
 
-### 總結 (Conclusion)
+**Linux · n8n · Ollama (`gpt-oss`) · RSS · Web extraction · Unsplash API · WordPress REST API**
 
-這個專案整理了 **Low-Code 工具 (n8n)** 與 **Local LLM** 在內容流程上的實作方式。它的重點不是取代編輯判斷，而是把重複性的整理、摘要與發布前處理自動化，讓人工可以集中在最後審閱與品質控制。
+## 線上網站
 
+> **外部內容提醒：** 下方 iframe 會載入 `lightnews.tw` 的外部內容，可能受網站可用性、Cookie 或瀏覽器安全設定影響。
 
-<iframe src="https://lightnews.tw/" width="100%" height="500px" style="border:none;"></iframe>
+若無法顯示嵌入頁面，請使用可見的備援連結：[前往 Lightnews 科技輕鬆報](https://lightnews.tw/)。
+
+<iframe src="https://lightnews.tw/" title="Lightnews 科技輕鬆報外部網站" width="100%" height="500" loading="lazy" style="border:0;max-width:100%;"></iframe>

@@ -90,6 +90,18 @@ html body #blog #sidebar,
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
+    height: auto !important;
+    min-height: 165px !important;
+    padding-top: 28px !important;
+    margin-bottom: 18px !important;
+}
+
+#sidebar .sidebar-profile-picture {
+    width: 120px !important;
+    height: 120px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    margin: 0 auto 8px !important;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -178,10 +190,10 @@ html body #bottom-bar[style],
         min-width: 60px !important;
     }
     
-    /* Hide profile picture and text on mobile */
+    /* Keep the profile picture visible in the narrow mobile sidebar */
     #sidebar .sidebar-profile-picture {
-        width: 40px !important;
-        height: 40px !important;
+        width: 48px !important;
+        height: 48px !important;
     }
     
     #sidebar .sidebar-profile-name,

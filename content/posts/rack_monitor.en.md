@@ -1,7 +1,7 @@
 ---
 title: Rack Monitoring System Development
 slug: rack-monitor
-date: 2026-02-05
+date: 2025-12-05
 categories:
 - Professional Technology
 tags:
@@ -15,49 +15,58 @@ tags:
 - Raritan
 - Network Automation
 - Data Visualization
-
 thumbnailImagePosition: left
-thumbnailImage: /postImg/rack_monitor/thumbnail.png
+thumbnailImage: /postImg/rack_monitor/thumbnail-v2.png
 katex: true
 ---
 
-Responsible for the design and implementation of a Rack Monitoring System. The system uses a Golang agent to collect server, switch, and PDU data through IPMI and SNMP, then integrates Prometheus and Grafana to provide real-time visibility into rack equipment status.
+This rack-monitoring system handles the protocol and vendor-MIB differences among server BMCs, switches, and PDUs. A Golang collector gathers data through IPMI/SNMP, normalizes it into Prometheus metrics, and gives Grafana a unified source for equipment status and threshold alerts.
 
 <!--more-->
 
-# Software Engineer
-**Advantech** | 2022/11 – Present
+> This case study belongs to my [Advantech software-engineering portfolio](/en/job_exp_advantech/). Its focus is heterogeneous-device observability, not predictive control.
 
-![Rack monitoring system architecture](/postImg/rack_monitor/architecture.svg)
+## Problem: Each Equipment Class Speaks Differently
 
-### 🚀 Core Skills & Expertise
-*   ✅ **Protocol Integration**: In-depth research and implementation of IPMI and SNMP (MIB) protocols, customizing data collection for different brand devices.
-*   ✅ **Monitoring System Development**: Developed high-performance Agents using Golang, integrating Prometheus time-series database.
-*   ✅ **Data Visualization**: Designed Grafana dashboards to transform complex data center metrics into intuitive real-time charts.
+Servers, network switches, and PDUs expose different fields and may use different protocols, SNMP versions, MIBs, and naming conventions. If each device is visible only through its own interface, engineers cannot easily compare health, network, environmental, and power context in one view.
 
-### 💼 Key Projects & Contributions
+The central design decision was to keep protocol adaptation and metric normalization in the collector layer, so the time-series backend and dashboards do not need to understand every vendor’s raw format.
 
-#### Rack Monitoring System Development
+![Observability pipeline from IPMI/SNMP equipment to Prometheus and Grafana](/postImg/rack_monitor/observability-pipeline-v2.svg)
 
-1.  **Monitoring Agent Design & Data Collection**
-    *   `#Golang`, `#IPMI`, `#SNMP`, `#ipmitool`, `#gosnmp`, `#pysnmp`
-    *   **Server Monitoring**: Developed a **Golang** monitoring Agent to communicate directly with BMC via the **IPMI (`ipmitool`)** protocol, capturing server health status and sensor data in real-time.
-    *   **Network & Power Monitoring**: Conducted in-depth research on **SNMP MIB (Management Information Base)** files to implement data collectors for specific brands (Switch: **Netgear, Cisco**; PDU: **Raritan**). Utilized `gosnmp` and `pysnmp` packages to ensure cross-platform and cross-device compatibility.
-    *   **Comprehensive Metrics**:
-        *   **Switch**: Collected Network Traffic, Port On/Off Speed, Stacking Status, Max Speed, Health Status, Temperature, and Fan Speed.
-        *   **PDU**: Monitored environmental sensor data (Humidity, Temperature, Vibration, etc.) and Power Control (On/Off).
+## Architecture and Data Flow
 
-2.  **Data Pipeline & Storage**
-    *   `#Prometheus`, `#TimeSeriesDB`
-    *   **Prometheus Integration**: Formatted collected heterogeneous data into unified Prometheus Metrics, establishing a high-efficiency **Time-series Pipeline** to support high-frequency data ingestion and querying.
+1. **Server / BMC adapter:** A Golang agent invokes IPMI/`ipmitool` to read health and sensor data.
+2. **Switch adapters:** Collectors implement fields from Netgear and Cisco SNMP MIBs with `gosnmp`/`pysnmp`.
+3. **PDU adapter:** A Raritan MIB provides environmental telemetry; the public description separately lists power on/off control.
+4. **Normalization:** The collector maps heterogeneous values into consistent Prometheus metrics.
+5. **Observe:** Prometheus stores time series, Grafana presents dashboards, and threshold rules support alerts for overheating, fan anomalies, and network congestion.
 
-3.  **Grafana Real-time Monitoring Dashboard**
-    *   `#Grafana`, `#Dashboard`, `#Visualization`
-    *   **Grafana Dashboard**: Designed multi-dimensional dashboards to show the operational status of rack equipment in one place.
-    *   **Anomaly Alerting**: Implemented threshold-based alerting. Visual indicators and notifications help operations personnel locate anomalies faster when overheating, fan failures, or network congestion occurs.
+![Existing rack-monitoring architecture diagram](/postImg/rack_monitor/architecture.svg)
+*Architecture diagram of the read-only telemetry path through device adapters, collector, Prometheus, and Grafana.*
 
-### 🛠️ Tech Stack
-*   **Languages**: Golang, Python.
-*   **Protocols**: IPMI (ipmitool), SNMP (v2c/v3).
-*   **Hardware**: Netgear Switch, Cisco Switch, Raritan PDU.
-*   **Observability**: Prometheus, Grafana.
+## Described Telemetry Scope
+
+| Equipment | Protocol | Publicly described fields |
+| --- | --- | --- |
+| Server / BMC | IPMI | Health status and sensor data |
+| Netgear / Cisco switch | SNMP | Traffic, port state/speed, stacking, maximum speed, health, temperature, fan speed |
+| Raritan PDU | SNMP | Humidity, temperature, vibration, and other environmental sensors |
+
+Supported SNMP versions are **v2c/v3**. Fields from different devices are not inherently equivalent; normalization should retain device class and source so similarly named values with different semantics are not mixed.
+
+## Safety Boundary between Control and Observability
+
+The public description mentions PDU power on/off, while the existing architecture only establishes a one-way metrics path. Power switching should be treated as a separate control path with authentication, authorization, confirmation, and audit—not as an action performed directly by Grafana or Prometheus.
+
+Likewise, “real time” here means a continuously updated monitoring view. No polling interval, latency, or retention data is public, so the project does not claim a particular real-time SLA or deployment scale.
+
+## Validation and Limitations
+
+The supported implementation story is: research the MIBs for named vendors, implement collectors with Golang/Python SNMP libraries, expose Prometheus metrics, and integrate Grafana views and threshold-based alerts. Public material does not include metric names, labels, cardinality, supported models/firmware, alert thresholds, notification channels, or a dashboard screenshot.
+
+This case therefore does not claim universal device compatibility or call threshold alerting a predictive model. Deployment still requires validation of credential storage, SNMPv3 configuration, network isolation, polling failure, stale data, and control authorization.
+
+## Stack
+
+**Golang · Python · IPMI (`ipmitool`) · SNMP v2c/v3 · `gosnmp` · `pysnmp` · Prometheus · Grafana**

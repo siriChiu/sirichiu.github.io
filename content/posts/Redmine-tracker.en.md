@@ -1,88 +1,86 @@
 ---
-title: "Redmine Smart Companion: Reshaping Time Management with Desktop Automation Tool"
+title: "Redmine Smart Companion: Redesigning Time Entry as a Desktop Workflow"
 slug: redmine-tracker
 date: 2025-01-27
 categories:
 - Professional Technology
 tags:
-- Vibe Coding
-- Deep Learning & Machine Learning
 - Redmine
 - Python
-- React
-- Electron
 - FastAPI
+- React
+- TypeScript
+- Electron
+- PyInstaller
+- Desktop App
 - Automation
+- UI/UX
 - CI/CD
-
 thumbnailImagePosition: left
-thumbnailImage: /postImg/Redmine-Tracker/thumbnail.png
+thumbnailImage: /postImg/Redmine-Tracker/thumbnail-v2.png
 ---
 
-This project developed a cross-platform desktop application designed to solve the "cumbersome operation" and "workflow interruption" problems engineers face when logging time in the Redmine system.
+Redmine Smart Companion is a desktop time-management tool built with an **Electron/React/TypeScript** frontend and a local **Python FastAPI** backend. I reorganized planning, tracking, and time-entry steps that were previously scattered across browser pages into a “Plan → Track → Review → Log” workflow and packaged it as a Windows application.
 
 <!--more-->
 
----
+## Context: Time Entry Interrupts Engineering Work
 
-## 📋 Abstract
+Redmine can manage issues and time entries, but in the workflow I observed, creating one record could involve roughly ten clicks and page transitions. The earlier estimate of “about 30 minutes per day” was an experience from that usage context, not a formal benchmark across Redmine versions or teams.
 
-> **This is a desktop productivity tool combining a modern UI with a Python backend.**
+The deeper problem was not only click count. Planning happened elsewhere, while Redmine required the engineer to select a project, issue, date, hours, and comment, followed by another check for missing weekly entries. Each transition interrupted the development context.
 
-By combining an **Electron (React)** frontend with a **Python FastAPI** backend, I built a **"Hybrid Architecture"** solution.
+![Redmine Smart Companion Plan, Track, Review, and Log desktop workflow](/postImg/Redmine-Tracker/plan-track-log-flow.svg)
 
-This tool turns a multi-step web workflow into a shorter desktop flow and introduces visualization dashboards and smart scheduling features. It also keeps architectural room for future AI-based time prediction, making time logging easier to maintain as a daily workflow.
+## Experience Design: Plan → Track → Review → Log
 
----
+1. **Plan:** Use a daily planner and reusable profiles to create work items with less repetitive input.
+2. **Track:** Arrange work blocks in a weekly calendar with drag-and-drop scheduling while preserving lunch or unallocated gaps.
+3. **Review:** Use a weekly overview to check daily and weekly distribution and return to the issue context before submission.
+4. **Log:** Send locally prepared data to the Redmine API to create the time entry.
 
-## 🛑 The Problem
+![Redmine Smart Companion weekly calendar](/postImg/Redmine-Tracker/calender.jpg)
+*Actual interface: weekly work blocks and gaps are visible. The screenshot demonstrates the UI surface, but does not by itself prove a remote write result.*
 
-In software development workflows, Redmine is a capable project management tool, but its "Time Logging" experience can be fragmented:
+![Redmine Smart Companion dashboard](/postImg/Redmine-Tracker/main.jpg)
+*Actual interface: daily and weekly summaries plus issue distribution support human review around the time-entry workflow.*
 
-* **⏳ High Time Cost:** Recording one time entry requires approximately 10 clicks and page navigations. Engineers spend about 30 minutes daily handling such administrative tasks.
-* **💔 Context Switch:** To log time, developers must interrupt their flow state and switch browser tabs, causing decreased work efficiency.
-* **📉 Lack of Feedback:** The native interface lacks real-time data visualization, making it difficult for users to track weekly time status, easily causing missed entries or overtime.
+## Hybrid Desktop Architecture
 
----
+The system separates the desktop experience from existing Python automation assets:
 
-## 💡 Solution & UX Design
+| Layer | Technology | Responsibility |
+| --- | --- | --- |
+| Renderer | Vite, React, TypeScript | Calendar, dashboard, profiles, and user interaction |
+| Desktop shell | Electron main process | Window, application lifecycle, and Python subprocess management |
+| Local service | FastAPI, Python | Redmine API wrapper, data logic, and existing script integration |
+| Remote system | Redmine REST API | System of record for issue context and time data |
 
-To thoroughly address these pain points, I designed a closed-loop **"Plan ➝ Track ➝ Log"** workflow, adopting a **Glassmorphism** style dark mode UI to create an immersive desktop experience.
+The main reason for choosing a Python backend was to reuse existing automation code without moving Redmine data logic into the UI. It also leaves room for future Pandas/Scikit-learn analysis of historical time entries. **History-based time prediction remains a roadmap item, not a currently validated AI feature.**
 
-### 1. The "Focus First" Workflow
-* **Plan:** Through **Smart Daily Planner** and **Intelligent Profiles** features, users can pre-load commonly used task templates (like Daily Standup) and create daily todos with one click.
-* **Track:** Supports drag-and-drop calendar interface. System monitors time in real-time and visually marks gaps (like lunch break) through charts.
-* **Log:** Provides **Automated Workflows**. When tasks complete or end-of-day arrives, the system automatically pushes local data to Redmine API, achieving "seamless logging."
+## Windows Packaging and Process Lifecycle
 
-![Redmine time-tracking calendar screen](/postImg/Redmine-Tracker/calender.jpg)
+I used **PyInstaller** to bundle FastAPI and its Python dependencies into `backend.exe`. The Electron main process starts and stops the local service, and **electron-builder** produces the Windows installer. This removes the need for users to install Python separately, while introducing lifecycle concerns such as backend startup failures, graceful shutdown, and port 8000 conflicts such as `Errno 10048`.
 
-### 2. Interactive Dashboard
-* Provides **Weekly Overview** bar chart, letting users grasp weekly time distribution at a glance.
-* Integrates **Project Deep Dive** view, allowing users to check Issue status, priority, and discussion threads without opening a browser.
+The original article described the desktop design as cross-platform, but the public evidence covers only a Windows executable and installer. I therefore claim **Windows desktop packaging**, not completed macOS or Linux distribution.
 
-![Redmine Smart Companion dashboard screen](/postImg/Redmine-Tracker/main.jpg)
+## Remote-Write and Security Boundary
 
----
+A time entry changes official Redmine data, so “seamless automation” is not a sufficient control model. The public material does not establish API-key storage, authentication between the renderer and localhost backend, TLS assumptions, log redaction, submission preview, retry deduplication, or error recovery. A production deployment should at minimum:
 
-## 🛠️ Technical Case Study
+- Display the project, issue, date, hours, and comment clearly before user confirmation.
+- Prevent retries from creating duplicate entries and preserve the Redmine response/error state.
+- Restrict the local bind address, protect credentials, and keep tokens out of logs.
+- Separate “local draft” from “successfully written to Redmine” states.
 
-### 1. Innovative Hybrid Architecture
+These are necessary engineering boundaries for remote writes. Without source code and test evidence, I do not claim that the public version has completed every control above.
 
-Unlike traditional Electron Apps that only rely on Node.js, this project adopted a **React (Frontend) + Python FastAPI (Backend)** concurrent architecture.
+## Verifiable Outcome and Limits
 
-* **Frontend:** Built with **Vite + React + TypeScript**, ensuring ultimate rendering performance and type safety.
-* **Backend:** Uses **Python FastAPI** as local server, handling Redmine API interactions and data logic.
+The public artifacts support the planner/calendar/dashboard interface, the React + Electron + FastAPI hybrid design, and the Windows backend/installer packaging path. They do not include build logs, release artifacts, API integration tests, before/after operation timing, or user research, so I do not claim a fixed productivity gain.
 
-#### 🤔 Why This Architecture? (Why Python Backend?)
-1.  **Legacy Integration:** Can directly encapsulate and reuse my previously written Python automation scripts, shortening development cycles.
-2.  **AI Readiness:** Preparing for future Roadmap. Python has the richest AI/ML ecosystem. This architecture layer allows me to easily integrate `Scikit-learn` or `Pandas` in the future to implement "history-based smart time prediction" features without restructuring the entire backend.
+For a measurable next iteration, I would track median interactions and elapsed time per entry, duplicate/failure rate, sync success rate, startup time, and the number of manual corrections.
 
+## Technology
 
-
-### 2. Packaging & Distribution
-
-Packaging Python environment into Electron is a major technical challenge. I built an automated Build Pipeline:
-
-* **Backend Compilation:** Uses **PyInstaller** to compile Python FastAPI environment and dependencies into a single executable (`backend.exe`), solving the problem of users not needing to install Python environment.
-* **Cross-Process Communication:** Electron Main Process manages the Python subprocess lifecycle (startup and graceful shutdown) and handles Port 8000 occupation conflicts (Errno 10048).
-* **Installer Creation:** Finally uses **electron-builder** to package React frontend and Python executable into standard Windows installer (`.exe`).
+**Electron · Vite · React · TypeScript · Python · FastAPI · PyInstaller · electron-builder · Redmine REST API**
