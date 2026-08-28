@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">Rack monitoring system architecture</title>
+  <desc id="desc">Diagram showing Golang agents collecting IPMI and SNMP metrics from servers, switches, and PDUs, then sending metrics to Prometheus and Grafana.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2563eb"/>
+    </marker>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 700 30px Arial, sans-serif; fill: #111827; }
+      .subtitle { font: 400 14px Arial, sans-serif; fill: #526070; }
+      .card { fill: #ffffff; stroke: #d9e2ec; stroke-width: 1.5; }
+      .device { fill: #eff6ff; stroke: #60a5fa; }
+      .agent { fill: #ecfdf5; stroke: #34d399; }
+      .store { fill: #fff7ed; stroke: #fb923c; }
+      .dash { fill: #f1ecff; stroke: #a78bfa; }
+      .label { font: 700 16px Arial, sans-serif; fill: #111827; }
+      .small { font: 400 13px Arial, sans-serif; fill: #526070; }
+      .line { stroke: #2563eb; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .thin { stroke: #94a3b8; stroke-width: 2; fill: none; stroke-dasharray: 7 6; }
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="600"/>
+  <text class="title" x="600" y="48" text-anchor="middle">Rack Monitoring System Architecture</text>
+  <text class="subtitle" x="600" y="76" text-anchor="middle">A unified metrics pipeline for server, switch, and PDU health monitoring.</text>
+
+  <g transform="translate(70 130)">
+    <rect class="card device" x="0" y="0" width="210" height="92" rx="16"/>
+    <text class="label" x="105" y="34" text-anchor="middle">Servers</text>
+    <text class="small" x="105" y="60" text-anchor="middle">BMC sensors via IPMI</text>
+    <rect class="card device" x="0" y="120" width="210" height="92" rx="16"/>
+    <text class="label" x="105" y="154" text-anchor="middle">Switches</text>
+    <text class="small" x="105" y="180" text-anchor="middle">Netgear / Cisco via SNMP</text>
+    <rect class="card device" x="0" y="240" width="210" height="92" rx="16"/>
+    <text class="label" x="105" y="274" text-anchor="middle">PDUs</text>
+    <text class="small" x="105" y="300" text-anchor="middle">Raritan power and sensors</text>
+  </g>
+
+  <rect class="card agent" x="410" y="230" width="220" height="120" rx="18"/>
+  <text class="label" x="520" y="270" text-anchor="middle">Golang Collector</text>
+  <text class="small" x="520" y="298" text-anchor="middle">normalize IPMI / SNMP data</text>
+  <text class="small" x="520" y="320" text-anchor="middle">export Prometheus metrics</text>
+
+  <rect class="card store" x="760" y="180" width="210" height="110" rx="18"/>
+  <text class="label" x="865" y="220" text-anchor="middle">Prometheus</text>
+  <text class="small" x="865" y="248" text-anchor="middle">time-series storage</text>
+
+  <rect class="card dash" x="760" y="330" width="210" height="110" rx="18"/>
+  <text class="label" x="865" y="370" text-anchor="middle">Grafana</text>
+  <text class="small" x="865" y="398" text-anchor="middle">dashboards and alerts</text>
+
+  <path class="line" d="M280 176 C340 176 350 248 400 270"/>
+  <path class="line" d="M280 296 C340 296 350 300 400 300"/>
+  <path class="line" d="M280 416 C340 416 350 352 400 320"/>
+  <path class="line" d="M630 290 C700 270 705 245 750 235"/>
+  <path class="line" d="M970 235 C1030 245 1045 330 970 385"/>
+  <path class="thin" d="M865 330 C865 310 865 305 865 292"/>
+
+  <text class="small" x="600" y="520" text-anchor="middle">Different vendor protocols are normalized before storage, so dashboards can compare devices in a consistent format.</text>
+</svg>

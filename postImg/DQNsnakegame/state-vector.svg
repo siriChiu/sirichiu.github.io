@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="520" viewBox="0 0 1100 520" role="img" aria-labelledby="title desc">
+  <title id="title">Snake DQN state vector design</title>
+  <desc id="desc">Diagram showing how the snake agent converts danger, movement direction, and food direction into an eleven dimensional state vector.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2563eb"/>
+    </marker>
+    <style>
+      .bg { fill: #f7fafc; }
+      .title { font: 700 30px Arial, sans-serif; fill: #111827; }
+      .label { font: 700 16px Arial, sans-serif; fill: #111827; }
+      .small { font: 400 13px Arial, sans-serif; fill: #526070; }
+      .cell { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; }
+      .snake { fill: #22c55e; stroke: #15803d; stroke-width: 2; }
+      .head { fill: #16a34a; stroke: #166534; stroke-width: 2; }
+      .food { fill: #ef4444; stroke: #b91c1c; stroke-width: 2; }
+      .danger { fill: #fee2e2; stroke: #f87171; stroke-width: 2; }
+      .panel { fill: #ffffff; stroke: #d9e2ec; stroke-width: 1.5; }
+      .vector { fill: #eaf2ff; stroke: #93c5fd; stroke-width: 1.5; }
+      .line { stroke: #2563eb; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect class="bg" width="1100" height="520"/>
+  <text class="title" x="550" y="48" text-anchor="middle">DQN Snake State Representation</text>
+  <text class="small" x="550" y="76" text-anchor="middle">Raw screen input is replaced with an 11-dimensional Boolean feature vector.</text>
+
+  <g transform="translate(90 120)">
+    <text class="label" x="150" y="-18" text-anchor="middle">Game Board Snapshot</text>
+    <g>
+      <rect class="cell" x="0" y="0" width="60" height="60"/>
+      <rect class="cell" x="60" y="0" width="60" height="60"/>
+      <rect class="cell" x="120" y="0" width="60" height="60"/>
+      <rect class="cell" x="180" y="0" width="60" height="60"/>
+      <rect class="cell" x="240" y="0" width="60" height="60"/>
+      <rect class="cell" x="0" y="60" width="60" height="60"/>
+      <rect class="danger" x="60" y="60" width="60" height="60"/>
+      <rect class="cell" x="120" y="60" width="60" height="60"/>
+      <rect class="cell" x="180" y="60" width="60" height="60"/>
+      <rect class="cell" x="240" y="60" width="60" height="60"/>
+      <rect class="cell" x="0" y="120" width="60" height="60"/>
+      <rect class="snake" x="60" y="120" width="60" height="60"/>
+      <rect class="head" x="120" y="120" width="60" height="60"/>
+      <rect class="danger" x="180" y="120" width="60" height="60"/>
+      <rect class="food" x="240" y="120" width="60" height="60"/>
+      <rect class="cell" x="0" y="180" width="60" height="60"/>
+      <rect class="cell" x="60" y="180" width="60" height="60"/>
+      <rect class="snake" x="120" y="180" width="60" height="60"/>
+      <rect class="cell" x="180" y="180" width="60" height="60"/>
+      <rect class="cell" x="240" y="180" width="60" height="60"/>
+      <rect class="cell" x="0" y="240" width="60" height="60"/>
+      <rect class="cell" x="60" y="240" width="60" height="60"/>
+      <rect class="cell" x="120" y="240" width="60" height="60"/>
+      <rect class="cell" x="180" y="240" width="60" height="60"/>
+      <rect class="cell" x="240" y="240" width="60" height="60"/>
+    </g>
+    <text class="small" x="150" y="328" text-anchor="middle">Danger is evaluated relative to the snake head, not absolute pixels.</text>
+  </g>
+
+  <path class="line" d="M430 270 C500 270 510 270 570 270"/>
+
+  <g transform="translate(620 120)">
+    <rect class="panel" x="0" y="0" width="400" height="300" rx="18"/>
+    <text class="label" x="200" y="34" text-anchor="middle">Feature Vector S<tspan baseline-shift="sub">t</tspan></text>
+    <g transform="translate(28 64)">
+      <rect class="vector" x="0" y="0" width="344" height="42" rx="10"/>
+      <text class="label" x="172" y="27" text-anchor="middle">Danger: ahead / right / left</text>
+      <rect class="vector" x="0" y="74" width="344" height="42" rx="10"/>
+      <text class="label" x="172" y="101" text-anchor="middle">Direction: left / right / up / down</text>
+      <rect class="vector" x="0" y="148" width="344" height="42" rx="10"/>
+      <text class="label" x="172" y="175" text-anchor="middle">Food: left / right / up / down</text>
+    </g>
+    <text class="small" x="200" y="270" text-anchor="middle">3 + 4 + 4 features = 11 model inputs</text>
+  </g>
+</svg>

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">Lightnews automated content pipeline</title>
+  <desc id="desc">Diagram showing RSS ingestion, content cleaning, local LLM processing, image selection, and WordPress publishing.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2563eb"/>
+    </marker>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 700 30px Arial, sans-serif; fill: #111827; }
+      .subtitle { font: 400 14px Arial, sans-serif; fill: #526070; }
+      .card { fill: #ffffff; stroke: #d9e2ec; stroke-width: 1.5; }
+      .blue { fill: #eaf2ff; stroke: #93c5fd; }
+      .green { fill: #e8f8ef; stroke: #86efac; }
+      .orange { fill: #fff3df; stroke: #fdba74; }
+      .purple { fill: #f1ecff; stroke: #c4b5fd; }
+      .label { font: 700 16px Arial, sans-serif; fill: #111827; }
+      .small { font: 400 13px Arial, sans-serif; fill: #526070; }
+      .line { stroke: #2563eb; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="560"/>
+  <text class="title" x="600" y="48" text-anchor="middle">Automated Technical Content Workflow</text>
+  <text class="subtitle" x="600" y="76" text-anchor="middle">n8n orchestrates ingestion, local LLM processing, media selection, and publishing.</text>
+
+  <g transform="translate(60 170)">
+    <rect class="card blue" x="0" y="0" width="170" height="130" rx="18"/>
+    <text class="label" x="85" y="38" text-anchor="middle">RSS Watch</text>
+    <text class="small" x="85" y="68" text-anchor="middle">monitor selected</text>
+    <text class="small" x="85" y="90" text-anchor="middle">technical sources</text>
+  </g>
+  <g transform="translate(275 170)">
+    <rect class="card" x="0" y="0" width="170" height="130" rx="18"/>
+    <text class="label" x="85" y="38" text-anchor="middle">Clean Content</text>
+    <text class="small" x="85" y="68" text-anchor="middle">remove noise</text>
+    <text class="small" x="85" y="90" text-anchor="middle">normalize article text</text>
+  </g>
+  <g transform="translate(490 170)">
+    <rect class="card purple" x="0" y="0" width="170" height="130" rx="18"/>
+    <text class="label" x="85" y="38" text-anchor="middle">Local LLM</text>
+    <text class="small" x="85" y="68" text-anchor="middle">summarize</text>
+    <text class="small" x="85" y="90" text-anchor="middle">translate / tag</text>
+  </g>
+  <g transform="translate(705 170)">
+    <rect class="card orange" x="0" y="0" width="170" height="130" rx="18"/>
+    <text class="label" x="85" y="38" text-anchor="middle">Image Match</text>
+    <text class="small" x="85" y="68" text-anchor="middle">visual keywords</text>
+    <text class="small" x="85" y="90" text-anchor="middle">media API search</text>
+  </g>
+  <g transform="translate(920 170)">
+    <rect class="card green" x="0" y="0" width="210" height="130" rx="18"/>
+    <text class="label" x="105" y="38" text-anchor="middle">WordPress Draft</text>
+    <text class="small" x="105" y="68" text-anchor="middle">REST API publishing</text>
+    <text class="small" x="105" y="90" text-anchor="middle">reviewable output</text>
+  </g>
+
+  <path class="line" d="M230 235 L265 235"/>
+  <path class="line" d="M445 235 L480 235"/>
+  <path class="line" d="M660 235 L695 235"/>
+  <path class="line" d="M875 235 L910 235"/>
+
+  <rect class="card" x="230" y="370" width="740" height="86" rx="18"/>
+  <text class="label" x="600" y="404" text-anchor="middle">Design Principle</text>
+  <text class="small" x="600" y="430" text-anchor="middle">Keep text processing local when possible, and leave the final output reviewable before publication.</text>
+</svg>
