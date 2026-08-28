@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>{{ .Title }} · {{ .Site.Title }}</title>
   <meta name="description" content="{{ .Description }}">
-  <meta name="theme-color" content="#07111f">
+  <meta name="theme-color" content="#f6f8fc">
   <link rel="canonical" href="{{ .Permalink }}">
   <meta property="og:title" content="{{ .Title }}">
   <meta property="og:description" content="{{ .Description }}">
@@ -17,6 +17,7 @@
 {{ $deck := .Params.presentation }}
 {{ $slides := $deck.slides }}
 {{ $coreSlides := where $slides "group" "core" }}
+{{ $coreCount := len $coreSlides }}
 {{ $newTabLabel := "在新分頁開啟" }}
 {{ if eq .Site.Language.Lang "en" }}{{ $newTabLabel = "opens in a new tab" }}{{ end }}
 <body class="presentation-page"
@@ -59,67 +60,111 @@
                  data-slide-index="{{ $index }}"
                  data-group="{{ $slide.group }}"
                  aria-labelledby="{{ $slide.id }}-title">
-          <button class="overview-select" type="button" data-select-slide="{{ $index }}" aria-label="{{ $deck.controls.openSlide }}: {{ $slide.title }}">
-            <span aria-hidden="true">↗</span>
-          </button>
+          <button class="overview-select" type="button" data-select-slide="{{ $index }}" aria-label="{{ $deck.controls.openSlide }}: {{ $slide.title }}"><span aria-hidden="true">↗</span></button>
           <div class="slide-number" aria-hidden="true">
-            {{ if eq $slide.group "appendix" }}{{ $deck.appendixLabel }}{{ else }}{{ printf "%02d" (add $index 1) }}{{ end }}
+            {{ if eq $slide.group "appendix" }}A{{ add (sub $index $coreCount) 1 }}{{ else }}{{ printf "%02d" (add $index 1) }} / {{ printf "%02d" $coreCount }}{{ end }}
           </div>
+
           <div class="slide-content">
             <div class="slide-copy">
               {{ with $slide.kicker }}<p class="slide-kicker">{{ . }}</p>{{ end }}
               <h2 id="{{ $slide.id }}-title">{{ $slide.title }}</h2>
               {{ with $slide.summary }}<p class="slide-summary">{{ . }}</p>{{ end }}
 
-              {{ with $slide.tags }}
-                <ul class="tag-list" aria-label="{{ if eq $.Site.Language.Lang "en" }}Core technologies{{ else }}核心技術{{ end }}">
-                  {{ range . }}<li>{{ . }}</li>{{ end }}
-                </ul>
+              {{ with $slide.capabilities }}
+                <div class="capability-list">
+                  {{ range . }}<div><strong>{{ .title }}</strong><span>{{ .text }}</span></div>{{ end }}
+                </div>
+              {{ end }}
+              {{ with $slide.roleLine }}<p class="role-line">{{ . }}</p>{{ end }}
+
+              {{ with $slide.timeline }}
+                <ol class="career-timeline">
+                  {{ range . }}
+                    <li><time>{{ .period }}</time><div><strong>{{ .company }}</strong><span>{{ .role }}</span><p>{{ .text }}</p></div></li>
+                  {{ end }}
+                </ol>
               {{ end }}
 
-              {{ with $slide.bullets }}
-                <ul class="slide-bullets">
-                  {{ range . }}<li>{{ . }}</li>{{ end }}
-                </ul>
+              {{ with $slide.method }}
+                <ol class="method-flow">
+                  {{ range . }}<li><span>{{ .step }}</span><strong>{{ .title }}</strong><p>{{ .text }}</p></li>{{ end }}
+                </ol>
               {{ end }}
+              {{ with $slide.mainLine }}<p class="main-line">{{ . }}</p>{{ end }}
+              {{ with $slide.supportLine }}<p class="support-line">{{ . }}</p>{{ end }}
+
+              {{ if $slide.problem }}
+                <div class="case-context">
+                  <div class="case-field"><h3>{{ $deck.labels.situation }}</h3><p>{{ $slide.problem }}</p></div>
+                  <div class="case-field"><h3>{{ $deck.labels.ownership }}</h3><p>{{ $slide.ownership }}</p></div>
+                </div>
+              {{ end }}
+
+              {{ with $slide.architecture }}
+                <ol class="architecture-strip" aria-label="{{ if eq $.Site.Language.Lang "en" }}Architecture flow{{ else }}架構流程{{ end }}">
+                  {{ range . }}<li>{{ . }}</li>{{ end }}
+                </ol>
+              {{ end }}
+
+              {{ with $slide.decisions }}
+                <section class="decision-region" aria-labelledby="{{ $slide.id }}-decisions">
+                  <h3 id="{{ $slide.id }}-decisions">{{ $deck.labels.decisions }}</h3>
+                  <ol class="decision-list">
+                    {{ range . }}<li><strong>{{ .title }}</strong><p>{{ .text }}</p></li>{{ end }}
+                  </ol>
+                </section>
+              {{ end }}
+
+              {{ if $slide.result }}
+                <div class="case-outcome">
+                  <div class="case-field result-field"><h3>{{ $deck.labels.result }}</h3><p>{{ $slide.result }}</p></div>
+                  <div class="case-field validation-field"><h3>{{ $deck.labels.validation }}</h3><p>{{ $slide.validation }}</p></div>
+                </div>
+              {{ end }}
+              {{ with $slide.boundary }}<p class="boundary-line"><strong>{{ $deck.labels.boundary }}</strong> {{ . }}</p>{{ end }}
 
               {{ with $slide.items }}
                 <div class="slide-items{{ if eq $slide.variant "gallery" }} gallery-items{{ end }}">
                   {{ range . }}
-                    {{ $item := . }}
-                    {{ if $item.href }}
-                      <a class="slide-item" href="{{ strings.TrimPrefix "/" $item.href | relURL }}" target="_blank" rel="noopener">
-                    {{ else }}
-                      <div class="slide-item">
-                    {{ end }}
-                      {{ with $item.image }}<img src="{{ strings.TrimPrefix "/" . | relURL }}" alt="{{ $item.imageAlt }}" loading="lazy">{{ end }}
-                      <span class="item-copy"><strong>{{ $item.title }}</strong>{{ with $item.text }}<span>{{ . }}</span>{{ end }}</span>
-                      {{ if $item.href }}<span class="item-arrow" aria-hidden="true">↗</span><span class="sr-only"> ({{ $newTabLabel }})</span>{{ end }}
-                    {{ if $item.href }}</a>{{ else }}</div>{{ end }}
+                    {{ if .href }}<a class="slide-item" href="{{ strings.TrimPrefix "/" .href | relURL }}" target="_blank" rel="noopener">
+                    {{ else }}<div class="slide-item">{{ end }}
+                      {{ if .image }}<img src="{{ strings.TrimPrefix "/" .image | relURL }}" alt="{{ .imageAlt }}" loading="lazy">{{ end }}
+                      <span class="item-copy"><strong>{{ .title }}</strong>{{ with .text }}<span>{{ . }}</span>{{ end }}{{ with .evidence }}<small>{{ . }}</small>{{ end }}</span>
+                      {{ if .href }}<span class="item-arrow" aria-hidden="true">↗</span><span class="sr-only"> ({{ $newTabLabel }})</span>{{ end }}
+                    {{ if .href }}</a>{{ else }}</div>{{ end }}
                   {{ end }}
                 </div>
               {{ end }}
 
-              {{ with $slide.note }}<p class="slide-note">{{ . }}</p>{{ end }}
+              {{ with $slide.skillGroups }}
+                <div class="skills-matrix" role="table" aria-label="{{ if eq $.Site.Language.Lang "en" }}Skills mapped to project evidence{{ else }}技能與專案證據對照{{ end }}">
+                  {{ range . }}<div class="skill-row" role="row"><strong role="rowheader">{{ .title }}</strong><span role="cell">{{ .technologies }}</span><p role="cell">{{ .evidence }}</p></div>{{ end }}
+                </div>
+              {{ end }}
 
+              {{ with $slide.workFits }}<ul class="fit-list">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}
+              {{ with $slide.collaboration }}<p class="collaboration-line">{{ . }}</p>{{ end }}
+              {{ with $slide.ownershipLine }}<p class="ownership-line">{{ . }}</p>{{ end }}
+
+              {{ with $slide.disclosures }}
+                <dl class="disclosure-list">{{ range . }}<div><dt>{{ .claim }}</dt><dd>{{ .scope }}</dd></div>{{ end }}</dl>
+              {{ end }}
+
+              {{ with $slide.note }}<p class="slide-note">{{ . }}</p>{{ end }}
               {{ with $slide.contacts }}
                 <nav class="contact-list" aria-label="{{ if eq $.Site.Language.Lang "en" }}Contact links{{ else }}聯絡連結{{ end }}">
                   {{ range . }}<a href="{{ .href }}" target="_blank" rel="noopener">{{ .label }} <span aria-hidden="true">↗</span><span class="sr-only"> ({{ $newTabLabel }})</span></a>{{ end }}
                 </nav>
               {{ end }}
-
               {{ with $slide.article }}
-                <a class="article-link" href="{{ strings.TrimPrefix "/" .href | relURL }}" target="_blank" rel="noopener">
-                  <span>{{ .label }}</span><span aria-hidden="true">↗</span><span class="sr-only"> ({{ $newTabLabel }})</span>
-                </a>
+                <a class="article-link" href="{{ strings.TrimPrefix "/" .href | relURL }}" target="_blank" rel="noopener"><span>{{ .label }}</span><span aria-hidden="true">↗</span><span class="sr-only"> ({{ $newTabLabel }})</span></a>
               {{ end }}
               {{ with $slide.closing }}<p class="closing-line">{{ . }}</p>{{ end }}
             </div>
 
             {{ with $slide.image }}
-              <figure class="slide-visual">
-                <img src="{{ strings.TrimPrefix "/" . | relURL }}" alt="{{ $slide.imageAlt }}" {{ if gt $index 1 }}loading="lazy"{{ end }}>
-              </figure>
+              <figure class="slide-visual"><img src="{{ strings.TrimPrefix "/" . | relURL }}" alt="{{ $slide.imageAlt }}" {{ if gt $index 1 }}loading="lazy"{{ end }}></figure>
             {{ end }}
           </div>
         </section>
@@ -127,24 +172,11 @@
     </div>
 
     <footer class="deck-controls" aria-label="{{ if eq .Site.Language.Lang "en" }}Presentation controls{{ else }}簡報控制{{ end }}">
-      <button type="button" class="control-button" data-action="previous" aria-label="{{ $deck.controls.previous }}">
-        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg><span>{{ $deck.controls.previous }}</span>
-      </button>
-      <div class="deck-status-wrap">
-        <span class="deck-count-group" data-count-group aria-hidden="true">{{ $deck.coreLabel }}</span>
-        <span class="deck-count" aria-hidden="true"><strong data-current-count>1</strong> / <span data-total-count>{{ len $coreSlides }}</span></span>
-        <span class="sr-only" data-live-status aria-live="polite" aria-atomic="true"></span>
-      </div>
-      <button type="button" class="control-button overview-button" data-action="overview" aria-pressed="false" aria-label="{{ $deck.controls.overview }}">
-        <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>{{ $deck.controls.overview }}</span>
-      </button>
-      <details class="keyboard-help">
-        <summary>{{ $deck.controls.keyboard }}</summary>
-        <p>{{ $deck.controls.keyboardHelp }}</p>
-      </details>
-      <button type="button" class="control-button" data-action="next" aria-label="{{ $deck.controls.next }}">
-        <span>{{ $deck.controls.next }}</span><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
-      </button>
+      <button type="button" class="control-button" data-action="previous" aria-label="{{ $deck.controls.previous }}"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg><span>{{ $deck.controls.previous }}</span></button>
+      <div class="deck-status-wrap"><span class="deck-count-group" data-count-group aria-hidden="true">{{ $deck.coreLabel }}</span><span class="deck-count" aria-hidden="true"><strong data-current-count>1</strong> / <span data-total-count>{{ $coreCount }}</span></span><span class="sr-only" data-live-status aria-live="polite" aria-atomic="true"></span></div>
+      <button type="button" class="control-button overview-button" data-action="overview" aria-pressed="false" aria-label="{{ $deck.controls.overview }}"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>{{ $deck.controls.overview }}</span></button>
+      <details class="keyboard-help"><summary>{{ $deck.controls.keyboard }}</summary><p>{{ $deck.controls.keyboardHelp }}</p></details>
+      <button type="button" class="control-button" data-action="next" aria-label="{{ $deck.controls.next }}"><span>{{ $deck.controls.next }}</span><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
     </footer>
   </main>
 
